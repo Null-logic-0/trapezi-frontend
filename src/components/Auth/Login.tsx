@@ -7,16 +7,21 @@ import {MdEmail} from "react-icons/md";
 import {TbLockFilled} from "react-icons/tb";
 import {useActionState} from "react";
 import {login} from "@/lib/actions/login";
+import {useRouter} from "next/navigation";
 
 function Login() {
-    const [state, formAction, isPending] = useActionState(login, {
-        message: "",
-        success: false,
-        values: {
-            email: "",
-        }
+    const router = useRouter();
 
-    })
+    const [state, formAction, isPending] = useActionState(login, {
+            message: "",
+            success: false,
+            values: {
+                email: "",
+            }
+        },
+    )
+
+
     return (
         <form
             action={formAction}

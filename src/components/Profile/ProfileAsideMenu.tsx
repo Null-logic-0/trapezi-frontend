@@ -1,13 +1,20 @@
 import UserCard from "@/components/Profile/UserCard";
 import ProfileNavMenu from "./ProfileNavMenu";
 import Logout from "../Auth/Logout";
-
 import { TfiWorld } from "react-icons/tfi";
+import { fetchCurrentUser } from "@/lib/api/fetchCurrentUser";
 
-function ProfileAsideMenu() {
+async function ProfileAsideMenu() {
+  const user = await fetchCurrentUser();
+
   return (
     <aside className="profile-card-container flex justify-evenly flex-col  gap-6 w-full h-full">
-      <UserCard />
+      <UserCard
+        business_owner={user?.business_owner || false}
+        name={user?.name || ""}
+        last_name={user?.last_name || ""}
+        avatar={user?.avatar_url || ""}
+      />
       <ProfileNavMenu />
 
       <div className="flex flex-col gap-2">

@@ -1,5 +1,11 @@
 "use client";
-import React, { createContext, use, useReducer, ReactNode } from "react";
+import React, {
+  createContext,
+  use,
+  useReducer,
+  ReactNode,
+  useCallback,
+} from "react";
 
 // --- Types ---
 interface UIState {
@@ -7,11 +13,15 @@ interface UIState {
   openModal: boolean;
 }
 
-type UIAction = { type: "TOGGLE_SIDEBAR" } | { type: "TOGGLE_MODAL" };
+type UIAction =
+  | { type: "TOGGLE_SIDEBAR" }
+  | { type: "TOGGLE_MODAL" }
+  | { type: "CLOSE_MODAL" };
 
 interface UIContextType extends UIState {
   handleToggleModal: () => void;
   handleToggleSideBar: () => void;
+  handleCloseModal: () => void;
 }
 
 // --- Context ---
@@ -33,6 +43,8 @@ function uiReducer(state: UIState, action: UIAction): UIState {
       return { ...state, toggleSideBar: !state.toggleSideBar };
     case "TOGGLE_MODAL":
       return { ...state, openModal: !state.openModal };
+    case "CLOSE_MODAL":
+      return { ...state, openModal: false };
     default:
       return state;
   }
@@ -52,11 +64,27 @@ interface UiContextProviderProps {
 export function UiContextProvider({ children }: UiContextProviderProps) {
   const [state, dispatch] = useReducer(uiReducer, initialState);
 
+  const handleToggleModal = useCallback(
+    () => dispatch({ type: "TOGGLE_MODAL" }),
+    []
+  );
+
+  const handleToggleSideBar = useCallback(
+    () => dispatch({ type: "TOGGLE_SIDEBAR" }),
+    []
+  );
+
+  const handleCloseModal = useCallback(
+    () => dispatch({ type: "CLOSE_MODAL" }),
+    []
+  );
+
   const contextValue: UIContextType = {
     toggleSideBar: state.toggleSideBar,
     openModal: state.openModal,
-    handleToggleModal: () => dispatch({ type: "TOGGLE_MODAL" }),
-    handleToggleSideBar: () => dispatch({ type: "TOGGLE_SIDEBAR" }),
+    handleCloseModal,
+    handleToggleModal,
+    handleToggleSideBar,
   };
 
   return <UIContext value={contextValue}>{children}</UIContext>;

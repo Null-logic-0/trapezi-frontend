@@ -9,8 +9,16 @@ import Button from "../UI/Button";
 import UpdateProfile from "./UpdateProfile";
 import { useUIContext } from "@/store/ui-context";
 
-function ProfileOverview() {
+type ProfileProps = {
+  name: string;
+  last_name: string;
+  email: string;
+  avatar_url: string;
+};
+
+function ProfileOverview({ name, last_name, email, avatar_url }: ProfileProps) {
   const { handleToggleModal } = useUIContext();
+  const fullName = `${name} ${last_name}`;
   return (
     <>
       <div className="profile-card-container ">
@@ -28,11 +36,11 @@ function ProfileOverview() {
 
         <div className="flex max-md:flex-col gap-4 max-md:items-start justify-between items-center">
           <div className="flex flex-col gap-4 items-start">
-            <UserMiniCard text="John Doe" icon={<FaRegUser />} label="Name" />
+            <UserMiniCard text={fullName} icon={<FaRegUser />} label="Name" />
 
             <UserMiniCard
               label="Email"
-              text="john@example.com"
+              text={email}
               icon={<MdOutlineEmail />}
             />
           </div>
@@ -43,7 +51,11 @@ function ProfileOverview() {
           </div>
         </div>
       </div>
-      <UpdateProfile />
+      <UpdateProfile
+        name={name || ""}
+        last_name={last_name || ""}
+        avatar_url={avatar_url || ""}
+      />
     </>
   );
 }

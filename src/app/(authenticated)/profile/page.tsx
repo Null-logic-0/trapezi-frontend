@@ -1,11 +1,18 @@
 import MyBusiness from "@/components/Profile/MyBusiness";
 import ProfileOverview from "@/components/Profile/ProfileOverview";
 import Subscription from "@/components/Profile/Subscription";
+import { fetchCurrentUser } from "@/lib/api/fetchCurrentUser";
 
-function Profile() {
+async function Profile() {
+  const user = await fetchCurrentUser();
   return (
     <div className="flex flex-col gap-6">
-      <ProfileOverview />
+      <ProfileOverview
+        avatar_url={user?.avatar_url || ""}
+        name={user?.name || ""}
+        last_name={user?.last_name || ""}
+        email={user?.email || ""}
+      />
       <MyBusiness />
       <Subscription />
     </div>

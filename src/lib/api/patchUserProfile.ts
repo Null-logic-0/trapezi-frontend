@@ -5,6 +5,7 @@ import { ENDPOINTS } from "../endpoints";
 export async function patchUserProfile({
   name,
   last_name,
+  business_owner,
   avatar,
 }: UpdateProfileInterface) {
   try {
@@ -14,6 +15,7 @@ export async function patchUserProfile({
 
     const formData = new FormData();
     formData.append("name", name);
+    formData.append("business_owner", business_owner ? "1" : "0");
     formData.append("last_name", last_name);
     if (avatar && avatar instanceof File && avatar.size > 0) {
       formData.append("avatar", avatar);

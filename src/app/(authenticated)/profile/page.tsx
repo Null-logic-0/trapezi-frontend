@@ -8,13 +8,18 @@ async function Profile() {
   return (
     <div className="flex flex-col gap-6">
       <ProfileOverview
+        isBusiness={user?.business_owner}
         avatar_url={user?.avatar_url || ""}
         name={user?.name || ""}
         last_name={user?.last_name || ""}
         email={user?.email || ""}
       />
-      <MyBusiness />
-      <Subscription />
+      {user?.business_owner && (
+        <>
+          <MyBusiness />
+          <Subscription />
+        </>
+      )}
     </div>
   );
 }

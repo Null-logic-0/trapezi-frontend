@@ -16,9 +16,16 @@ type ProfileProps = {
   last_name: string;
   email: string;
   avatar_url: string;
+  isBusiness?: boolean;
 };
 
-function ProfileOverview({ name, last_name, email, avatar_url }: ProfileProps) {
+function ProfileOverview({
+  name,
+  last_name,
+  email,
+  avatar_url,
+  isBusiness,
+}: ProfileProps) {
   const { handleToggleModal } = useUIContext();
   const messages = useMessages();
 
@@ -69,6 +76,7 @@ function ProfileOverview({ name, last_name, email, avatar_url }: ProfileProps) {
         </div>
       </div>
       <UpdateProfile
+        isBusiness={isBusiness}
         name={name || ""}
         last_name={last_name || ""}
         avatar_url={avatar_url || ""}

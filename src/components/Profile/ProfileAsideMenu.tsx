@@ -14,7 +14,7 @@ async function ProfileAsideMenu() {
         last_name={user?.last_name || ""}
         avatar={user?.avatar_url || ""}
       />
-      <ProfileNavMenu />
+      <ProfileNavMenu isBusinessAccount={user?.business_owner} />
 
       <hr className="border-gray-300" />
 

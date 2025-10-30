@@ -10,6 +10,7 @@ export interface UpdateProfileInterface {
   name: string;
   last_name: string;
   avatar?: File;
+  business_owner: boolean;
 }
 
 export interface ProfileFormState {

@@ -9,12 +9,16 @@ export async function updateProfile(
 ) {
   const name = formData.get("name") as string;
   const last_name = formData.get("last_name") as string;
+
+  const business_owner = formData.get("business_owner") === "1" ? true : false;
+
   const avatar = formData.get("avatar") as File;
   const hasImage = avatar && avatar.size > 0;
 
   const res = await patchUserProfile({
     name,
     last_name,
+    business_owner,
     ...(hasImage && { avatar }),
   });
 

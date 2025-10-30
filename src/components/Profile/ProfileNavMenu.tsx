@@ -5,10 +5,14 @@ import { usePathname } from "next/navigation";
 import { PROFILE_NAV_LINKS } from "@/helpers/profileNavLink";
 import { useMessages } from "@/hooks/useMessages";
 
-function ProfileNavMenu() {
+function ProfileNavMenu({
+  isBusinessAccount,
+}: {
+  isBusinessAccount?: boolean;
+}) {
   const pathname = usePathname();
   const messages = useMessages();
-  const NAV_LINKS = PROFILE_NAV_LINKS(messages);
+  const NAV_LINKS = PROFILE_NAV_LINKS(messages, isBusinessAccount);
   return (
     <nav>
       <ul className="flex flex-col gap-2">

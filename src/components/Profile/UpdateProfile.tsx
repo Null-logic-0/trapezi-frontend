@@ -9,14 +9,21 @@ import { useActionState, useEffect } from "react";
 import { updateProfile } from "@/lib/actions/updateUserProfile";
 import toast from "react-hot-toast";
 import { useMessages } from "@/hooks/useMessages";
+import BusinessAccountToggle from "./BusinessAccountToggle";
 
 type UpdateProfileProps = {
   name: string;
   last_name: string;
   avatar_url: string;
+  isBusiness?: boolean;
 };
 
-function UpdateProfile({ name, last_name, avatar_url }: UpdateProfileProps) {
+function UpdateProfile({
+  name,
+  last_name,
+  avatar_url,
+  isBusiness,
+}: UpdateProfileProps) {
   const [state, formAction, isPending] = useActionState(updateProfile, {
     message: "",
     success: false,
@@ -57,6 +64,8 @@ function UpdateProfile({ name, last_name, avatar_url }: UpdateProfileProps) {
           name="last_name"
           defaultValue={last_name}
         />
+
+        <BusinessAccountToggle isBusiness={isBusiness} />
 
         <div className="flex justify-center mt-6 items-center gap-4">
           <Button

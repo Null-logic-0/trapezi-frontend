@@ -6,47 +6,51 @@ import { IoCardOutline } from "react-icons/io5";
 import { IoSettingsOutline } from "react-icons/io5";
 import { AiOutlineHome } from "react-icons/ai";
 
-export const PROFILE_NAV_LINKS = [
+export interface Messages {
+  [key: string]: string | undefined;
+}
+
+export const PROFILE_NAV_LINKS = (messages: Messages) => [
   {
     key: "home",
     href: "/",
-    text: "Home",
+    text: messages.home,
     icon: <AiOutlineHome />,
   },
   {
     key: "profile",
     href: "/profile",
-    text: "Profile",
+    text: messages.profile,
     icon: <LuUser />,
   },
   {
     key: "reviews",
     href: "/my_reviews",
-    text: "My Reviews",
+    text: messages.reviews,
     icon: <IoIosStarOutline />,
   },
   {
     key: "favorites",
     href: "/favorites",
-    text: "Favorites",
+    text: messages.favorites,
     icon: <MdFavoriteBorder />,
   },
   {
     key: "business",
     href: "/my_business",
-    text: "My Business",
+    text: messages.my_business,
     icon: <LuBriefcaseBusiness />,
   },
   {
     key: "Subscription",
     href: "/subscription",
-    text: "Subscription",
+    text: messages.subscriptions,
     icon: <IoCardOutline />,
   },
   {
     key: "settings",
     href: "/settings",
-    text: "Settings",
+    text: messages.settings,
     icon: <IoSettingsOutline />,
   },
 ];

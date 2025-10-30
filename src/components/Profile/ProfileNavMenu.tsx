@@ -2,14 +2,17 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { PROFILE_NAV_LINKS } from "@/constants/profileNavLink";
+import { PROFILE_NAV_LINKS } from "@/helpers/profileNavLink";
+import { useMessages } from "@/hooks/useMessages";
 
 function ProfileNavMenu() {
   const pathname = usePathname();
+  const messages = useMessages();
+  const NAV_LINKS = PROFILE_NAV_LINKS(messages);
   return (
     <nav>
       <ul className="flex flex-col gap-2">
-        {PROFILE_NAV_LINKS.map((link) => {
+        {NAV_LINKS.map((link) => {
           const isActive = pathname === link.href;
           return (
             <li

@@ -5,37 +5,10 @@ import {
 import getCookies from "../cookies";
 import { ENDPOINTS } from "../endpoints";
 
-// export async function patchUserPassword(data: UpdatePasswordInterface) {
-//   try {
-//     const { token, success } = await getCookies();
-
-//     if (!success || !token) return { success: false, message: "No auth token" };
-
-//     const res = await fetch(ENDPOINTS.user.update_password, {
-//       method: "PATCH",
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: `Bearer ${token}`,
-//       },
-//       body: JSON.stringify(data),
-//       cache: "no-store",
-//     });
-
-//     const body = await res.json();
-
-//     return {
-//       success: body.success ?? res.ok,
-//       message: body.message ?? "Password updated",
-//     };
-//   } catch (error) {
-//     return {
-//       success: false,
-//       message: error instanceof Error ? error.message : String(error),
-//     };
-//   }
-// }
-
-export async function patchUserPassword(data: UpdatePasswordInterface) {
+export async function patchUserPassword(
+  data: UpdatePasswordInterface,
+  locale: "ka" | "en" = "ka"
+) {
   try {
     const { token, success } = await getCookies();
 
@@ -47,27 +20,23 @@ export async function patchUserPassword(data: UpdatePasswordInterface) {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        "Accept-Language": locale,
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(data),
     });
 
-    let body: PatchUserPasswordResponse = {};
-    try {
-      body = await res.json();
-    } catch (err) {
-      console.error(err);
-      body = {};
+    const body: PatchUserPasswordResponse = await res.json();
+
+    if (!res.ok) {
+      return {
+        success: false,
+        message: body.message || "Request failed",
+        errors: body.errors || {},
+      };
     }
 
-    return {
-      success: body.success ?? res.ok,
-      message:
-        body.message ??
-        (res.ok
-          ? "Password updated!"
-          : `Error ${res.status}: Failed to update password`),
-    };
+    return { success: true, data: body };
   } catch (error) {
     return {
       success: false,

@@ -26,4 +26,5 @@ export interface UpdatePasswordInterface {
 export interface PatchUserPasswordResponse {
   success?: boolean;
   message?: string;
+  errors?: Record<string, string[]>;
 }

@@ -8,9 +8,16 @@ import { MdEmail } from "react-icons/md";
 import { login } from "@/lib/actions/login";
 import { TbLockFilled } from "react-icons/tb";
 import { useActionToast } from "@/hooks/useActionToast";
+import { useMessages } from "@/hooks/useMessages";
+import { useLanguage } from "@/store/language-context";
+import { AuthFormState } from "@/interfaces/authResponse.interface";
 
 function Login() {
-  const [state, formAction, isPending] = useActionState(login, {
+  const { locale } = useLanguage();
+  const handleAction = async (prevState: AuthFormState, formData: FormData) => {
+    return login(prevState, formData, locale);
+  };
+  const [state, formAction, isPending] = useActionState(handleAction, {
     message: "",
     success: false,
     values: {
@@ -20,6 +27,8 @@ function Login() {
 
   useActionToast(state, "/profile");
 
+  const messages = useMessages();
+
   return (
     <form action={formAction} className="flex flex-col gap-4 w-full">
       <Input
@@ -27,7 +36,7 @@ function Login() {
         name="email"
         defaultValue={state.values?.email}
         placeholder="your@email.com"
-        label="Email"
+        label={messages.email}
         icon={<MdEmail className="text-gray-500 text-xl" />}
       />
 
@@ -35,7 +44,7 @@ function Login() {
         type="password"
         name="password"
         placeholder="*************"
-        label="Password"
+        label={messages.password}
         isPassword={true}
         icon={<TbLockFilled className="text-gray-500 text-xl" />}
       />
@@ -46,7 +55,7 @@ function Login() {
         isDisabled={isPending}
         className="mt-2"
       >
-        {isPending ? "Logging..." : "Login"}
+        {isPending ? messages.logging : messages.login}
       </Button>
     </form>
   );

@@ -9,7 +9,8 @@ import {
 
 export async function signup(
   _prevState: AuthFormState,
-  formData: FormData
+  formData: FormData,
+  locale: "ka" | "en" = "ka"
 ): Promise<AuthFormState> {
   const body: SignupInterface = {
     name: (formData.get("name") as string) || "",
@@ -24,7 +25,7 @@ export async function signup(
       false,
   };
 
-  const res: CreateUserResponse = await createUser(body);
+  const res: CreateUserResponse = await createUser(body, locale);
 
   if (!res.success) {
     const fieldErrors: Record<string, string> = {};

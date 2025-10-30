@@ -19,7 +19,7 @@ export async function updateProfile(
   });
 
   if (!res.success) {
-    return { success: false, message: res.message };
+    return { success: false, message: res.message || "Request Failed" };
   }
 
   revalidatePath("/profile", "layout");

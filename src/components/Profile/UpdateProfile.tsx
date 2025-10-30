@@ -8,6 +8,7 @@ import ImagePicker from "../UI/ImagePicker";
 import { useActionState, useEffect } from "react";
 import { updateProfile } from "@/lib/actions/updateUserProfile";
 import toast from "react-hot-toast";
+import { useMessages } from "@/hooks/useMessages";
 
 type UpdateProfileProps = {
   name: string;
@@ -27,13 +28,14 @@ function UpdateProfile({ name, last_name, avatar_url }: UpdateProfileProps) {
     if (!state.message) return;
 
     if (state.success) {
-      toast.success(state.message || "Updated successfully!");
+      toast.success(state.message);
       handleCloseModal();
     } else {
-      toast.error(state.message || "Something went wrong.");
+      toast.error(state.message);
     }
   }, [state, handleCloseModal]);
 
+  const messages = useMessages();
   return (
     <Modal>
       <form action={formAction} className="flex flex-col gap-4">
@@ -43,10 +45,15 @@ function UpdateProfile({ name, last_name, avatar_url }: UpdateProfileProps) {
           defaultImage={avatar_url}
           name="avatar"
         />
-        <Input type="text" label="Name" name="name" defaultValue={name} />
         <Input
           type="text"
-          label="Last Name"
+          label={messages.name}
+          name="name"
+          defaultValue={name}
+        />
+        <Input
+          type="text"
+          label={messages.last_name}
           name="last_name"
           defaultValue={last_name}
         />
@@ -58,7 +65,7 @@ function UpdateProfile({ name, last_name, avatar_url }: UpdateProfileProps) {
             type="button"
             onClick={handleCloseModal}
           >
-            Cancel
+            {messages.cancel}
           </Button>
 
           <Button
@@ -67,7 +74,7 @@ function UpdateProfile({ name, last_name, avatar_url }: UpdateProfileProps) {
             buttonType="fill"
             type="submit"
           >
-            Save
+            {isPending ? messages.saving : messages.save}
           </Button>
         </div>
       </form>

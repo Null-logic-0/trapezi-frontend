@@ -1,5 +1,7 @@
+"use client";
 import { MdBusinessCenter } from "react-icons/md";
 import Image from "next/image";
+import { useMessages } from "@/hooks/useMessages";
 
 type UserProps = {
   name: string;
@@ -10,6 +12,7 @@ type UserProps = {
 
 function UserCard({ name, last_name, avatar, business_owner }: UserProps) {
   const initials = `${name?.[0] ?? ""}${last_name?.[0] ?? ""}`.toUpperCase();
+  const messages = useMessages();
 
   return (
     <div className="flex flex-col items-center justify-center w-full gap-4">
@@ -18,7 +21,7 @@ function UserCard({ name, last_name, avatar, business_owner }: UserProps) {
           src={avatar}
           width={80}
           height={80}
-          loading="lazy"
+          unoptimized
           alt="User profile image"
           className="rounded-full object-cover h-20 w-20"
         />
@@ -33,9 +36,9 @@ function UserCard({ name, last_name, avatar, business_owner }: UserProps) {
           {name} {last_name}
         </h3>
         {business_owner && (
-          <p className="flex justify-center items-center font-bold text-sm rounded-full gap-1  w-full max-w-40 px-2 py-1 bg-[#ffd466]">
+          <p className="flex justify-center items-center font-bold text-sm rounded-full gap-1  w-full max-w-sm px-2 py-1 bg-[#ffd466]">
             <MdBusinessCenter className="text-lg" />
-            Business Owner
+            {messages.business_account}
           </p>
         )}
       </div>

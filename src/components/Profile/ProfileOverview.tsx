@@ -4,10 +4,12 @@ import { FaRegUser } from "react-icons/fa6";
 import UserMiniCard from "./UserMiniCard";
 import { TfiWorld } from "react-icons/tfi";
 import { MdOutlineEmail } from "react-icons/md";
-import { LuCrown } from "react-icons/lu";
+import { FaCreditCard } from "react-icons/fa";
+
 import Button from "../UI/Button";
 import UpdateProfile from "./UpdateProfile";
 import { useUIContext } from "@/store/ui-context";
+import { useMessages } from "@/hooks/useMessages";
 
 type ProfileProps = {
   name: string;
@@ -18,36 +20,51 @@ type ProfileProps = {
 
 function ProfileOverview({ name, last_name, email, avatar_url }: ProfileProps) {
   const { handleToggleModal } = useUIContext();
+  const messages = useMessages();
+
   const fullName = `${name} ${last_name}`;
+
   return (
     <>
       <div className="profile-card-container ">
         <div className="flex justify-between max-md:flex-col gap-2  mb-6 mt-2  items-center">
-          <ProfileHeading title="Profile Overview" />
+          <ProfileHeading title={messages.profile_overview} />
 
           <Button
             onClick={handleToggleModal}
             buttonType="outline"
-            className="w-[100px] text-sm p-2"
+            className="max-w-[184px] text-sm p-2"
           >
-            Edit Profile
+            {messages.edit_profile}
           </Button>
         </div>
 
-        <div className="flex max-md:flex-col gap-4 max-md:items-start justify-between items-center">
+        <div className="flex max-md:flex-col gap-4 max-md:items-start justify-between items-center max-w-xl">
           <div className="flex flex-col gap-4 items-start">
-            <UserMiniCard text={fullName} icon={<FaRegUser />} label="Name" />
+            <UserMiniCard
+              text={fullName}
+              icon={<FaRegUser />}
+              label={messages.name}
+            />
 
             <UserMiniCard
-              label="Email"
+              label={messages.email}
               text={email}
               icon={<MdOutlineEmail />}
             />
           </div>
 
           <div className="flex flex-col gap-4 items-start">
-            <UserMiniCard label="Plan" text="VIP" icon={<LuCrown />} />
-            <UserMiniCard label="Language" text="English" icon={<TfiWorld />} />
+            <UserMiniCard
+              label={messages.plan}
+              text="PRO"
+              icon={<FaCreditCard />}
+            />
+            <UserMiniCard
+              label={messages.lang}
+              text={messages.language}
+              icon={<TfiWorld />}
+            />
           </div>
         </div>
       </div>

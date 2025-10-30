@@ -5,10 +5,12 @@ import { logout } from "@/lib/actions/logout";
 import { MdLogout } from "react-icons/md";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { useMessages } from "@/hooks/useMessages";
 
 export default function Logout() {
   const [pending, setPending] = useState(false);
   const router = useRouter();
+  const messages = useMessages();
 
   const handleLogout = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,7 +43,7 @@ export default function Logout() {
         `}
       >
         <MdLogout />
-        {pending ? "Logging out..." : "Log out"}
+        {pending ? messages.Logging_out : messages.logout}
       </button>
     </form>
   );

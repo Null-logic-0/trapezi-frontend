@@ -1,20 +1,24 @@
+"use client";
+
+import { useMessages } from "@/hooks/useMessages";
 import Button from "../UI/Button";
 import ProfileHeading from "./ProfileHeading";
 
 function MyBusiness() {
+  const messages = useMessages();
   return (
     <div className="profile-card-container">
       <div className="flex justify-between max-md:flex-col mb-6 mt-2 gap-2 items-center">
-        <ProfileHeading title="My Business" />
+        <ProfileHeading title={messages.my_business} />
 
-        <Button buttonType="outline" className="w-[150px] text-sm p-2">
-          Add New Business
+        <Button buttonType="outline" className="w-[180px] text-sm p-2">
+          {messages.add_business}
         </Button>
       </div>
 
       <div>
         <p className="text-center text-sm mt-6 font-semibold text-gray-400">
-          You haven&apos;t added any businesses yet
+          {messages.no_business}
         </p>
       </div>
     </div>

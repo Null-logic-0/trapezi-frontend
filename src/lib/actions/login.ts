@@ -10,14 +10,15 @@ import { revalidatePath } from "next/cache";
 
 export async function login(
   _prevState: AuthFormState,
-  formData: FormData
+  formData: FormData,
+  locale: "ka" | "en" = "ka"
 ): Promise<AuthFormState> {
   const body: LoginInterface = {
     email: (formData.get("email") as string) || "",
     password: (formData.get("password") as string) || "",
   };
 
-  const res: CreateUserResponse = await createSession(body);
+  const res: CreateUserResponse = await createSession(body, locale);
 
   if (!res.success) {
     return {

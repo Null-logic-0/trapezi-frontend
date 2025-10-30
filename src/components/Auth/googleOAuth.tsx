@@ -11,6 +11,7 @@ import Button from "@/components/UI/Button";
 import { googleOAuth } from "@/lib/actions/googleOAuth";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { useMessages } from "@/hooks/useMessages";
 
 const CLIENTID = process.env.NEXT_PUBLIC_CLIENT_ID || "";
 
@@ -18,6 +19,8 @@ function GoogleAuth() {
   const router = useRouter();
   const googleLoginRef = useRef<HTMLDivElement>(null);
   const [isPending, setIsPending] = useState(false);
+
+  const messages = useMessages();
 
   const handleGoogleResponse = async (response: CredentialResponse) => {
     if (!response.credential) return;
@@ -69,7 +72,7 @@ function GoogleAuth() {
         onClick={triggerGoogleLogin}
       >
         <FaGoogle className="text-xl text-[#ff6633]" />
-        {isPending ? "Signing..." : "Sign in with google"}
+        {isPending ? messages.logging : messages.google}
       </Button>
     </div>
   );

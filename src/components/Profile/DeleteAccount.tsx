@@ -7,12 +7,15 @@ import { useState } from "react";
 import { deleteAccount } from "@/lib/actions/deleteAccount";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { useMessages } from "@/hooks/useMessages";
 
 function DeleteAccount() {
   const router = useRouter();
   const { handleToggleModal } = useUIContext();
 
   const [pending, setPending] = useState(false);
+
+  const message = useMessages();
 
   const handleDelete = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,9 +47,11 @@ function DeleteAccount() {
 
       <Modal>
         <form onSubmit={handleDelete}>
-          <h1 className="text-2xl text-center font-bold">Delete Account</h1>
+          <h1 className="text-2xl text-center font-bold">
+            {message.delete_account}
+          </h1>
           <p className="text-sm text-center mt-2 font-semibold text-gray-400">
-            Once deleted, this can’t be undone. Still want to proceed?
+            {message.delete_caution}
           </p>
 
           <div className="flex mt-6 justify-center items-center gap-4">
@@ -55,7 +60,7 @@ function DeleteAccount() {
               type="button"
               buttonType="outline"
             >
-              Cancel
+              {message.cancel}
             </Button>
             <Button
               type="submit"
@@ -63,7 +68,7 @@ function DeleteAccount() {
               isPending={pending}
               buttonType="fill"
             >
-              {pending ? "Deleting..." : "Delete"}
+              {pending ? message.deleting : message.delete_account}
             </Button>
           </div>
         </form>

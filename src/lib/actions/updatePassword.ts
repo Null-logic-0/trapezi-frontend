@@ -1,32 +1,47 @@
 "use server";
-import { ProfileFormState } from "@/interfaces/user.interface";
+import {
+  PatchUserPasswordResponse,
+  ProfileFormState,
+  UpdatePasswordInterface,
+} from "@/interfaces/user.interface";
 import { patchUserPassword } from "../api/patchUserPassword";
 import { revalidatePath } from "next/cache";
 import { logout } from "./logout";
 
 export async function updatePassword(
   _prevState: ProfileFormState,
-  formData: FormData
+  formData: FormData,
+  locale: "ka" | "en" = "ka"
 ) {
-  const current_password = formData.get("current_password") as string;
-  const password = formData.get("password") as string;
-  const password_confirmation = formData.get("password_confirmation") as string;
+  const body: UpdatePasswordInterface = {
+    current_password: formData.get("current_password") as string,
+    password: formData.get("password") as string,
+    password_confirmation: formData.get("password_confirmation") as string,
+  };
 
-  const res = await patchUserPassword({
-    current_password,
-    password,
-    password_confirmation,
-  });
-
-  console.log("🔍 patchUserPassword response:", res);
+  const res: PatchUserPasswordResponse = await patchUserPassword(body, locale);
 
   if (!res.success) {
-    return { success: false, message: res.message };
+    const fieldErrors: Record<string, string> = {};
+    if (res.errors) {
+      for (const key in res.errors) {
+        fieldErrors[key] = Array.isArray(res.errors[key])
+          ? res.errors[key][0]
+          : res.errors[key];
+      }
+    }
+
+    return {
+      success: false,
+      message: res.message || "Update password failed",
+      fieldErrors,
+      values: body,
+    };
   }
 
   await logout();
   revalidatePath("/settings", "page");
   revalidatePath("/login", "page");
 
-  return { success: true, message: "Password updated!" };
+  return { success: true, message: "Password Updated", values: body };
 }

@@ -9,9 +9,16 @@ import { TbLockFilled } from "react-icons/tb";
 import { signup } from "@/lib/actions/signup";
 import { useActionState } from "react";
 import { useActionToast } from "@/hooks/useActionToast";
+import { useMessages } from "@/hooks/useMessages";
+import { useLanguage } from "@/store/language-context";
+import { AuthFormState } from "@/interfaces/authResponse.interface";
 
 function Signup() {
-  const [state, formAction, isPending] = useActionState(signup, {
+  const { locale } = useLanguage();
+  const handleAction = async (prevState: AuthFormState, formData: FormData) => {
+    return signup(prevState, formData, locale);
+  };
+  const [state, formAction, isPending] = useActionState(handleAction, {
     success: false,
     message: "",
     fieldErrors: {},
@@ -23,6 +30,7 @@ function Signup() {
   });
 
   useActionToast(state, "/profile");
+  const messages = useMessages();
 
   return (
     <form action={formAction} className="flex flex-col gap-4 w-full">
@@ -31,7 +39,7 @@ function Signup() {
         name="name"
         defaultValue={state.values?.name}
         placeholder="John"
-        label="Name"
+        label={messages.name}
         error={state.fieldErrors?.name}
         icon={<FaUser className="text-gray-500 " />}
       />
@@ -40,7 +48,7 @@ function Signup() {
         name="last_name"
         defaultValue={state.values?.last_name}
         placeholder="Doe"
-        label="Last Name"
+        label={messages.last_name}
         error={state.fieldErrors?.last_name}
         icon={<FaAddressCard className="text-gray-500 text-xl" />}
       />
@@ -49,7 +57,7 @@ function Signup() {
         name="email"
         defaultValue={state.values?.email}
         placeholder="your@email.com"
-        label="Email"
+        label={messages.email}
         error={state.fieldErrors?.email}
         icon={<MdEmail className="text-gray-500 text-xl" />}
       />
@@ -58,7 +66,7 @@ function Signup() {
         type="password"
         name="password"
         placeholder="*************"
-        label="Password"
+        label={messages.password}
         isPassword={true}
         error={state.fieldErrors?.password}
         icon={<TbLockFilled className="text-gray-500 text-xl" />}
@@ -68,14 +76,14 @@ function Signup() {
         type="password"
         name="password_confirmation"
         placeholder="*************"
-        label="Confirm Password"
+        label={messages.password_confirmation}
         isPassword={true}
         error={state.fieldErrors?.password_confirmation}
         icon={<TbLockFilled className="text-gray-500 text-xl" />}
         className="mb-2"
       />
 
-      <Checkbox name="business_owner" label={" Register Business Account"} />
+      <Checkbox name="business_owner" label={messages.business_account} />
 
       <Button
         type="submit"
@@ -83,7 +91,7 @@ function Signup() {
         isDisabled={isPending}
         className="mt-2"
       >
-        {isPending ? "Signing up..." : "Sign up"}
+        {isPending ? messages.signing : messages.signup}
       </Button>
     </form>
   );

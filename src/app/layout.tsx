@@ -4,6 +4,8 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import React from "react";
 import { UiContextProvider } from "@/store/ui-context";
+import { LanguageProvider } from "@/store/language-context";
+import LanguageToggle from "@/components/UI/LanguageToggle";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -24,8 +26,13 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable}  antialiased`}>
         <UiContextProvider>
-          <Toaster position="top-center" />
-          {children}
+          <LanguageProvider>
+            <Toaster position="top-center" />
+            <div className="w-full flex justify-end">
+              <LanguageToggle />
+            </div>
+            {children}
+          </LanguageProvider>
         </UiContextProvider>
       </body>
     </html>

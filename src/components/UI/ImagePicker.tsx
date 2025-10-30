@@ -68,6 +68,7 @@ function ImagePicker({
             src={displayImage}
             alt="Avatar"
             fill
+            unoptimized
             sizes="100px"
             className="object-cover rounded-full"
           />

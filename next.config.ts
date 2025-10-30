@@ -7,9 +7,14 @@ const nextConfig: NextConfig = {
         protocol: "http",
         hostname: "localhost",
         port: "3000",
-        pathname: "/**", // allow any path
+        pathname: "/**",
       },
     ],
+  },
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "10mb",
+    },
   },
 };
 

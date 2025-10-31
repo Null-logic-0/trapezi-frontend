@@ -1,6 +1,4 @@
-export interface Messages {
-  [key: string]: string | undefined;
-}
+import { Messages } from "@/interfaces/messages.interface";
 
 export const POLICIES_LINKS = (messages: Messages) => [
   {

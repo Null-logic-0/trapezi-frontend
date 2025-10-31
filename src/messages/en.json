@@ -51,5 +51,11 @@
   "cookies": "Cookie Policy",
   "follow": "Follow Us",
   "search_placeholder": "Search restaurants, cafes, bakeries...",
-  "hero_subtitle": "Explore the best restaurants, cafes, bars, and bakeries near you"
+  "hero_subtitle": "Explore the best restaurants, cafes, bars, and bakeries near you",
+  "all": "All",
+  "restaurants": "Restaurants",
+  "cafes": "Cafes",
+  "bars": "Bars",
+  "bakeries": "Bakeries",
+  "pastry": "Pastry"
 }

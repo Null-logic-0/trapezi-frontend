@@ -19,7 +19,7 @@ function BurgerMenu() {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: "-100%", opacity: 0 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
-          className="flex flex-col lg:hidden items-center justify-center fixed top-0 left-0 w-full z-10 bg-white h-screen"
+          className="flex flex-col lg:hidden items-center justify-center fixed top-0 left-0 w-full z-20 bg-white h-screen"
         >
           <NavList />
           <div className="flex justify-center max-w-[125px] items-center w-full flex-col gap-2 mt-4">

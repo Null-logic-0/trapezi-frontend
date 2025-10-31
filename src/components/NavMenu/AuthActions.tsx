@@ -16,7 +16,7 @@ function AuthActions({ currentUser }: { currentUser: object | null }) {
   return (
     <div className="flex items-center gap-2 ">
       <LanguageToggle />
-      {!currentUser ? (
+      {currentUser ? (
         <Button
           onClick={() => router.push("/profile")}
           buttonType="outline"

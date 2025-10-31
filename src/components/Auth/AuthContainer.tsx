@@ -7,7 +7,7 @@ import GoogleOAuth from "./googleOAuth";
 function AuthContainer({ children }: { children: React.ReactNode }) {
   const messages = useMessages();
   return (
-    <div className="flex flex-col px-2 py-4  items-center justify-center ">
+    <div className="flex flex-col px-2 pb-8 pt-18  items-center justify-center ">
       <div className="text-center my-4">
         <Logo />
         <p className="text-gray-500 font-semibold text-[16px]">

@@ -7,6 +7,7 @@ import { UiContextProvider } from "@/store/ui-context";
 import { LanguageProvider } from "@/store/language-context";
 import LanguageToggle from "@/components/UI/LanguageToggle";
 import HeaderNavMenu from "@/components/NavMenu/HeaderNavMenu";
+import Footer from "@/components/Footer/Footer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -31,6 +32,7 @@ export default function RootLayout({
             <Toaster position="top-center" />
             <HeaderNavMenu />
             {children}
+            <Footer />
           </LanguageProvider>
         </UiContextProvider>
       </body>

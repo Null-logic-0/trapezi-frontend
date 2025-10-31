@@ -6,6 +6,7 @@ import React from "react";
 import { UiContextProvider } from "@/store/ui-context";
 import { LanguageProvider } from "@/store/language-context";
 import LanguageToggle from "@/components/UI/LanguageToggle";
+import HeaderNavMenu from "@/components/NavMenu/HeaderNavMenu";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -28,9 +29,7 @@ export default function RootLayout({
         <UiContextProvider>
           <LanguageProvider>
             <Toaster position="top-center" />
-            <div className="w-full flex justify-end">
-              <LanguageToggle />
-            </div>
+            <HeaderNavMenu />
             {children}
           </LanguageProvider>
         </UiContextProvider>

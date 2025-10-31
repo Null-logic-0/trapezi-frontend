@@ -10,7 +10,7 @@ function AuthContainer({ children }: { children: React.ReactNode }) {
     <div className="flex flex-col px-2 py-4  items-center justify-center ">
       <div className="text-center my-4">
         <Logo />
-        <p className="text-gray-500 font-semibold text-lg">
+        <p className="text-gray-500 font-semibold text-[16px]">
           {messages.discover}
         </p>
       </div>
@@ -19,8 +19,8 @@ function AuthContainer({ children }: { children: React.ReactNode }) {
             border-[#e5e5e5] rounded-xl p-4 max-w-lg w-full "
       >
         <div className="py-2">
-          <h2 className="text-2xl  font-bold">{messages.welcome}</h2>
-          <p className="text-gray-500 font-semibold   text-sm">
+          <h2 className="text-2xl  font-semibold">{messages.welcome}</h2>
+          <p className="text-gray-500 font-medium   text-sm">
             {messages.signup_or_login}
           </p>
         </div>

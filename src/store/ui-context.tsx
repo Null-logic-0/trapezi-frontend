@@ -9,18 +9,18 @@ import React, {
 
 // --- Types ---
 interface UIState {
-  toggleSideBar: boolean;
+  toggleMenu: boolean;
   openModal: boolean;
 }
 
 type UIAction =
-  | { type: "TOGGLE_SIDEBAR" }
+  | { type: "TOGGLE_MENU" }
   | { type: "TOGGLE_MODAL" }
   | { type: "CLOSE_MODAL" };
 
 interface UIContextType extends UIState {
   handleToggleModal: () => void;
-  handleToggleSideBar: () => void;
+  handleToggleMenu: () => void;
   handleCloseModal: () => void;
 }
 
@@ -39,8 +39,8 @@ export function useUIContext(): UIContextType {
 // --- Reducer ---
 function uiReducer(state: UIState, action: UIAction): UIState {
   switch (action.type) {
-    case "TOGGLE_SIDEBAR":
-      return { ...state, toggleSideBar: !state.toggleSideBar };
+    case "TOGGLE_MENU":
+      return { ...state, toggleMenu: !state.toggleMenu };
     case "TOGGLE_MODAL":
       return { ...state, openModal: !state.openModal };
     case "CLOSE_MODAL":
@@ -52,7 +52,7 @@ function uiReducer(state: UIState, action: UIAction): UIState {
 
 // --- Initial State ---
 const initialState: UIState = {
-  toggleSideBar: false,
+  toggleMenu: false,
   openModal: false,
 };
 
@@ -69,8 +69,8 @@ export function UiContextProvider({ children }: UiContextProviderProps) {
     []
   );
 
-  const handleToggleSideBar = useCallback(
-    () => dispatch({ type: "TOGGLE_SIDEBAR" }),
+  const handleToggleMenu = useCallback(
+    () => dispatch({ type: "TOGGLE_MENU" }),
     []
   );
 
@@ -80,11 +80,11 @@ export function UiContextProvider({ children }: UiContextProviderProps) {
   );
 
   const contextValue: UIContextType = {
-    toggleSideBar: state.toggleSideBar,
+    toggleMenu: state.toggleMenu,
     openModal: state.openModal,
     handleCloseModal,
     handleToggleModal,
-    handleToggleSideBar,
+    handleToggleMenu,
   };
 
   return <UIContext value={contextValue}>{children}</UIContext>;

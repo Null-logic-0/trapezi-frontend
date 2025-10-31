@@ -1,25 +1,9 @@
-import Link from "next/link";
-import Logout from "@/components/Auth/Logout";
-
 function Page() {
-    return (
-        <div className="flex flex-col items-center justify-center w-xl mx-auto gap-4">
-
-
-            <h1 className="text-2xl font-bold text-gray-900">
-                HOME PAGE
-            </h1>
-
-            <Logout/>
-
-            <Link href={'/login'}>
-                login
-            </Link>
-            <Link href={'/signup'}>
-                signup
-            </Link>
-        </div>
-    );
+  return (
+    <div className="h-screen flex justify-center items-center">
+      <h1 className="text-4xl font-bold text-gray-900">HOME PAGE</h1>
+    </div>
+  );
 }
 
 export default Page;

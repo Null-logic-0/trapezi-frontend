@@ -9,7 +9,7 @@ function LanguageToggle() {
     <button
       onClick={toggleLanguage}
       className="cursor-pointer
-       text-[#838383] flex justify-start items-center transition-all gap-2 rounded-xl px-2 py-1
+       text-[#838383] flex justify-start items-center shrink-0 transition-all gap-2 rounded-xl px-2 py-3
        font-semibold text-[16px] hover:bg-[#ffd466]"
     >
       {locale === "ka" ? "🇬🇧 EN" : "🇬🇪 KA"}

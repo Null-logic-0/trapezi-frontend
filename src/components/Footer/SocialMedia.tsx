@@ -33,13 +33,7 @@ function SocialMedia() {
         >
           <PiTiktokLogoBold className="text-xl" />
         </a>
-        <a
-          target="_blank"
-          href="#"
-          className="text-[#fafafa]/80 hover:text-[#fafafa] transition-colors"
-        >
-          <BsTwitterX className="text-xl" />
-        </a>
+
         <a
           target="_blank"
           href="#"

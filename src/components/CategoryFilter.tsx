@@ -35,7 +35,7 @@ const CategoryFilter = () => {
   }, [currentCategory]);
 
   return (
-    <section className="py-8 px-4 sm:px-6 lg:px-8 bg-[#ffffff] border-y border-[#e3e3e3]">
+    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-[#ffffff] border-y border-[#e3e3e3]">
       <div className="max-w-7xl mx-auto">
         <div className="flex max-md:flex-wrap items-center justify-center gap-3">
           {categories.map((category) => {

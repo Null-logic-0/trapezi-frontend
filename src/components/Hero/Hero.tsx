@@ -7,7 +7,7 @@ import { useMessages } from "@/hooks/useMessages";
 function Hero() {
   const messages = useMessages();
   return (
-    <section className="relative h-[600px] flex items-center justify-center">
+    <section className="relative h-screen flex items-center justify-center">
       <div className="absolute inset-0">
         <Image
           src={heroImage}

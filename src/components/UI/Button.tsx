@@ -1,5 +1,5 @@
 "use client";
-import React, { ButtonHTMLAttributes } from "react";
+import React, { ButtonHTMLAttributes, ForwardedRef } from "react";
 import { twMerge } from "tailwind-merge";
 import SpinnerMini from "./SpinnerMini/SpinnerMini";
 
@@ -9,6 +9,7 @@ type ButtonProps = {
   className?: string;
   buttonType?: "fill" | "outline";
   isPending?: boolean;
+  ref?: ForwardedRef<HTMLButtonElement>;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 function Button({
@@ -17,6 +18,7 @@ function Button({
   isDisabled,
   isPending,
   className,
+  ref,
   ...rest
 }: ButtonProps) {
   const buttonStyle =
@@ -25,6 +27,7 @@ function Button({
       : "bg-[#f5f5f5] border-2 text-[#1A1A1A] border-[#e5e5e5] hover:bg-[#FFD166] ";
   return (
     <button
+      ref={ref}
       disabled={isDisabled || isPending}
       className={twMerge(
         `${

@@ -1,7 +1,6 @@
 "use client";
 import { LuFacebook } from "react-icons/lu";
 import { GrInstagram } from "react-icons/gr";
-import { BsTwitterX } from "react-icons/bs";
 import { SlSocialLinkedin } from "react-icons/sl";
 import { PiTiktokLogoBold } from "react-icons/pi";
 import { useMessages } from "@/hooks/useMessages";

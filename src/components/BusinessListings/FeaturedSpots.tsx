@@ -5,6 +5,7 @@ import BusinessCard from "./BusinessCard";
 import Button from "../UI/Button";
 import { useRouter } from "next/navigation";
 import { BusinessProps } from "@/interfaces/business.interface";
+import Link from "next/link";
 
 const FeaturedSpots = ({ businesses }: BusinessProps) => {
   const messages = useMessages();
@@ -21,13 +22,14 @@ const FeaturedSpots = ({ businesses }: BusinessProps) => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {businesses.map((business, index) => (
-            <div
-              key={business.id}
-              className="animate-scale-in"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <BusinessCard {...business} />
-            </div>
+            <Link key={business.id} href={`places/${business.id}`}>
+              <div
+                className="animate-scale-in"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <BusinessCard {...business} />
+              </div>
+            </Link>
           ))}
         </div>
         <Button

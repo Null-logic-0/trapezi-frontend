@@ -50,7 +50,7 @@ export const PROFILE_NAV_LINKS = (
     },
     {
       key: "settings",
-      href: "/settings",
+      href: "/profile/settings",
       text: messages.settings,
       icon: <IoSettingsOutline />,
     },

@@ -68,5 +68,11 @@
   "love_great_food_title": "Love Great Food?",
   "love_great_food_subtitle": "Create your account and start discovering the best restaurants, cafes, bars, and bakeries in Georgia.",
   "register_business": "Register Your Business",
-  "create_account": "Create Account"
+  "create_account": "Create Account",
+  "send": "Send",
+  "back": "Go back",
+  "forgot_password_title": "Forgot Password?",
+  "forgot_password_subtitle": "Enter your email address and we'll send you a link to reset your password",
+  "reset_password": "Reset Password",
+  "new_password": "Enter your new password"
 }

@@ -1,8 +1,7 @@
-// proxy.ts
 import { NextResponse, type NextRequest } from "next/server";
 import { cookies } from "next/headers";
 
-const protectedRoutes = ["/profile", "/settings"];
+const protectedBaseRoutes = ["/profile", "/settings"];
 const authPages = ["/login", "/signup"];
 
 export async function proxy(req: NextRequest) {
@@ -10,15 +9,20 @@ export async function proxy(req: NextRequest) {
   const token = cookieStore.get("token")?.value;
   const { pathname } = req.nextUrl;
 
-  if (!token && protectedRoutes.includes(pathname)) {
+  const isProtectedPlace = /^\/places\/[^/]+$/.test(pathname);
+  const isProtectedBase = protectedBaseRoutes.some((r) => pathname === r);
+
+  if (!token && (isProtectedBase || isProtectedPlace)) {
     return NextResponse.redirect(new URL("/login", req.nextUrl.origin));
   }
+
   if (token && authPages.includes(pathname)) {
     return NextResponse.redirect(new URL("/profile", req.nextUrl.origin));
   }
+
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/profile", "/settings", "/login", "/signup"],
+  matcher: ["/profile", "/settings", "/login", "/signup", "/places/:path*"],
 };

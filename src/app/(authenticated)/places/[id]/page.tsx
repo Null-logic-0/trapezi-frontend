@@ -6,9 +6,5 @@ interface PlaceDetailsProps {
 
 export default async function PlaceDetails({ params }: PlaceDetailsProps) {
   const { id } = await params;
-  return (
-    <>
-      <BusinessDetail id={id} />
-    </>
-  );
+  return <BusinessDetail id={id} />;
 }

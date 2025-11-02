@@ -14,21 +14,21 @@ function SocialMedia() {
         <a
           target="_blank"
           href="#"
-          className="text-[#fafafa]/80 hover:text-[#fafafa] transition-colors"
+          className="text-[#fafafa]/80 hover:text-[#ff6b35] transition-colors"
         >
           <LuFacebook className="text-xl" />
         </a>
         <a
           target="_blank"
           href="#"
-          className="text-[#fafafa]/80 hover:text-[#fafafa] transition-colors"
+          className="text-[#fafafa]/80 hover:text-[#ff6b35] transition-colors"
         >
           <GrInstagram className="text-xl" />
         </a>
         <a
           target="_blank"
           href="#"
-          className="text-[#fafafa]/80 hover:text-[#fafafa] transition-colors"
+          className="text-[#fafafa]/80 hover:text-[#ff6b35] transition-colors"
         >
           <PiTiktokLogoBold className="text-xl" />
         </a>
@@ -36,7 +36,7 @@ function SocialMedia() {
         <a
           target="_blank"
           href="#"
-          className="text-[#fafafa]/80 hover:text-[#fafafa] transition-colors"
+          className="text-[#fafafa]/80 hover:text-[#ff6b35] transition-colors"
         >
           <SlSocialLinkedin className="text-xl" />
         </a>

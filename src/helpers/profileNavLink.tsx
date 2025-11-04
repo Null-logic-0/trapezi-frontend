@@ -35,8 +35,8 @@ export const PROFILE_NAV_LINKS = (
       icon: <MdFavoriteBorder />,
     },
     {
-      key: "business",
-      href: "/my_business",
+      key: "places",
+      href: "/my_places",
       text: messages.my_business,
       icon: <LuBriefcaseBusiness />,
       requiresBusiness: true,

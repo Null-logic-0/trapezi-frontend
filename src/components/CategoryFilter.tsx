@@ -6,7 +6,7 @@ import Button from "./UI/Button";
 import { CATEGORIES } from "@/helpers/categories";
 import { useMessages } from "@/hooks/useMessages";
 
-const CategoryFilter = () => {
+const CategoryFilter = ({ className }: { className?: string }) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -35,7 +35,7 @@ const CategoryFilter = () => {
   }, [currentCategory]);
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-[#ffffff] border-y border-[#e3e3e3]">
+    <section className={className}>
       <div className="max-w-7xl mx-auto">
         <div className="flex max-md:flex-wrap items-center justify-center gap-3">
           {categories.map((category) => {

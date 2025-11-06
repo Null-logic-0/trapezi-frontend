@@ -12,7 +12,7 @@ function SearchBar() {
           name="search"
           type="text"
           placeholder={messages.search_placeholder}
-          className="flex-1 transition-all  w-full focus:border-[#ff6633] border focus:outline-none rounded-full pl-6 pr-4 py-4 text-base focus-visible:ring-0"
+          className="flex-1 transition-all  w-full focus:border-[#ff6633] border border-[#e5e5e5] focus:outline-none rounded-full pl-6 pr-4 py-4 text-base focus-visible:ring-0"
         />
         <Button
           type="submit"

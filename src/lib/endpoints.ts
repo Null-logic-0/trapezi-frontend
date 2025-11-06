@@ -13,5 +13,14 @@ export const ENDPOINTS = {
     update_profile: `${BASE_URL}/update_profile`,
     update_password: `${BASE_URL}/update_password`,
     delete_profile: `${BASE_URL}/delete_profile`,
+    my_places: `${BASE_URL}/my_businesses`,
+    create_place: `${BASE_URL}/food_places`,
+    update_place: `${BASE_URL}/food_places`,
+    delete_place: `${BASE_URL}/food_places`,
+  },
+
+  places: {
+    all: `${BASE_URL}/food_places`,
+    one: `${BASE_URL}/food_places`,
   },
 };

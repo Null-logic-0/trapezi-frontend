@@ -19,6 +19,7 @@
   "plan": "ანაგარიში",
   "my_business": "ჩემი ობიექტები",
   "add_business": "ობიექტის დამატება",
+  "manage_businesses": "მართე შენი ბიზნესი",
   "update_business": "ობიექტის განახლება",
   "business_name": "ობიექტის სახელი",
   "enter_business_name": "შეიყვანეთ ობიექტის სახელი",
@@ -53,9 +54,10 @@
   "cancel": "გაუქმება",
   "update_password": "პაროლის განახლება",
   "updating": "მიმდინარეობს განახლება...",
+  "edit": "ჩასწორება",
   "current_password": "ამჟამინდელი პაროლი",
   "delete_account": "პროფილის წაშლა",
-  "deleting": "Deleting...",
+  "deleting": "წაშლა...",
   "delete_caution": "დარწმუნებული ხართ რომ გინდათ პროფილის წაშლა?",
   "welcome": "მობრძანდით",
   "signup_or_login": "შედით თქვენს ანგარიშზე ან შექმენით ახალი",
@@ -91,5 +93,16 @@
   "send": "გაგზავნა",
   "back": "უკან დაბრუნება",
   "reset_password": "პაროლის შეცვლა",
-  "new_password": "შეიყვანეთ ახალი პაროლი"
+  "new_password": "შეიყვანეთ ახალი პაროლი",
+  "success_message": "ოპერაცია წარმატებით განხორციელდა",
+  "error_message": "ოპერაცია ჩაიშალა",
+  "delete": "წაშლა",
+
+  "monday": "ორშაბათი",
+  "tuesday": "სამშაბათი",
+  "wednesday": "ოთხშაბათი",
+  "thursday": "ხუთშაბათი",
+  "friday": "პარასკევი",
+  "saturday": "შაბათი",
+  "sunday": "კვირა"
 }

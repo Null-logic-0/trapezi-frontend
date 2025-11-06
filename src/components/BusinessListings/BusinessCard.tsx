@@ -6,23 +6,23 @@ import { FaRegClock } from "react-icons/fa";
 import { Badge } from "../UI/Badge";
 
 interface BusinessCardProps {
-  name: string;
-  category: string;
+  business_name: string;
+  categories: string[];
   rating: number;
   reviews: number;
   image: string;
-  location: string;
+  address: string;
   isOpen: boolean;
   isVIP?: boolean;
 }
 
 const BusinessCard = ({
-  name,
-  category,
+  business_name,
+  categories,
   rating,
   reviews,
   image,
-  location,
+  address,
   isOpen,
   isVIP = false,
 }: BusinessCardProps) => {
@@ -32,8 +32,9 @@ const BusinessCard = ({
       <div className="relative aspect-4/3 overflow-hidden">
         <Image
           src={image}
-          alt={name}
+          alt={business_name}
           fill
+          unoptimized
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
         {isVIP && (
@@ -49,9 +50,9 @@ const BusinessCard = ({
         <div className="flex items-start justify-between mb-2">
           <div>
             <h3 className="text-lg font-bold  group-hover:text-[#ff6933] transition-colors">
-              {name}
+              {business_name}
             </h3>
-            <p className="text-sm text-[#737373]">{category}</p>
+            <p className="text-sm text-[#737373]">{categories.join(", ")}</p>
           </div>
         </div>
 
@@ -61,10 +62,10 @@ const BusinessCard = ({
           <span className="text-sm text-[#737373]">({reviews})</span>
         </div>
 
-        <div className="flex items-center gap-4 text-sm text-[#737373]">
+        <div className="flex items-center justify-between gap-4 text-sm text-[#737373]">
           <div className="flex items-center gap-1">
             <FiMapPin className="text-[#737373]" />
-            <span className="truncate">{location}</span>
+            <span className="truncate w-[150px] block">{address}</span>
           </div>
           <div className="flex items-center gap-1">
             <FaRegClock className="text-[#737373]" />

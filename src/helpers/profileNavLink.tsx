@@ -24,7 +24,7 @@ export const PROFILE_NAV_LINKS = (
     },
     {
       key: "reviews",
-      href: "/my_reviews",
+      href: "/my-reviews",
       text: messages.reviews,
       icon: <IoIosStarOutline />,
     },
@@ -36,7 +36,7 @@ export const PROFILE_NAV_LINKS = (
     },
     {
       key: "places",
-      href: "/my_places",
+      href: "/my-places",
       text: messages.my_business,
       icon: <LuBriefcaseBusiness />,
       requiresBusiness: true,

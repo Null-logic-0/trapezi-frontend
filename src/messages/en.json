@@ -46,6 +46,7 @@
   "favorites": "Favorites",
   "settings": "Settings",
   "discover_food": "Discover",
+  "manage_businesses": "Manage your places",
   "help": "Help Center",
   "about": "About Us",
   "save": "Save",
@@ -53,9 +54,11 @@
   "cancel": "Cancel",
   "update_password": "Update Password",
   "updating": "Updating...",
+  "edit": "Edit",
   "current_password": "Current Password",
   "delete_account": "Delete Account",
   "deleting": "Deleting...",
+  "delete": "delete",
   "delete_caution": "Once deleted, this can’t be undone. Still want to proceed?",
   "welcome": "Welcome",
   "signup_or_login": "Sign in to your account or create a new one",
@@ -91,5 +94,15 @@
   "forgot_password_title": "Forgot Password?",
   "forgot_password_subtitle": "Enter your email address and we'll send you a link to reset your password",
   "reset_password": "Reset Password",
-  "new_password": "Enter your new password"
+  "new_password": "Enter your new password",
+  "success_message": "Action completed successfully",
+  "error_message": "Action failed",
+
+  "monday": "monday",
+  "tuesday": "tuesday",
+  "wednesday": "wednesday",
+  "thursday": "thursday",
+  "friday": "friday",
+  "saturday": "saturday",
+  "sunday": "sunday"
 }

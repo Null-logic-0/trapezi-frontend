@@ -12,42 +12,24 @@ import GoogleMapInput from "../UI/GoogleMapInput";
 import { GOOGLE_API_KEY } from "@/constants/google-api-key";
 import { useLanguage } from "@/store/language-context";
 import { useBusinessForm } from "@/hooks/useBusinessForm";
-import { BusinessInterface } from "@/interfaces/places.interface";
-import WorkingScheduleInput from "../UI/WorkingScheduleInput";
 
-type Props = {
-  initialValues?: BusinessInterface;
-  onSuccessRedirect?: string;
-};
-
-function BusinessForm({
-  initialValues,
-  onSuccessRedirect = "/my-places",
-}: Props) {
+function CreateBusiness() {
   const { locale } = useLanguage();
   const router = useRouter();
   const messages = useMessages();
   const categories = SELECT_CATEGORIES(messages);
 
   const { state, isPending, setImages, setMenuPdf, handleSubmit } =
-    useBusinessForm({ locale, initialValues, onSuccessRedirect });
+    useBusinessForm({ locale: locale, onSuccessRedirect: "/my-places" });
 
   return (
     <div className="max-w-3xl mx-auto flex flex-col justify-center py-24">
       <form
-        onSubmit={(e) =>
-          handleSubmit(
-            e,
-            initialValues?.id ? "PATCH" : "POST",
-            initialValues?.id
-          )
-        }
+        onSubmit={(e) => handleSubmit(e, "POST")}
         className="bg-[#ffffff] flex flex-col gap-6 w-full border-[#e3e3e3] border px-8 py-6 rounded-xl"
         encType="multipart/form-data"
       >
-        <h1 className="text-3xl font-bold pb-2">
-          {initialValues?.id ? messages.add_business : messages.update_business}
-        </h1>
+        <h1 className="text-3xl font-bold pb-2">{messages.add_business}</h1>
 
         <Input
           type="text"
@@ -55,7 +37,6 @@ function BusinessForm({
           error={state.fieldErrors?.business_name}
           placeholder={messages.enter_business_name}
           label={messages.business_name}
-          defaultValue={initialValues?.business_name || ""}
         />
 
         <Input
@@ -63,7 +44,6 @@ function BusinessForm({
           name="description"
           error={state.fieldErrors?.description}
           placeholder={messages.description_business}
-          defaultValue={initialValues?.description || ""}
           label={messages.description}
           className="h-[200px]"
         />
@@ -72,7 +52,6 @@ function BusinessForm({
           name="address"
           error={state.fieldErrors?.address}
           label={messages.address}
-          defaultValue={initialValues?.address || ""}
           placeholder={messages.enter_address}
           apiKey={GOOGLE_API_KEY}
         />
@@ -84,17 +63,13 @@ function BusinessForm({
             placeholder={messages.select_categories}
             error={state.fieldErrors?.categories}
             options={categories}
-            defaultSelected={initialValues?.categories || []}
           />
         </label>
-
-        <WorkingScheduleInput name="working_schedule" />
 
         {/* Multi Image Picker */}
         <MultiImagePicker
           name="images[]"
           maxImages={5}
-          defaultImages={initialValues?.images_url || []}
           onChange={setImages}
           error={state.fieldErrors?.images}
         />
@@ -104,11 +79,10 @@ function BusinessForm({
           name="menu_pdf"
           onChange={setMenuPdf}
           label={messages.upload_menu}
-          defaultFileUrl={initialValues?.menu_url}
           error={state.fieldErrors?.menu_pdf}
         />
 
-        <AddLinks defaultValues={initialValues} />
+        <AddLinks />
 
         <div className="flex justify-center items-center gap-4">
           <Button
@@ -133,4 +107,4 @@ function BusinessForm({
   );
 }
 
-export default BusinessForm;
+export default CreateBusiness;

@@ -11,11 +11,15 @@ type InputProps = React.InputHTMLAttributes<HTMLInputElement> &
     label?: string;
     icon?: React.ReactNode;
     error?: string;
+    value?: string; // for controlled input
+    defaultValue?: string; // for uncontrolled input
   };
 
 function Input({
   isTextArea,
   isPassword,
+  defaultValue,
+  value,
   error,
   label,
   icon,
@@ -37,9 +41,9 @@ function Input({
     : type || "text";
 
   const mergedClass = twMerge(
-    `w-full border-2  ${
+    `w-full border-2 ${
       error ? "border-[#E50000]" : "border-[#e5e5e5]"
-    }  font-medium text-sm rounded-xl resize-none ${
+    } font-medium text-sm rounded-xl resize-none ${
       icon ? "pl-[42px]" : "px-3"
     } py-3 focus:border-[#ff6633] bg-[#f5f5f5] focus:outline-none`,
     className
@@ -48,7 +52,7 @@ function Input({
   return (
     <div className="flex flex-col gap-2">
       {label && (
-        <label htmlFor={inputId} className="font-semibold  text-sm">
+        <label htmlFor={inputId} className="font-semibold text-sm">
           {label}
         </label>
       )}
@@ -59,6 +63,7 @@ function Input({
           name={name}
           className={mergedClass}
           placeholder={placeholder}
+          {...(value !== undefined ? { value } : { defaultValue })}
           {...rest}
         />
       ) : (
@@ -71,6 +76,7 @@ function Input({
             name={name}
             placeholder={placeholder}
             className={mergedClass}
+            {...(value !== undefined ? { value } : { defaultValue })}
             {...rest}
           />
           {isPassword && (

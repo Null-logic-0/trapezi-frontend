@@ -10,7 +10,18 @@ import { FaInstagram } from "react-icons/fa";
 import { PiTiktokLogoLight } from "react-icons/pi";
 import { useMessages } from "@/hooks/useMessages";
 
-function AddLinks() {
+type LinkProps = {
+  website: string;
+  facebook: string;
+  instagram: string;
+  tiktok: string;
+};
+
+interface Links {
+  defaultValues?: LinkProps;
+}
+
+function AddLinks({ defaultValues }: Links) {
   const [showInputs, setShowInputs] = useState(false);
   const messages = useMessages();
   return (
@@ -18,7 +29,11 @@ function AddLinks() {
       <Button
         buttonType="outline"
         type="button"
-        className="self-start px-4 py-2 w-45 text-sm text-[#ff6633]"
+        className={`${
+          defaultValues
+            ? "hidden"
+            : "self-start px-4 py-2 w-45 text-sm text-[#ff6633]"
+        }`}
         onClick={() => setShowInputs(!showInputs)}
       >
         {showInputs ? messages.hide_links : messages.add_links}
@@ -26,7 +41,13 @@ function AddLinks() {
 
       <div
         className={`overflow-hidden transition-all duration-500 ease-in-out ${
-          showInputs ? "max-h-96 opacity-100 mt-4" : "max-h-0 opacity-0 mt-0"
+          defaultValues
+            ? "opacity-100"
+            : `${
+                showInputs
+                  ? "max-h-96 opacity-100 mt-4"
+                  : "max-h-0 opacity-0 mt-0"
+              }`
         }`}
       >
         <div className="grid grid-cols-1  md:grid-cols-2  gap-3">
@@ -35,6 +56,8 @@ function AddLinks() {
             placeholder="https://yourwebsite.ge"
             name="website"
             label="Website"
+            className="text-gray-600 font-semibold"
+            defaultValue={defaultValues?.website}
             icon={<BsGlobe className="text-[#949494]" />}
           />
           <Input
@@ -42,6 +65,8 @@ function AddLinks() {
             placeholder="Facebook"
             name="facebook"
             label="Facebook"
+            className="text-gray-600 font-semibold"
+            defaultValue={defaultValues?.facebook}
             icon={<LuFacebook className="text-[#949494]" />}
           />
           <Input
@@ -49,12 +74,16 @@ function AddLinks() {
             placeholder="Instagram"
             name="instagram"
             label="Instagram"
+            className="text-gray-600 font-semibold"
+            defaultValue={defaultValues?.instagram}
             icon={<FaInstagram className="text-[#949494]" />}
           />
           <Input
             type="text"
             placeholder="TikTok"
             name="tiktok"
+            className="text-gray-600 font-semibold"
+            defaultValue={defaultValues?.tiktok}
             label="TikTok"
             icon={<PiTiktokLogoLight className="text-[#949494]" />}
           />

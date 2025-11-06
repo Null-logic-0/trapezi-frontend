@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { cookies } from "next/headers";
 
-const protectedBaseRoutes = ["/profile", "/settings"];
+const protectedBaseRoutes = ["/profile", "/settings", "/my-places"];
 const authPages = ["/login", "/signup"];
 
 export async function proxy(req: NextRequest) {
@@ -24,5 +24,12 @@ export async function proxy(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/profile", "/settings", "/login", "/signup", "/places/:path*"],
+  matcher: [
+    "/profile",
+    "/settings",
+    "/login",
+    "/signup",
+    "/places/:path*",
+    "/my-places",
+  ],
 };

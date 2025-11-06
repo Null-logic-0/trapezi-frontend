@@ -11,27 +11,42 @@ type Props = {
   maxImages?: number;
   accept?: string;
   className?: string;
+  error?: string;
   initialFiles?: File[];
   onChange?: (files: File[]) => void;
+  defaultImages?: string[]; // URLs from backend
 };
 
 type Preview = {
   id: string;
-  file: File;
+  file?: File;
   url: string;
 };
 
 export default function MultiImagePicker({
-  name = "images",
+  name = "images[]",
   maxImages = 5,
   accept = "image/*",
   className,
   initialFiles = [],
+  error,
   onChange,
+  defaultImages = [],
 }: Props) {
   const [previews, setPreviews] = useState<Preview[]>([]);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const dropRef = useRef<HTMLDivElement | null>(null);
+  const messages = useMessages();
+
+  useEffect(() => {
+    if (defaultImages.length > 0) {
+      const existingPreviews = defaultImages.map((url) => ({
+        id: `default-${Math.random().toString(36).slice(2, 9)}`,
+        url,
+      }));
+      setPreviews(existingPreviews);
+    }
+  }, [defaultImages]);
 
   useEffect(() => {
     if (initialFiles.length) handleAddFiles(initialFiles);
@@ -39,8 +54,16 @@ export default function MultiImagePicker({
   }, []);
 
   useEffect(() => {
+    if (onChange) {
+      onChange(previews.filter((p) => p.file).map((p) => p.file!) || []);
+    }
+  }, [previews, onChange]);
+
+  useEffect(() => {
     return () => {
-      previews.forEach((p) => URL.revokeObjectURL(p.url));
+      previews.forEach((p) => {
+        if (p.file) URL.revokeObjectURL(p.url);
+      });
     };
   }, [previews]);
 
@@ -57,9 +80,7 @@ export default function MultiImagePicker({
         file,
         url: URL.createObjectURL(file),
       }));
-      const next = [...prev, ...newPreviews];
-      onChange?.(next.map((p) => p.file));
-      return next;
+      return [...prev, ...newPreviews];
     });
   };
 
@@ -72,14 +93,12 @@ export default function MultiImagePicker({
   const removeAt = (index: number) => {
     setPreviews((prev) => {
       const removed = prev[index];
-      if (removed) URL.revokeObjectURL(removed.url);
-      const next = prev.filter((_, i) => i !== index);
-      onChange?.(next.map((p) => p.file));
-      return next;
+      if (removed?.file) URL.revokeObjectURL(removed.url);
+      return prev.filter((_, i) => i !== index);
     });
   };
 
-  // drag & drop handlers
+  // Drag & drop behavior
   useEffect(() => {
     const el = dropRef.current;
     if (!el) return;
@@ -107,28 +126,20 @@ export default function MultiImagePicker({
       el.removeEventListener("dragleave", onDragLeave);
       el.removeEventListener("drop", onDrop);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dropRef.current, previews]);
+  }, [previews]);
 
   const openFileDialog = () => inputRef.current?.click();
 
   const handlePointerDownOpen = (e: React.PointerEvent) => {
     const target = e.target as HTMLElement | null;
     if (!target) return;
-
-    if (target.closest("button") || target.closest("input")) {
-      return;
-    }
-
+    if (target.closest("button") || target.closest("input")) return;
     e.preventDefault();
     openFileDialog();
   };
 
-  const messages = useMessages();
-
   return (
     <div className={twMerge("w-full", className)}>
-      {/* real file input for forms */}
       <input
         ref={inputRef}
         type="file"
@@ -142,7 +153,9 @@ export default function MultiImagePicker({
       <div
         ref={dropRef}
         onPointerDown={handlePointerDownOpen}
-        className="cursor-pointer rounded-xl border border-[#ff6933] bg-[#f5f5f5] p-4 transition hover:shadow-sm"
+        className={`cursor-pointer rounded-xl border ${
+          error ? "border-red-500" : "border-[#ff6933]"
+        }  bg-[#f5f5f5] p-4 transition hover:shadow-sm`}
       >
         <div className="flex items-center justify-between mb-3">
           <div>
@@ -151,20 +164,19 @@ export default function MultiImagePicker({
             </h3>
             <p className="text-xs text-gray-500">{messages.images_caution}</p>
           </div>
-
           <div className="text-sm text-gray-600">
             {previews.length}/{maxImages}
           </div>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-          {/* show previews */}
           {previews.map((p, i) => (
             <div key={p.id} className="relative group">
               <Image
                 width={96}
                 height={96}
                 src={p.url}
+                unoptimized
                 alt={`img-${i}`}
                 className="object-cover w-24 h-24 rounded-md border"
                 style={{ pointerEvents: "none" }}
@@ -189,9 +201,13 @@ export default function MultiImagePicker({
               return (
                 <div
                   key={`slot-${slotIndex}`}
-                  className="flex items-center justify-center w-24 h-24 rounded-md  border border-dashed border-gray-300 bg-white/40 hover:bg-[#ffd466]/30 transition"
+                  className={`flex items-center justify-center w-24 h-24 rounded-md border border-dashed ${
+                    error ? "border-red-500" : "border-gray-300"
+                  }  bg-white/40 hover:bg-[#ffd466]/30 transition`}
                 >
-                  <FaPlus className="text-gray-500" />
+                  <FaPlus
+                    className={` ${error ? "text-red-500" : "text-gray-500"}`}
+                  />
                 </div>
               );
             }
@@ -205,10 +221,8 @@ export default function MultiImagePicker({
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
-                // clear all
-                previews.forEach((p) => URL.revokeObjectURL(p.url));
+                previews.forEach((p) => p.file && URL.revokeObjectURL(p.url));
                 setPreviews([]);
-                onChange?.([]);
               }}
               className="flex items-center gap-1 cursor-pointer text-red-500 hover:text-red-700"
             >
@@ -216,6 +230,10 @@ export default function MultiImagePicker({
             </button>
           )}
         </div>
+
+        {error && (
+          <span className="text-sm text-[#E50000] font-medium">{error}</span>
+        )}
       </div>
     </div>
   );

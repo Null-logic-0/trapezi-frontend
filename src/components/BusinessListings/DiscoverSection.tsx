@@ -71,7 +71,7 @@ const DiscoverSection = () => {
   ];
 
   return (
-    <section id="discover" className="py-16 px-4 sm:px-6 lg:px-8 ">
+    <section className="py-16 px-4 sm:px-6 lg:px-8 ">
       <DiscoverPlaces businesses={businesses} />
     </section>
   );

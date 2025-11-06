@@ -3,12 +3,13 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { LuMapPin } from "react-icons/lu";
 import {
-  LoadScript,
+  useJsApiLoader,
   StandaloneSearchBox,
   GoogleMap,
   Marker,
 } from "@react-google-maps/api";
 import Input from "./Input";
+import Spinner from "./Spinner/Spinner";
 
 type Props = {
   apiKey: string;
@@ -16,20 +17,28 @@ type Props = {
   label?: string;
   placeholder?: string;
   mapHeight?: string;
+  error?: string;
+  defaultValue?: string;
 };
 
 export default function GoogleMapInputWithUserLocation({
   apiKey,
+  error,
+  defaultValue,
   name,
   label = "Location / Address",
   placeholder = "Enter your address",
   mapHeight = "200px",
 }: Props) {
-  const [address, setAddress] = useState("");
+  const { isLoaded, loadError } = useJsApiLoader({
+    googleMapsApiKey: apiKey,
+    libraries: ["places"],
+  });
+
+  const [address, setAddress] = useState(defaultValue || "");
   const [position, setPosition] = useState<{ lat: number; lng: number } | null>(
     null
   );
-
   const [userPosition, setUserPosition] = useState<{
     lat: number;
     lng: number;
@@ -62,6 +71,7 @@ export default function GoogleMapInputWithUserLocation({
     }
   };
 
+  // Handle clicking on the map to set marker & address
   const handleMapClick = useCallback((e: google.maps.MapMouseEvent) => {
     if (!e.latLng) return;
     const lat = e.latLng.lat();
@@ -78,42 +88,54 @@ export default function GoogleMapInputWithUserLocation({
 
   const mapContainerStyle = { width: "100%", height: mapHeight };
 
+  if (!isLoaded)
+    return (
+      <div className="text-center animate-pulse">
+        <Spinner />
+      </div>
+    );
+
+  if (loadError)
+    return (
+      <p className="text-red-500 font-medium text-sm">
+        Error loading Google Maps
+      </p>
+    );
+
   return (
     <div className="w-full space-y-4">
-      <LoadScript googleMapsApiKey={apiKey} libraries={["places"]}>
-        <StandaloneSearchBox
-          onLoad={(ref) => (searchBoxRef.current = ref)}
-          onPlacesChanged={handlePlacesChanged}
-        >
-          <Input
-            type="text"
-            label={label}
-            name={name}
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            placeholder={placeholder}
-            icon={<LuMapPin className="text-[#949494]" />}
-          />
-        </StandaloneSearchBox>
+      <StandaloneSearchBox
+        onLoad={(ref) => (searchBoxRef.current = ref)}
+        onPlacesChanged={handlePlacesChanged}
+      >
+        <Input
+          type="text"
+          label={label}
+          error={error}
+          name={name}
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          placeholder={placeholder}
+          icon={<LuMapPin className="text-[#949494]" />}
+        />
+      </StandaloneSearchBox>
 
-        {/* Map */}
-        {(position || userPosition) && (
-          <GoogleMap
-            mapContainerStyle={mapContainerStyle}
-            center={position || userPosition!}
-            zoom={position ? 15 : 14}
-            onClick={handleMapClick}
-          >
-            {!position && userPosition && (
-              <Marker
-                position={userPosition}
-                label={{ text: "You", color: "white", fontSize: "12px" }}
-              />
-            )}
-            {position && <Marker position={position} />}
-          </GoogleMap>
-        )}
-      </LoadScript>
+      {(position || userPosition) && (
+        <GoogleMap
+          mapContainerStyle={mapContainerStyle}
+          center={position || userPosition!}
+          zoom={position ? 15 : 14}
+          onClick={handleMapClick}
+        >
+          {!position && userPosition && (
+            <Marker
+              position={userPosition}
+              label={{ text: "You", color: "white", fontSize: "12px" }}
+            />
+          )}
+          {position && <Marker position={position} />}
+        </GoogleMap>
+      )}
     </div>
   );
 }

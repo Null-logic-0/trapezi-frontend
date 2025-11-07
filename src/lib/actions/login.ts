@@ -1,31 +1,38 @@
-"use server"
+"use server";
 
-import {AuthFormState, CreateUserResponse} from "@/interfaces/authResponse.interface";
-import {LoginInterface} from "@/interfaces/login.interface";
-import {createSession} from "@/lib/api/createSession";
-import {revalidatePath} from "next/cache";
-import {redirect} from "next/navigation";
+import {
+  AuthFormState,
+  CreateUserResponse,
+} from "@/interfaces/authResponse.interface";
+import { LoginInterface } from "@/interfaces/login.interface";
+import { createSession } from "@/lib/api/createSession";
+import { revalidatePath } from "next/cache";
 
-export async function login(_prevState: AuthFormState, formData: FormData): Promise<AuthFormState> {
-    const body: LoginInterface = {
-        email: (formData.get("email") as string) || "",
-        password: (formData.get("password") as string) || "",
-    }
+export async function login(
+  _prevState: AuthFormState,
+  formData: FormData,
+  locale: "ka" | "en" = "ka"
+): Promise<AuthFormState> {
+  const body: LoginInterface = {
+    email: (formData.get("email") as string) || "",
+    password: (formData.get("password") as string) || "",
+  };
 
-    const res: CreateUserResponse = await createSession(body);
+  const res: CreateUserResponse = await createSession(body, locale);
 
-    if (!res.success) {
-        return {
-            success: false,
-            message: res.message || "Login failed",
-            values: body
-        };
-    }
+  if (!res.success) {
+    return {
+      success: false,
+      message: res.message || "Login failed",
+      values: body,
+    };
+  }
 
+  revalidatePath("/profile", "page");
 
-    revalidatePath("/", "layout");
-    redirect("/");
-
-
+  return {
+    success: true,
+    message: "Login successful!",
+    values: body,
+  };
 }
-

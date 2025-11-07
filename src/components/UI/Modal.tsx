@@ -32,7 +32,7 @@ function Modal({ children }: { children: React.ReactNode }) {
       {openModal && (
         <>
           <motion.div
-            className="fixed inset-0 bg-black z-10"
+            className="fixed inset-0 bg-black z-50"
             variants={backdropVariants}
             initial="hidden"
             animate="visible"

@@ -15,11 +15,15 @@ export interface BusinessInterface {
   images_url?: string[];
   menu_pdf?: File | null;
   menu_url?: string;
+  phone?: string;
   description: string;
+  working_schedule?: string;
+  working_schedule_readable?: string;
   website: string;
   facebook: string;
   tiktok: string;
   instagram: string;
+  is_vip?: boolean;
 }
 
 export interface BusinessFormState {

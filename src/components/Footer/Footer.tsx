@@ -5,7 +5,7 @@ import SocialMedia from "./SocialMedia";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#292d33] text-[#fafafa] py-12 px-4 sm:px-6 lg:px-8">
+    <footer className="bg-[#292d33]   text-[#fafafa] py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}

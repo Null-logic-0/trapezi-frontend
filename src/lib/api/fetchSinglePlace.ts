@@ -3,7 +3,8 @@ import getCookies from "../cookies";
 import { ENDPOINTS } from "../endpoints";
 
 export async function fetchSinglePlace(
-  id: number
+  id: number,
+  locale: "ka" | "en" = "ka"
 ): Promise<BusinessInterface | null> {
   try {
     const { token, success } = await getCookies();
@@ -13,6 +14,7 @@ export async function fetchSinglePlace(
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
+        "Accept-Language": locale,
       },
     });
 

@@ -97,12 +97,18 @@
   "new_password": "Enter your new password",
   "success_message": "Action completed successfully",
   "error_message": "Action failed",
-
+  "no_places": "No places found.",
   "monday": "monday",
   "tuesday": "tuesday",
   "wednesday": "wednesday",
   "thursday": "thursday",
   "friday": "friday",
   "saturday": "saturday",
-  "sunday": "sunday"
+  "sunday": "sunday",
+  "phone": "Phone Number",
+  "working_hours": "Working Hours",
+  "social_media": "Social Media",
+  "website": "Website",
+  "contact_info": "Contact Information",
+  "location": "Location"
 }

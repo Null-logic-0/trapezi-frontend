@@ -1,9 +1,9 @@
 "use client";
-
 import { useMessages } from "@/hooks/useMessages";
 import Button from "../UI/Button";
 import ProfileHeading from "./ProfileHeading";
 import { useRouter } from "next/navigation";
+import MyBusinessesList from "./MyBusinessesList";
 
 function MyBusiness() {
   const messages = useMessages();
@@ -22,11 +22,7 @@ function MyBusiness() {
         </Button>
       </div>
 
-      <div>
-        <p className="text-center text-sm mt-6 font-semibold text-gray-400">
-          {messages.no_business}
-        </p>
-      </div>
+      <MyBusinessesList />
     </div>
   );
 }

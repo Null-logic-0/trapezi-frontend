@@ -1,4 +1,4 @@
-import { BusinessFormInterface } from "@/interfaces/places.interface";
+import { BusinessInterface } from "@/interfaces/places.interface";
 import getCookies from "../cookies";
 import { ENDPOINTS } from "../endpoints";
 
@@ -9,7 +9,7 @@ interface SaveBusinessListingOptions {
   id?: number;
   locale: Locale;
   method?: Method;
-  data: BusinessFormInterface;
+  data: BusinessInterface;
 }
 
 export async function saveBusinessListing({
@@ -25,7 +25,9 @@ export async function saveBusinessListing({
     const {
       business_name,
       description,
+      working_schedule,
       address,
+      phone,
       categories,
       images,
       menu_pdf,
@@ -40,7 +42,14 @@ export async function saveBusinessListing({
     // Text fields
     formData.append("business_name", business_name);
     formData.append("description", description);
+    formData.append(
+      "working_schedule",
+      typeof working_schedule === "string"
+        ? working_schedule
+        : JSON.stringify(working_schedule || {})
+    );
     formData.append("address", address);
+    formData.append("phone", phone || "");
     formData.append("website", website);
     formData.append("facebook", facebook);
     formData.append("instagram", instagram);
@@ -57,9 +66,6 @@ export async function saveBusinessListing({
     if (menu_pdf && menu_pdf instanceof File && menu_pdf.size > 0) {
       formData.append("menu_pdf", menu_pdf);
     }
-
-    console.log(formData, "zd");
-    console.log([...formData.entries()]);
 
     const endpoint =
       method === "PATCH"

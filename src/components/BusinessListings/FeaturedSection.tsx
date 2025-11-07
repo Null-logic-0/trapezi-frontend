@@ -1,4 +1,3 @@
-import BusinessCard from "./BusinessCard";
 import FeaturedSpots from "./FeaturedSpots";
 
 const FeaturedSection = () => {

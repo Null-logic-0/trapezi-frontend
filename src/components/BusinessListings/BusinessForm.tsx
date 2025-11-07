@@ -88,7 +88,20 @@ function BusinessForm({
           />
         </label>
 
-        <WorkingScheduleInput name="working_schedule" />
+        <Input
+          type="text"
+          error={state.fieldErrors?.phone}
+          name="phone"
+          label={messages.phone}
+          placeholder="+995598123456"
+          defaultValue={initialValues?.phone}
+        />
+
+        <WorkingScheduleInput
+          name="working_schedule"
+          defaultValue={initialValues?.working_schedule}
+          error={state.fieldErrors?.working_schedule}
+        />
 
         {/* Multi Image Picker */}
         <MultiImagePicker

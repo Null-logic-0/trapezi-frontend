@@ -20,7 +20,7 @@ import Button from "../UI/Button";
 import { useRouter } from "next/navigation";
 
 export default function MyBusinesses() {
-  const { loading, error, businesses } = useFetchMyPlaces();
+  const { loading, error, businesses, removeBusiness } = useFetchMyPlaces();
   const { handleToggleModal } = useUIContext();
   const [placeId, setPlaceId] = useState<number | undefined>();
   const messages = useMessages();
@@ -60,7 +60,7 @@ export default function MyBusinesses() {
         {!loading && !error && businesses.length === 0 && (
           <div className="flex flex-col items-center py-12 gap-6">
             <p className="text-center text-gray-500  text-xl font-semibold">
-              No places found.
+              {messages.no_business}
             </p>
             <Button
               onClick={() => router.push("/add-new-place")}
@@ -129,7 +129,10 @@ export default function MyBusinesses() {
           <Pagination currentPage={1} totalPages={10} onPageChange={() => {}} />
         )}
       </div>
-      <DeleteMyBusiness id={placeId} />
+      <DeleteMyBusiness
+        id={placeId}
+        onDeleted={() => removeBusiness(placeId)}
+      />
     </>
   );
 }

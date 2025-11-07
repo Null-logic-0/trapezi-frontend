@@ -12,8 +12,8 @@ import { Dialog, DialogContent, DialogTitle } from "../UI/Dialog";
 import { Dispatch, SetStateAction } from "react";
 
 export type BusinessWithImages = {
-  name: string;
-  images: string[];
+  business_name?: string;
+  images_url?: string[];
 };
 
 type FullScreenImageDialogProps = {
@@ -34,7 +34,7 @@ function FullScreenImageDialog({
     >
       <DialogContent className="max-w-[100vw] h-screen w-full p-0">
         <DialogTitle className="sr-only">
-          {business.name} — Image Gallery
+          {business.business_name} — Image Gallery
         </DialogTitle>
 
         <div className="relative w-full h-full flex items-center justify-center">
@@ -51,16 +51,17 @@ function FullScreenImageDialog({
             opts={{ startIndex: selectedImageIndex ?? 0 }}
           >
             <CarouselContent className="h-full ">
-              {business.images.map((image, index) => (
+              {business?.images_url?.map((image, index) => (
                 <CarouselItem key={index} className="h-full">
                   <div
-                    className="relative rounded-2xl overflow-hidden max-w-5xl max-md:my-50 my-6  mx-auto max-md:h-[500px] h-[95vh] cursor-pointer"
+                    className="relative rounded-lg overflow-hidden max-w-5xl max-md:my-50 my-6  mx-auto max-md:h-[500px] h-[95vh] cursor-pointer"
                     onClick={() => setSelectedImageIndex(index)}
                   >
                     <Image
                       fill
+                      unoptimized
                       src={image}
-                      alt={`${business.name} ${index + 1}`}
+                      alt={`${business.business_name} ${index + 1}`}
                       className="w-full h-full object-cover "
                     />
                   </div>

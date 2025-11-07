@@ -1,7 +1,12 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { cookies } from "next/headers";
 
-const protectedBaseRoutes = ["/profile", "/settings", "/my-places"];
+const protectedBaseRoutes = [
+  "/profile",
+  "/settings",
+  "/my-places",
+  "add-new-places",
+];
 const authPages = ["/login", "/signup"];
 
 export async function proxy(req: NextRequest) {
@@ -31,5 +36,6 @@ export const config = {
     "/signup",
     "/places/:path*",
     "/my-places",
+    "/add-new-places",
   ],
 };

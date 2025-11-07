@@ -25,9 +25,15 @@ export function useFetchMyPlaces() {
     load();
   }, []);
 
+  const removeBusiness = (id?: number) => {
+    if (!id) return;
+    setBusinesses((prev) => prev.filter((b) => b.id !== id));
+  };
+
   return {
     businesses,
     loading,
     error,
+    removeBusiness,
   };
 }

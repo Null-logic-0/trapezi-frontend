@@ -7,10 +7,7 @@ const Card = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={twMerge(
-      "rounded-lg border bg-card text-card-foreground shadow-sm",
-      className
-    )}
+    className={twMerge("rounded-lg border bg-card  shadow-sm", className)}
     {...props}
   />
 ));
@@ -47,11 +44,7 @@ const CardDescription = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, ...props }, ref) => (
-  <p
-    ref={ref}
-    className={twMerge("text-sm text-muted-foreground", className)}
-    {...props}
-  />
+  <p ref={ref} className={twMerge("text-sm ", className)} {...props} />
 ));
 CardDescription.displayName = "CardDescription";
 

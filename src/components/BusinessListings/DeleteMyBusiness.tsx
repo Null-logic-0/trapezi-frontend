@@ -8,7 +8,13 @@ import toast from "react-hot-toast";
 import { useMessages } from "@/hooks/useMessages";
 import { deleteBusiness } from "@/lib/actions/deleteBusiness";
 
-function DeleteMyBusiness({ id }: { id?: number; onDeleted?: () => void }) {
+function DeleteMyBusiness({
+  id,
+  onDeleted,
+}: {
+  id?: number;
+  onDeleted?: () => void;
+}) {
   const { handleToggleModal } = useUIContext();
 
   const [pending, setPending] = useState(false);
@@ -24,7 +30,7 @@ function DeleteMyBusiness({ id }: { id?: number; onDeleted?: () => void }) {
       if (result.success) {
         toast.success(message.success_message);
         handleToggleModal();
-        window.location.reload();
+        if (onDeleted) onDeleted();
       }
     } catch (err) {
       console.error(err);

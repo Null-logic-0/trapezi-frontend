@@ -54,6 +54,10 @@ export function useBusinessForm({
         instagram: (formData.get("instagram") as string) || "",
         tiktok: (formData.get("tiktok") as string) || "",
         categories: formData.getAll("categories[]") as string[],
+        phone: (formData.get("phone") as string) || "",
+        working_schedule:
+          (formData.get("working_schedule") as string) || JSON.stringify({}),
+
         images,
         menu_pdf: menuPdf,
       };

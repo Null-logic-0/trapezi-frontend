@@ -97,12 +97,18 @@
   "success_message": "ოპერაცია წარმატებით განხორციელდა",
   "error_message": "ოპერაცია ჩაიშალა",
   "delete": "წაშლა",
-
+  "no_places": "ობიექტები ვერ მოიძებნა",
   "monday": "ორშაბათი",
   "tuesday": "სამშაბათი",
   "wednesday": "ოთხშაბათი",
   "thursday": "ხუთშაბათი",
   "friday": "პარასკევი",
   "saturday": "შაბათი",
-  "sunday": "კვირა"
+  "sunday": "კვირა",
+  "phone": "ტელეფონის ნომერი",
+  "working_hours": "სამუშაო საათეები",
+  "social_media": "სოც ქსელები",
+  "website": "ვებსაიტი",
+  "contact_info": "საკონტაქტო ინფორმაცია",
+  "location": "ლოკაცია"
 }

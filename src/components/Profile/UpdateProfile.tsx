@@ -30,19 +30,24 @@ function UpdateProfile({
   });
 
   const { handleCloseModal } = useUIContext();
+  const messages = useMessages();
 
   useEffect(() => {
     if (!state.message) return;
 
     if (state.success) {
-      toast.success(state.message);
+      toast.success(messages.success_message);
       handleCloseModal();
     } else {
-      toast.error(state.message);
+      toast.error(messages.error_message);
     }
-  }, [state, handleCloseModal]);
+  }, [
+    state,
+    handleCloseModal,
+    messages.success_message,
+    messages.error_message,
+  ]);
 
-  const messages = useMessages();
   return (
     <Modal>
       <form action={formAction} className="flex flex-col gap-4">

@@ -8,6 +8,7 @@ import { LanguageProvider } from "@/store/language-context";
 import LanguageToggle from "@/components/UI/LanguageToggle";
 import HeaderNavMenu from "@/components/NavMenu/HeaderNavMenu";
 import Footer from "@/components/Footer/Footer";
+import { FavoritesProvider } from "@/store/favorites-context";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -29,10 +30,12 @@ export default function RootLayout({
       <body className={`${inter.variable}  antialiased`}>
         <UiContextProvider>
           <LanguageProvider>
-            <Toaster position="top-center" />
-            <HeaderNavMenu />
-            {children}
-            <Footer />
+            <FavoritesProvider>
+              <Toaster position="top-center" />
+              <HeaderNavMenu />
+              {children}
+              <Footer />
+            </FavoritesProvider>
           </LanguageProvider>
         </UiContextProvider>
       </body>

@@ -22,5 +22,7 @@ export const ENDPOINTS = {
   places: {
     all: `${BASE_URL}/food_places`,
     one: `${BASE_URL}/food_places`,
+    favorite_places: `${BASE_URL}/favorites`,
+    toggle_favorite: `${BASE_URL}/favorite`,
   },
 };

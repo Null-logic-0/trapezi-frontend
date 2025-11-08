@@ -1,14 +1,18 @@
 "use client";
 
+import { twMerge } from "tailwind-merge";
+
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
   onPageChange: (page: number) => void;
+  className?: string;
 }
 
 export default function Pagination({
   currentPage,
   totalPages,
+  className,
   onPageChange,
 }: PaginationProps) {
   if (totalPages <= 1) return null;
@@ -49,7 +53,12 @@ export default function Pagination({
   const pages = getPages();
 
   return (
-    <div className="flex items-center justify-center gap-2 mt-10">
+    <div
+      className={twMerge(
+        "flex items-center justify-center gap-2 mt-10",
+        className
+      )}
+    >
       {/* Prev Button */}
       <button
         onClick={() => onPageChange(currentPage - 1)}

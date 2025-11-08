@@ -8,7 +8,7 @@ export const NAV_LINKS = (messages: Messages) => [
   },
   {
     key: "discover",
-    href: "/discover",
+    href: "/discover-places",
     text: messages.discover_food,
   },
   {

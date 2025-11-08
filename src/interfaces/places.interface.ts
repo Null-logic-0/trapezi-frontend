@@ -24,6 +24,8 @@ export interface BusinessInterface {
   tiktok: string;
   instagram: string;
   is_vip?: boolean;
+  latitude?: number;
+  longitude?: number;
 }
 
 export interface BusinessFormState {

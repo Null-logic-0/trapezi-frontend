@@ -80,7 +80,7 @@ const BusinessDetail = ({ business, id }: Props) => {
                   </p>
                 </div>
                 <div className="space-y-4 text-end">
-                  <HeartShapeButton />
+                  <HeartShapeButton id={id} />
                   <div className="flex items-center space-x-1">
                     <span className="text-sm flex items-center max-md:text-xl font-bold">
                       {/* {business.rating} */}

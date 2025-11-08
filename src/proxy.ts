@@ -5,7 +5,8 @@ const protectedBaseRoutes = [
   "/profile",
   "/settings",
   "/my-places",
-  "add-new-places",
+  "/add-new-places",
+  "/favorites",
 ];
 const authPages = ["/login", "/signup"];
 
@@ -37,5 +38,6 @@ export const config = {
     "/places/:path*",
     "/my-places",
     "/add-new-places",
+    "/favorites",
   ],
 };

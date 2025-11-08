@@ -1,20 +1,21 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { GoHeart, GoHeartFill } from "react-icons/go";
+import { useFavorites } from "@/store/favorites-context";
 
-function HeartShapeButton() {
-  const [favorite, setFavorite] = useState(false);
+function HeartShapeButton({ id }: { id: number }) {
+  const { isFavorite, toggleFavorite } = useFavorites();
+  const favorite = isFavorite(id);
 
-  const handleToggleLike = () => {
-    setFavorite((prev) => !prev);
+  const handleClick = async () => {
+    await toggleFavorite(id);
   };
 
   return (
     <motion.button
       whileTap={{ scale: 0.8 }}
-      onClick={handleToggleLike}
+      onClick={handleClick}
       className="text-xl text-[#ff6633] cursor-pointer relative"
     >
       <motion.div

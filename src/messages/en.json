@@ -114,5 +114,6 @@
   "location": "Location",
   "menu": "Menu",
   "not_found": "Page not found — it may have been moved or deleted.",
-  "error_500": "The server encountered an issue while processing your request."
+  "error_500": "The server encountered an issue while processing your request.",
+  "refresh_page": "Refresh Page"
 }

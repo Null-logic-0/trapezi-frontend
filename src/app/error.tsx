@@ -1,10 +1,13 @@
 "use client";
 
-import Navigation from "@/components/UI/navigation";
+import Button from "@/components/UI/Button";
 import { useMessages } from "@/hooks/useMessages";
 
 function Error() {
   const messages = useMessages();
+  const handleRefresh = () => {
+    window.location.reload();
+  };
 
   return (
     <div className="h-screen flex gap-2 flex-col justify-center items-center">
@@ -14,9 +17,13 @@ function Error() {
           {messages.error_500}
         </p>
       </div>
-      <Navigation path={"/"} className="text-lg">
-        {messages.back}
-      </Navigation>
+      <Button
+        onClick={handleRefresh}
+        buttonType="outline"
+        className="w-30 text-[#ff6933]"
+      >
+        {messages.refresh_page}
+      </Button>
     </div>
   );
 }

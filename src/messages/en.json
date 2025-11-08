@@ -110,5 +110,8 @@
   "social_media": "Social Media",
   "website": "Website",
   "contact_info": "Contact Information",
-  "location": "Location"
+  "location": "Location",
+  "menu": "Menu",
+  "not_found": "Page not found — it may have been moved or deleted.",
+  "error_500": "The server encountered an issue while processing your request."
 }

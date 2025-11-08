@@ -20,6 +20,7 @@ import FullScreenImageDialog from "./FullScreenImageDialog";
 import { BusinessInterface } from "@/interfaces/places.interface";
 import { useMessages } from "@/hooks/useMessages";
 import GoBack from "../UI/GoBack";
+import HeartShapeButton from "../UI/HeartShapeButton";
 
 type Props = {
   business: BusinessInterface;
@@ -43,7 +44,7 @@ const BusinessDetail = ({ business, id }: Props) => {
             {business.images_url?.map((image, index) => (
               <CarouselItem key={index}>
                 <div
-                  className="relative rounded-lg overflow-hidden h-[782px] max-md:h-[375px] cursor-pointer"
+                  className="relative rounded-lg overflow-hidden h-[820px] max-md:h-[375px] cursor-pointer"
                   onClick={() => setSelectedImageIndex(index)}
                 >
                   <Image
@@ -78,17 +79,19 @@ const BusinessDetail = ({ business, id }: Props) => {
                     {business.categories.join(", ")}
                   </p>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <IoMdStar className="text-4xl text-[#ff6633]" />
-
-                  <span className="text-2xl max-md:text-xl font-bold">
-                    {/* {business.rating} */}
-                    4.4
-                  </span>
-                  <span className="text-[#7c7c7c] text-sm">
-                    {/* ({business.reviews} reviews) */}
-                    (200)
-                  </span>
+                <div className="space-y-4 text-end">
+                  <HeartShapeButton />
+                  <div className="flex items-center space-x-1">
+                    <span className="text-sm flex items-center max-md:text-xl font-bold">
+                      {/* {business.rating} */}
+                      4.4
+                      <IoMdStar className="text-sm text-[#ff6633]" />
+                    </span>
+                    <span className="text-[#7c7c7c] text-xs">
+                      {/* ({business.reviews} reviews) */}
+                      (200)
+                    </span>
+                  </div>
                 </div>
               </div>
 

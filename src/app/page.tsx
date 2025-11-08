@@ -9,8 +9,8 @@ function Page() {
     <>
       <Hero />
       <CategoryFilter className="py-16 px-4 sm:px-6 lg:px-8 bg-[#ffffff] border-y border-[#e3e3e3]" />
-      {/* <FeaturedSection />
-      <DiscoverSection /> */}
+      <FeaturedSection />
+      <DiscoverSection />
       <CTASection />
     </>
   );

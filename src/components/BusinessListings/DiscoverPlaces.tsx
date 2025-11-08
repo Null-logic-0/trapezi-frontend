@@ -1,10 +1,14 @@
 "use client";
-import { BusinessProps } from "@/interfaces/business.interface";
 import BusinessCard from "./BusinessCard";
 import { useMessages } from "@/hooks/useMessages";
 import { useRouter } from "next/navigation";
 import Button from "../UI/Button";
 import Link from "next/link";
+import { BusinessInterface } from "@/interfaces/places.interface";
+
+export interface BusinessProps {
+  businesses: BusinessInterface[];
+}
 
 function DiscoverPlaces({ businesses }: BusinessProps) {
   const messages = useMessages();
@@ -20,13 +24,21 @@ function DiscoverPlaces({ businesses }: BusinessProps) {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {businesses.map((business, index) => (
+        {businesses.slice(0, 3).map((business, index) => (
           <Link key={business.id} href={`places/${business.id}`}>
             <div
               className="animate-fade-in"
               style={{ animationDelay: `${index * 0.05}s` }}
             >
-              <BusinessCard {...business} />
+              <BusinessCard
+                business_name={business.business_name}
+                categories={business.categories}
+                address={business.address}
+                image={business.images_url?.[0] || ""}
+                rating={4.4}
+                reviews={20}
+                isOpen={true}
+              />
             </div>
           </Link>
         ))}

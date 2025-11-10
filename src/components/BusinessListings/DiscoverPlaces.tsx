@@ -35,8 +35,7 @@ function DiscoverPlaces({ businesses }: BusinessProps) {
                 categories={business.categories}
                 address={business.address}
                 image={business.images_url?.[0] || ""}
-                rating={4.4}
-                reviews={20}
+                rating={business.average_rating}
                 isOpen={true}
               />
             </div>

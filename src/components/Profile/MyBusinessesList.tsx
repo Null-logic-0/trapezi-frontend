@@ -50,8 +50,7 @@ function MyBusinessesList() {
               </p>
             </Link>
             <p className="text-sm font-semibold text-gray-700">
-              {/* {business?.rating} ⭐️ */}
-              4.4 ⭐️
+              {business?.average_rating?.toFixed(1)} ⭐️
             </p>
           </li>
         ))

@@ -11,17 +11,20 @@ import React, {
 interface UIState {
   toggleMenu: boolean;
   openModal: boolean;
+  writeReview: boolean;
 }
 
 type UIAction =
   | { type: "TOGGLE_MENU" }
   | { type: "TOGGLE_MODAL" }
-  | { type: "CLOSE_MODAL" };
+  | { type: "CLOSE_MODAL" }
+  | { type: "TOGGLE_REVIEW_FORM" };
 
 interface UIContextType extends UIState {
   handleToggleModal: () => void;
   handleToggleMenu: () => void;
   handleCloseModal: () => void;
+  handleToggleReviewForm: () => void;
 }
 
 // --- Context ---
@@ -45,6 +48,8 @@ function uiReducer(state: UIState, action: UIAction): UIState {
       return { ...state, openModal: !state.openModal };
     case "CLOSE_MODAL":
       return { ...state, openModal: false };
+    case "TOGGLE_REVIEW_FORM":
+      return { ...state, writeReview: !state.writeReview };
     default:
       return state;
   }
@@ -54,6 +59,7 @@ function uiReducer(state: UIState, action: UIAction): UIState {
 const initialState: UIState = {
   toggleMenu: false,
   openModal: false,
+  writeReview: false,
 };
 
 // --- Provider ---
@@ -79,12 +85,19 @@ export function UiContextProvider({ children }: UiContextProviderProps) {
     []
   );
 
+  const handleToggleReviewForm = useCallback(
+    () => dispatch({ type: "TOGGLE_REVIEW_FORM" }),
+    []
+  );
+
   const contextValue: UIContextType = {
     toggleMenu: state.toggleMenu,
     openModal: state.openModal,
+    writeReview: state.writeReview,
     handleCloseModal,
     handleToggleModal,
     handleToggleMenu,
+    handleToggleReviewForm,
   };
 
   return <UIContext value={contextValue}>{children}</UIContext>;

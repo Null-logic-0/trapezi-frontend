@@ -23,7 +23,7 @@ export default async function PlaceDetails({
         </div>
       }
     >
-      <BusinessDetail business={place!} id={Number(id)} />;
+      <BusinessDetail business={place!} id={Number(id)} />
     </Suspense>
   );
 }

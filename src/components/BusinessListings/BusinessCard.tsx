@@ -8,8 +8,8 @@ import { Badge } from "../UI/Badge";
 interface BusinessCardProps {
   business_name: string;
   categories: string[];
-  rating: number;
-  reviews: number;
+  rating?: number;
+
   image: string;
   address: string;
   isOpen: boolean;
@@ -20,7 +20,7 @@ const BusinessCard = ({
   business_name,
   categories,
   rating,
-  reviews,
+
   image,
   address,
   isOpen,
@@ -58,8 +58,9 @@ const BusinessCard = ({
 
         <div className="flex items-center gap-1 mb-3">
           <IoMdStar className="text-[#ff6933]" />
-          <span className="text-sm font-medium text-[#1a1a1a]">{rating}</span>
-          <span className="text-sm text-[#737373]">({reviews})</span>
+          <span className="text-sm font-medium text-[#1a1a1a]">
+            {rating?.toFixed(1)}
+          </span>
         </div>
 
         <div className="flex items-center justify-between gap-4 text-sm text-[#737373]">

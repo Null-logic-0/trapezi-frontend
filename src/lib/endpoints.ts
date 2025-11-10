@@ -24,5 +24,9 @@ export const ENDPOINTS = {
     one: `${BASE_URL}/food_places`,
     favorite_places: `${BASE_URL}/favorites`,
     toggle_favorite: `${BASE_URL}/favorite`,
+    reviews: `${BASE_URL}/reviews`,
+    create_review: `${BASE_URL}/reviews`,
+    update_review: `${BASE_URL}/reviews`,
+    delete_review: `${BASE_URL}/reviews`,
   },
 };

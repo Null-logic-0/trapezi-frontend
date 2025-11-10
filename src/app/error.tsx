@@ -20,7 +20,7 @@ function Error() {
       <Button
         onClick={handleRefresh}
         buttonType="outline"
-        className="w-30 text-[#ff6933]"
+        className="w-full max-w-[220px] text-[#ff6933]"
       >
         {messages.refresh_page}
       </Button>

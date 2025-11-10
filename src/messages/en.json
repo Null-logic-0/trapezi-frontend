@@ -3,6 +3,7 @@
   "logging": "Logging...",
   "signup": "Sign Up",
   "signing": "Signing up...",
+  "logout_message": "Logged out successfully",
   "email": "Email",
   "password": "Password",
   "password_confirmation": "Confirm Password",

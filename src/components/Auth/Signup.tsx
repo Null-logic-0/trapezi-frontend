@@ -29,8 +29,8 @@ function Signup() {
     },
   });
 
-  useActionToast(state, "/profile");
   const messages = useMessages();
+  useActionToast(state, "/profile");
 
   return (
     <form action={formAction} className="flex flex-col gap-4 w-full">

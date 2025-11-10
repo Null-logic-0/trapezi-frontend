@@ -14,7 +14,7 @@ function DiscoverPlaces({ businesses }: BusinessProps) {
   const messages = useMessages();
   const router = useRouter();
 
-  const handleNavigate = () => router.push("#");
+  const handleNavigate = () => router.push("/discover-places");
 
   return (
     <div className="max-w-7xl mx-auto">

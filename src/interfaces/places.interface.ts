@@ -4,6 +4,7 @@ export interface MyFoodPlaceInterface {
   categories: string[];
   address: string;
   images_url: string[];
+  average_rating?: number;
 }
 
 export interface BusinessInterface {
@@ -26,6 +27,7 @@ export interface BusinessInterface {
   is_vip?: boolean;
   latitude?: number;
   longitude?: number;
+  average_rating?: number;
 }
 
 export interface BusinessFormState {

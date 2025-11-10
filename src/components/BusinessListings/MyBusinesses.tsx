@@ -83,6 +83,8 @@ export default function MyBusinesses() {
               >
                 <DropdownMenu
                   align="right"
+                  className="z-20"
+                  buttonStyles="rounded-md mb-2 shadow-sm bg-[#2A2D34] text-white text-lg p-2 hover:bg-[#FF6B35] transition-colors"
                   items={[
                     {
                       label: (
@@ -114,8 +116,7 @@ export default function MyBusinesses() {
                     categories={business.categories}
                     address={business.address}
                     image={business.images_url?.[0] || ""}
-                    rating={4.4}
-                    reviews={20}
+                    rating={business.average_rating}
                     isOpen={true}
                   />
                 </Link>

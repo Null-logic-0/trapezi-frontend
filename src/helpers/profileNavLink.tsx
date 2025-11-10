@@ -22,12 +22,7 @@ export const PROFILE_NAV_LINKS = (
       text: messages.profile,
       icon: <LuUser />,
     },
-    {
-      key: "reviews",
-      href: "/my-reviews",
-      text: messages.reviews,
-      icon: <IoIosStarOutline />,
-    },
+
     {
       key: "favorites",
       href: "/favorites",

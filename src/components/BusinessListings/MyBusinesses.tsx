@@ -20,7 +20,15 @@ import Button from "../UI/Button";
 import { useRouter } from "next/navigation";
 
 export default function MyBusinesses() {
-  const { loading, error, businesses, removeBusiness } = useFetchMyPlaces();
+  const {
+    loading,
+    error,
+    places,
+    removeBusiness,
+    paginate,
+    setPage,
+    setSearchTerm,
+  } = useFetchMyPlaces();
   const { handleToggleModal } = useUIContext();
   const [placeId, setPlaceId] = useState<number | undefined>();
   const messages = useMessages();
@@ -36,7 +44,10 @@ export default function MyBusinesses() {
         <p className="text-lg opacity-90 mb-8 text-white">
           {messages.manage_businesses}
         </p>
-        <SearchBar />
+        <SearchBar
+          onChange={(e) => setSearchTerm(e.target.value)}
+          hasButton={false}
+        />
       </div>
 
       <div className="max-w-7xl mx-auto py-12 px-4 w-full sm:px-6 lg:px-8">
@@ -57,7 +68,7 @@ export default function MyBusinesses() {
         )}
 
         {/* Empty State */}
-        {!loading && !error && businesses.length === 0 && (
+        {!loading && !error && places.length === 0 && (
           <div className="flex flex-col items-center py-12 gap-6">
             <p className="text-center text-gray-500  text-xl font-semibold">
               {messages.no_business}
@@ -73,9 +84,9 @@ export default function MyBusinesses() {
         )}
 
         {/* Business Grid */}
-        {!loading && !error && businesses.length > 0 && (
+        {!loading && !error && places.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 py-12 lg:grid-cols-3 gap-6">
-            {businesses.map((business, index) => (
+            {places.map((business, index) => (
               <div
                 key={business.id}
                 className="animate-fade-in relative"
@@ -126,8 +137,14 @@ export default function MyBusinesses() {
         )}
 
         {/* Pagination */}
-        {!loading && !error && businesses.length > 0 && (
-          <Pagination currentPage={1} totalPages={10} onPageChange={() => {}} />
+        {!loading && !error && places.length > 0 && (
+          <Pagination
+            className="justify-self-center"
+            currentPage={paginate?.current_page || 1}
+            pagesCount={paginate?.total_count || 0}
+            itemsPerPage={paginate?.per_page || 10}
+            onPageChange={(p) => setPage(p)}
+          />
         )}
       </div>
       <DeleteMyBusiness

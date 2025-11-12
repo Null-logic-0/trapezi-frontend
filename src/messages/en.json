@@ -118,5 +118,7 @@
   "error_500": "The server encountered an issue while processing your request.",
   "refresh_page": "Refresh Page",
   "write_review": "Write a Review",
-  "no_reviews": "No more reviews"
+  "no_reviews": "No more reviews",
+  "next": "Next",
+  "prev": "Prev"
 }

@@ -12,7 +12,8 @@ import PlacesMap from "../PlacesMap";
 
 function DiscoverAllPlaces() {
   const messages = useMessages();
-  const { loading, error, businesses } = useFetchAllPlaces();
+  const { loading, error, places, setSearchTerm, paginate, setPage } =
+    useFetchAllPlaces();
   return (
     <>
       {/* Hero Section */}
@@ -21,7 +22,10 @@ function DiscoverAllPlaces() {
           {messages.discover}
         </h1>
 
-        <SearchBar />
+        <SearchBar
+          onChange={(e) => setSearchTerm(e.target.value)}
+          hasButton={false}
+        />
       </div>
       <div className="max-w-7xl mx-auto py-12 px-4 w-full sm:px-6 lg:px-8">
         <CategoryFilter />
@@ -41,17 +45,17 @@ function DiscoverAllPlaces() {
         )}
 
         {/* Empty State */}
-        {!loading && !error && businesses.length === 0 && (
+        {!loading && !error && places.length === 0 && (
           <p className="text-center text-gray-500  py-12 text-xl font-semibold">
             {messages.no_places}
           </p>
         )}
 
         {/* Business Grid */}
-        {!loading && !error && businesses.length > 0 && (
+        {!loading && !error && places.length > 0 && (
           <div className="grid grid-cols-1  pt-18 pb-4 lg:grid-cols-2 gap-6">
             <div className="grid grid-cols-1  lg:grid-cols-2 gap-6">
-              {businesses.map((business, index) => (
+              {places.map((business, index) => (
                 <div
                   key={business.id}
                   className="animate-fade-in relative"
@@ -64,6 +68,7 @@ function DiscoverAllPlaces() {
                       address={business.address}
                       image={business.images_url?.[0] || ""}
                       rating={business.average_rating}
+                      isVIP={business.is_vip}
                       isOpen={true}
                     />
                   </Link>
@@ -71,7 +76,7 @@ function DiscoverAllPlaces() {
               ))}
             </div>
             <PlacesMap
-              locations={businesses.map((b) => ({
+              locations={places.map((b) => ({
                 lat: b.latitude!,
                 lng: b.longitude!,
                 name: b.business_name,
@@ -82,12 +87,13 @@ function DiscoverAllPlaces() {
         )}
 
         {/* Pagination */}
-        {!loading && !error && businesses.length > 0 && (
+        {!loading && !error && places.length > 0 && (
           <Pagination
             className="justify-self-start"
-            currentPage={1}
-            totalPages={10}
-            onPageChange={() => {}}
+            currentPage={paginate?.current_page || 1}
+            pagesCount={paginate?.total_count || 0}
+            itemsPerPage={paginate?.per_page || 10}
+            onPageChange={(p) => setPage(p)}
           />
         )}
       </div>

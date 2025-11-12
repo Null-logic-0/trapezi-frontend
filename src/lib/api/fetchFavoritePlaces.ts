@@ -1,18 +1,44 @@
-import { BusinessInterface } from "@/interfaces/places.interface";
 import { ENDPOINTS } from "../endpoints";
 import getCookies from "../cookies";
+import { Places } from "@/types/places.types";
 
-export async function fetchFavoritePlaces(): Promise<BusinessInterface[]> {
+export async function fetchFavoritePlaces(
+  queryParams?: Record<string, string | number | boolean | undefined>
+): Promise<Places> {
   try {
     const { token, success } = await getCookies();
 
-    if (!success || !token) return [];
+    if (!success || !token) {
+      return {
+        places: [],
+        pagination: {
+          current_page: 0,
+          per_page: 0,
+          total_pages: 0,
+          total_count: 0,
+        },
+      };
+    }
 
-    const res = await fetch(ENDPOINTS.places.favorite_places, {
+    const query = new URLSearchParams();
+
+    if (queryParams) {
+      Object.entries(queryParams).forEach(([key, value]) => {
+        if (value !== undefined && value !== null && value !== "") {
+          query.append(key, value.toString());
+        }
+      });
+    }
+    const url = query.toString()
+      ? `${ENDPOINTS.places.favorite_places}?${query.toString()}`
+      : ENDPOINTS.places.favorite_places;
+
+    const res = await fetch(url, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
+      next: { revalidate: 10 },
     });
 
     if (!res.ok) {
@@ -21,7 +47,10 @@ export async function fetchFavoritePlaces(): Promise<BusinessInterface[]> {
     }
 
     const data = await res.json();
-    return Array.isArray(data) ? data : [];
+    return {
+      places: Array.isArray(data.data) ? data.data : [],
+      pagination: data.pagination ?? {},
+    };
   } catch (error) {
     throw error;
   }

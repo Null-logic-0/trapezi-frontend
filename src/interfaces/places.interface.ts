@@ -1,12 +1,3 @@
-export interface MyFoodPlaceInterface {
-  id: number;
-  business_name: string;
-  categories: string[];
-  address: string;
-  images_url: string[];
-  average_rating?: number;
-}
-
 export interface BusinessInterface {
   id?: number;
   business_name: string;

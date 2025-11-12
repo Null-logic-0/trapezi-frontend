@@ -15,8 +15,9 @@ import Navigation from "../UI/navigation";
 
 function Login() {
   const { locale } = useLanguage();
+
   const handleAction = async (prevState: AuthFormState, formData: FormData) => {
-    return login(prevState, formData, locale);
+    return await login(prevState, formData, locale);
   };
   const [state, formAction, isPending] = useActionState(handleAction, {
     message: "",

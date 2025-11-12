@@ -16,7 +16,7 @@ import { AuthFormState } from "@/interfaces/authResponse.interface";
 function Signup() {
   const { locale } = useLanguage();
   const handleAction = async (prevState: AuthFormState, formData: FormData) => {
-    return signup(prevState, formData, locale);
+    return await signup(prevState, formData, locale);
   };
   const [state, formAction, isPending] = useActionState(handleAction, {
     success: false,

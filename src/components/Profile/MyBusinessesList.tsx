@@ -8,7 +8,7 @@ import Spinner from "../UI/Spinner/Spinner";
 
 function MyBusinessesList() {
   const messages = useMessages();
-  const { loading, businesses, error } = useFetchMyPlaces();
+  const { loading, places, error } = useFetchMyPlaces();
 
   if (loading && !error)
     return (
@@ -26,8 +26,8 @@ function MyBusinessesList() {
   }
   return (
     <ul className="flex flex-col gap-2 overflow-scroll h-[140px]">
-      {businesses.length > 0 ? (
-        businesses.map((business) => (
+      {places.length > 0 ? (
+        places.slice(0, 5).map((business) => (
           <li
             key={business.id}
             className="flex justify-between items-center border-b pb-4 border-gray-400"
@@ -38,7 +38,7 @@ function MyBusinessesList() {
             >
               <div className="relative h-10 w-18">
                 <Image
-                  src={business?.images_url[0]}
+                  src={business?.images_url?.[0] || ""}
                   alt={business?.business_name}
                   fill
                   unoptimized

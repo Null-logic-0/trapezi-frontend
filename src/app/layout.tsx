@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import React from "react";
 import { UiContextProvider } from "@/store/ui-context";
 import { LanguageProvider } from "@/store/language-context";
-import LanguageToggle from "@/components/UI/LanguageToggle";
 import HeaderNavMenu from "@/components/NavMenu/HeaderNavMenu";
 import Footer from "@/components/Footer/Footer";
 import { FavoritesProvider } from "@/store/favorites-context";
 
-const inter = Inter({
-  variable: "--font-inter",
+const sans = Open_Sans({
+  variable: "--font-open_sans",
   subsets: ["latin"],
 });
 
@@ -27,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable}  antialiased`}>
+      <body className={`${sans.variable}  antialiased`}>
         <UiContextProvider>
           <LanguageProvider>
             <FavoritesProvider>

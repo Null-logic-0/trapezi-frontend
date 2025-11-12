@@ -8,7 +8,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Inter, sans-serif;
+  font-family: var(--font-open_sans), sans-serif !important;
 }
 
 .profile-card-container {

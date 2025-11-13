@@ -127,5 +127,19 @@
     "Trapezi was created to make discovering great food in Georgia simple and fun. We know finding the perfect place to eat can be tricky, whether it’s a cozy café for coffee or a fine dining restaurant for a special night.",
     "Our platform brings together the best restaurants, cafes, and eateries across Georgia, helping food lovers explore new favorites and enjoy classic spots they love. From traditional Georgian dishes to international flavors, we highlight the richness of our local food culture.",
     "Today, thousands of food enthusiasts trust Trapezi to guide them to memorable dining experiences. We’re proud to support local businesses and connect them with customers who appreciate quality and great service."
-  ]
+  ],
+  "help_title": "How can we help you?",
+  "help_subtitle": "Find answers to common questions, get in touch with us, and explore our latest blog posts",
+  "video_tutorials": "Video Tutorials",
+  "video_guides": "Watch step-by-step guides to master Trapezi",
+  "faqs_title": "Frequently Asked Questions",
+  "faqs_subtitle": "Quick answers to common questions",
+  "need_help": "Still Need Help?",
+  "send_message": "Send us a message and we'll respond as soon as possible",
+  "subject": "Subject",
+  "subject_placeholder": "What's this about?",
+  "message": "Message",
+  "blog_title": "From Our Blog",
+  "blog_subtitle": "Tips,updates and insights to help succeed",
+  "no_content": "No Content"
 }

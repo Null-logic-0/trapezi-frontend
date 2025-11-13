@@ -5,7 +5,7 @@ import { FiMapPin } from "react-icons/fi";
 import { FaRegClock } from "react-icons/fa";
 import { Badge } from "../UI/Badge";
 
-interface BusinessCardProps {
+type BusinessCardProps = {
   business_name: string;
   categories: string[];
   rating?: number;
@@ -14,7 +14,7 @@ interface BusinessCardProps {
   address: string;
   isOpen: boolean;
   isVIP?: boolean;
-}
+};
 
 const BusinessCard = ({
   business_name,

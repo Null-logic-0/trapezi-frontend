@@ -141,5 +141,6 @@
   "message": "Message",
   "blog_title": "From Our Blog",
   "blog_subtitle": "Tips,updates and insights to help succeed",
-  "no_content": "No Content"
+  "no_content": "No Content",
+  "instruction_sent": "Instructions to reset your password have been sent to your email."
 }

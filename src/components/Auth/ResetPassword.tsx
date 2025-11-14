@@ -5,11 +5,47 @@ import Input from "../UI/Input";
 import { TbLockFilled } from "react-icons/tb";
 import Navigation from "../UI/navigation";
 import { useMessages } from "@/hooks/useMessages";
+import { useActionState } from "react";
+import toast from "react-hot-toast";
+import { resetPasswordAction } from "@/lib/actions/restPasswordAction";
+import { ResetPasswordState } from "@/interfaces/authResponse.interface";
+import { useRouter } from "next/navigation";
+import { useLanguage } from "@/store/language-context";
 
-function ResetPassword() {
+function ResetPassword({ token }: { token: string }) {
   const messages = useMessages();
+  const router = useRouter();
+  const { locale } = useLanguage();
+
+  const handleAction = async (
+    prevState: ResetPasswordState,
+    formData: FormData
+  ) => {
+    formData.set("token", token);
+    const result = await resetPasswordAction(prevState, formData, locale);
+
+    if (result.success) {
+      toast.success(result.message);
+      router.push("/login");
+    } else {
+      toast.error(result.message);
+    }
+
+    return result;
+  };
+  const [_state, formAction, isPending] = useActionState(handleAction, {
+    message: "",
+    success: false,
+    values: {
+      password: "",
+      password_confirmation: "",
+    },
+    fieldErrors: {},
+  });
+
   return (
     <form
+      action={formAction}
       className="bg-[#ffffff] flex flex-col gap-4 border-3
             border-[#e5e5e5] rounded-xl p-4 max-w-lg w-full "
     >
@@ -35,7 +71,12 @@ function ResetPassword() {
         className="mb-2"
       />
 
-      <Button type="submit" className="text-sm ">
+      <Button
+        type="submit"
+        className="text-sm "
+        isDisabled={isPending}
+        isPending={isPending}
+      >
         {messages.reset_password}
       </Button>
 

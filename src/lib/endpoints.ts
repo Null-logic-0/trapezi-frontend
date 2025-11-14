@@ -6,6 +6,8 @@ export const ENDPOINTS = {
     google: `${BASE_URL}/google_oauth`,
     signup: `${BASE_URL}/signup`,
     logout: `${BASE_URL}/logout`,
+    reset_password_request: `${BASE_URL}/password_reset_request`,
+    reset_password: `${BASE_URL}/password_reset`,
   },
 
   user: {

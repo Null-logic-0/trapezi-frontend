@@ -142,5 +142,9 @@
   "blog_title": "From Our Blog",
   "blog_subtitle": "Tips,updates and insights to help succeed",
   "no_content": "No Content",
-  "instruction_sent": "Instructions to reset your password have been sent to your email."
+  "confirm_instruction_sent": "Confirmation email sent!",
+  "instruction_sent": "Instructions to reset your password have been sent to your email.",
+  "confirm_title": "Confirm your email",
+  "confirm_subtitle": "Please confirm your email to complete your registration.",
+  "confirm_email": "Confirm Email"
 }

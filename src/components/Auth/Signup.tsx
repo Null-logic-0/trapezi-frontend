@@ -8,29 +8,37 @@ import { MdEmail } from "react-icons/md";
 import { TbLockFilled } from "react-icons/tb";
 import { signup } from "@/lib/actions/signup";
 import { useActionState } from "react";
-import { useActionToast } from "@/hooks/useActionToast";
 import { useMessages } from "@/hooks/useMessages";
 import { useLanguage } from "@/store/language-context";
 import { AuthFormState } from "@/interfaces/authResponse.interface";
 
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+
 function Signup() {
+  const messages = useMessages();
+  const router = useRouter();
   const { locale } = useLanguage();
   const handleAction = async (prevState: AuthFormState, formData: FormData) => {
-    return await signup(prevState, formData, locale);
+    const result = await signup(prevState, formData, locale);
+
+    if (result.success) {
+      toast.success(result.message);
+      router.push("/signup/success");
+    } else {
+      toast.error(result.message);
+    }
+
+    return result;
   };
   const [state, formAction, isPending] = useActionState(handleAction, {
-    success: false,
     message: "",
-    fieldErrors: {},
+    success: false,
     values: {
-      name: "",
       email: "",
-      last_name: "",
     },
+    fieldErrors: {},
   });
-
-  const messages = useMessages();
-  useActionToast(state, "/profile");
 
   return (
     <form action={formAction} className="flex flex-col gap-4 w-full">

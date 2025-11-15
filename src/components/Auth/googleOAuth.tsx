@@ -30,13 +30,13 @@ function GoogleAuth() {
 
       if (result.success) {
         router.push("/profile");
-        toast.success(result.message || "Welcome back!");
+        toast.success(messages.success_message);
       } else {
         toast.error(result.message || "Login failed.");
       }
     } catch (err) {
       console.error(err);
-      toast.error("Something went wrong. Try again.");
+      toast.error(messages.error_message);
     } finally {
       setIsPending(false);
     }

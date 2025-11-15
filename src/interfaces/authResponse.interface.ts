@@ -15,6 +15,10 @@ export interface AuthFormState {
   };
   fieldErrors?: Record<string, string>;
 }
+export interface ConfirmFormState {
+  success: boolean;
+  message: string;
+}
 
 export interface ResetPasswordRequestState {
   success: boolean;

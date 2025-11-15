@@ -5,6 +5,7 @@ export const ENDPOINTS = {
     login: `${BASE_URL}/login`,
     google: `${BASE_URL}/google_oauth`,
     signup: `${BASE_URL}/signup`,
+    confirm: `${BASE_URL}/confirm`,
     logout: `${BASE_URL}/logout`,
     reset_password_request: `${BASE_URL}/password_reset_request`,
     reset_password: `${BASE_URL}/password_reset`,

@@ -1,4 +1,3 @@
-// lib/api/auth.ts
 import { cookies } from "next/headers";
 import { AuthResponse } from "@/interfaces/authResponse.interface";
 

@@ -34,4 +34,9 @@ export const ENDPOINTS = {
     delete_review: `${BASE_URL}/reviews`,
     search_places: `${BASE_URL}/search_places`,
   },
+
+  blogs: {
+    all: `${BASE_URL}/blogs`,
+    one: `${BASE_URL}/blogs`,
+  },
 };

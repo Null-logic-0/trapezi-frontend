@@ -1,6 +1,9 @@
+"use client";
 import Image from "next/image";
 import { Card } from "../UI/Card";
 import { HiOutlineCalendarDateRange } from "react-icons/hi2";
+import { formatDate } from "@/utils/formatDate";
+import { useLanguage } from "@/store/language-context";
 
 type BlogCardProps = {
   title: string;
@@ -10,6 +13,7 @@ type BlogCardProps = {
 };
 
 function BlogCard({ title, image, date, content }: BlogCardProps) {
+  const { locale } = useLanguage();
   return (
     <Card className="group overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border border-[#e3e3e3]">
       {/* Image */}
@@ -30,7 +34,7 @@ function BlogCard({ title, image, date, content }: BlogCardProps) {
         <span className="text-sm  text-[#737373] flex gap-2 items-center font-semibold">
           <HiOutlineCalendarDateRange />
 
-          {date}
+          {formatDate(date, locale)}
         </span>
         <h3 className="text-xl my-3 font-bold group-hover:text-[#ff6b35]">
           {title}

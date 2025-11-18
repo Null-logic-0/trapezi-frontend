@@ -1,8 +1,19 @@
 import BlogDetails from "@/components/Blogs/BlogDetails";
 import Spinner from "@/components/UI/Spinner/Spinner";
+import { fetchBlog } from "@/lib/api/fetchBlog";
+import { fetchBlogs } from "@/lib/api/fetchBlogs";
 import { Suspense } from "react";
 
-function BlogPage() {
+type Props = {
+  params: Promise<{
+    id?: string;
+  }>;
+};
+
+async function BlogPage({ params }: Props) {
+  const { id } = await params;
+  const blog = await fetchBlog(Number(id));
+  const { blogs } = await fetchBlogs();
   return (
     <Suspense
       fallback={
@@ -11,7 +22,7 @@ function BlogPage() {
         </div>
       }
     >
-      <BlogDetails />
+      <BlogDetails blog={blog!} blogs={blogs} />
     </Suspense>
   );
 }

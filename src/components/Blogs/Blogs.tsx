@@ -1,22 +1,30 @@
 "use client";
 
-import { BlogInterface } from "@/interfaces/blog.interface";
+import { useRouter } from "next/navigation";
 import Pagination from "../UI/Pagination";
 import BlogPreview from "./BlogPreview";
+import { Blogs as BlogsProps } from "@/types/blogs.types";
 
-export interface BlogsProps {
-  blogs: BlogInterface[];
-}
+function Blogs({ blogs, pagination }: BlogsProps) {
+  const router = useRouter();
+  const handlePaginate = (page: number) => {
+    if (
+      page < 1 ||
+      page > Math.ceil(pagination.total_count / pagination.per_page)
+    )
+      return; // prevent invalid pages
 
-function Blogs({ blogs }: BlogsProps) {
+    router.push(`/blogs?page=${page}`);
+  };
+
   return (
     <div className="max-w-7xl mx-auto flex flex-col gap-6 py-24 md:px-6 px-4">
       <BlogPreview blogs={blogs} />
       <Pagination
-        currentPage={1}
-        pagesCount={10}
-        itemsPerPage={1}
-        onPageChange={() => {}}
+        currentPage={pagination.current_page}
+        pagesCount={pagination.total_count}
+        itemsPerPage={pagination.per_page}
+        onPageChange={handlePaginate}
       />
     </div>
   );

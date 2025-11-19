@@ -1,5 +1,4 @@
 import { LuUser, LuBriefcaseBusiness } from "react-icons/lu";
-import { IoIosStarOutline } from "react-icons/io";
 import { MdFavoriteBorder } from "react-icons/md";
 import { IoCardOutline, IoSettingsOutline } from "react-icons/io5";
 import { AiOutlineHome } from "react-icons/ai";

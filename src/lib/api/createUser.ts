@@ -1,6 +1,5 @@
 import { ENDPOINTS } from "@/lib/endpoints";
 import { SignupInterface } from "@/interfaces/signup.interface";
-import { cookies } from "next/headers";
 
 export async function createUser(
   userData: SignupInterface,

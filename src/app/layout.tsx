@@ -30,7 +30,15 @@ export default function RootLayout({
         <UiContextProvider>
           <LanguageProvider>
             <FavoritesProvider>
-              <Toaster position="top-center" />
+              <Toaster
+                position="top-center"
+                toastOptions={{
+                  duration: 3000,
+                  style: {
+                    fontSize: "14px",
+                  },
+                }}
+              />
               <HeaderNavMenu />
               {children}
               <Footer />

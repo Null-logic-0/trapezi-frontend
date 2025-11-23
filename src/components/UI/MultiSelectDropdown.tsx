@@ -5,7 +5,7 @@ import { FaChevronDown, FaChevronUp, FaCheck } from "react-icons/fa";
 
 type Option = {
   id: string | number;
-  label: string;
+  label: string | string[];
 };
 
 type Props = {

@@ -5,7 +5,7 @@ import { Suspense } from "react";
 
 interface PlaceDetailsProps {
   params: Promise<{ id: string }>;
-  searchParams?: { lang?: "en" | "ka" };
+  searchParams: Promise<{ locale: "en" | "ka" }>;
 }
 
 export default async function PlaceDetails({
@@ -13,7 +13,7 @@ export default async function PlaceDetails({
   searchParams,
 }: PlaceDetailsProps) {
   const { id } = await params;
-  const locale = searchParams?.lang || "ka";
+  const { locale } = (await searchParams) || "ka";
   const place = await fetchSinglePlace(Number(id), locale);
   return (
     <Suspense

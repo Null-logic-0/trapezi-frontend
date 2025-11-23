@@ -26,7 +26,7 @@ function ProfileOverview({
   avatar_url,
   isBusiness,
 }: ProfileProps) {
-  const { handleToggleModal } = useUIContext();
+  const { handleOpenModal } = useUIContext();
   const messages = useMessages();
 
   const fullName = `${name} ${last_name}`;
@@ -38,7 +38,7 @@ function ProfileOverview({
           <ProfileHeading title={messages.profile_overview} />
 
           <Button
-            onClick={handleToggleModal}
+            onClick={() => handleOpenModal("update-profile")}
             buttonType="outline"
             className="max-w-[184px] text-sm p-2"
           >

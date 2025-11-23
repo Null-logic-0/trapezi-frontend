@@ -33,6 +33,7 @@ export const ENDPOINTS = {
     update_review: `${BASE_URL}/reviews`,
     delete_review: `${BASE_URL}/reviews`,
     search_places: `${BASE_URL}/search_places`,
+    create_report: `${BASE_URL}/create_report`,
   },
 
   blogs: {

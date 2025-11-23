@@ -27,7 +27,7 @@ function ReviewsList({
   setSelectedReviewId,
   lastReviewCallback,
 }: Props) {
-  const { handleToggleModal, handleToggleReviewForm } = useUIContext();
+  const { handleOpenModal, handleToggleReviewForm } = useUIContext();
 
   const messages = useMessages();
 
@@ -81,7 +81,7 @@ function ReviewsList({
                         </p>
                       ),
                       onClick: () => {
-                        handleToggleModal();
+                        handleOpenModal("delete-review");
                         setSelectedReviewId(review.id);
                       },
                     },

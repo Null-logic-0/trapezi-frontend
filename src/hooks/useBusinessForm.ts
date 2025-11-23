@@ -6,6 +6,7 @@ import {
   BusinessInterface,
 } from "@/interfaces/places.interface";
 import { saveBusinessListing } from "@/lib/api/saveBusinessListing";
+import { useMessages } from "./useMessages";
 
 type UseBusinessFormOptions = {
   locale: "en" | "ka";
@@ -26,7 +27,7 @@ export function useBusinessForm({
     fieldErrors: {},
     values: initialValues,
   });
-
+  const messages = useMessages();
   const [isPending, setIsPending] = useState(false);
   const [images, setImages] = useState<File[]>(initialValues.images || []);
   const [menuPdf, setMenuPdf] = useState<File | null>(
@@ -67,7 +68,7 @@ export function useBusinessForm({
       if (!res) {
         setState({
           success: false,
-          message: "No response from server",
+          message: messages.error_message,
           fieldErrors: {},
           values: Object.fromEntries(formData.entries()),
         });
@@ -78,7 +79,7 @@ export function useBusinessForm({
       if (!res.success) {
         setState({
           success: false,
-          message: res.message || "Request failed",
+          message: res.message || messages.error_message,
           fieldErrors: res.errors || {},
           values: Object.fromEntries(formData.entries()),
         });

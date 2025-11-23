@@ -28,7 +28,7 @@ function DeleteMyBusiness({
     try {
       const result = await deleteBusiness(id);
       if (result.success) {
-        toast.success(message.success_message);
+        toast.success(message.business_deletion);
         handleToggleModal();
         if (onDeleted) onDeleted();
       }

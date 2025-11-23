@@ -5,7 +5,8 @@ export interface Tab {
 export interface Messages {
   login: string;
   signup: string;
-  [key: string]: string | undefined;
+  story_paragraphs?: string[];
+  [key: string]: string | string[] | undefined;
 }
 
 export const getTabs = (messages: Messages): Tab[] => [

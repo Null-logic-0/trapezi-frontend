@@ -24,13 +24,13 @@ function DeleteAccount() {
     try {
       const result = await deleteAccount();
       if (result.success) {
-        toast.success("Account deleted successfully");
+        toast.success(message.account_deletion_success);
         handleToggleModal();
         router.push("/login");
       }
     } catch (err) {
       console.error(err);
-      toast.error("Account destruction failed");
+      toast.error(message.error_message);
     } finally {
       setPending(false);
     }
@@ -40,9 +40,9 @@ function DeleteAccount() {
       <Button
         onClick={handleToggleModal}
         buttonType="outline"
-        className="text-red-500 max-w-[150px]"
+        className="text-red-500 max-w-40 text-sm"
       >
-        Delete Account
+        {message.delete_account}
       </Button>
 
       <Modal>

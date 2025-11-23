@@ -5,11 +5,12 @@ import Button from "../UI/Button";
 import Input from "../UI/Input";
 import Modal from "../UI/Modal";
 import ImagePicker from "../UI/ImagePicker";
-import { useActionState, useEffect } from "react";
+import { useActionState } from "react";
 import { updateProfile } from "@/lib/actions/updateUserProfile";
 import toast from "react-hot-toast";
 import { useMessages } from "@/hooks/useMessages";
 import BusinessAccountToggle from "./BusinessAccountToggle";
+import { ProfileFormState } from "@/interfaces/user.interface";
 
 type UpdateProfileProps = {
   name: string;
@@ -24,29 +25,28 @@ function UpdateProfile({
   avatar_url,
   isBusiness,
 }: UpdateProfileProps) {
-  const [state, formAction, isPending] = useActionState(updateProfile, {
-    message: "",
-    success: false,
-  });
-
   const { handleCloseModal } = useUIContext();
   const messages = useMessages();
 
-  useEffect(() => {
-    if (!state.message) return;
+  const handleAction = async (
+    prevState: ProfileFormState,
+    formData: FormData
+  ) => {
+    const result = await updateProfile(prevState, formData);
 
-    if (state.success) {
-      toast.success(messages.success_message);
+    if (result.success) {
+      toast.success(messages.profile_success);
       handleCloseModal();
     } else {
       toast.error(messages.error_message);
     }
-  }, [
-    state,
-    handleCloseModal,
-    messages.success_message,
-    messages.error_message,
-  ]);
+
+    return result;
+  };
+  const [_state, formAction, isPending] = useActionState(handleAction, {
+    message: "",
+    success: false,
+  });
 
   return (
     <Modal>

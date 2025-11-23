@@ -21,6 +21,7 @@ import { BusinessInterface } from "@/interfaces/places.interface";
 import { useMessages } from "@/hooks/useMessages";
 import GoBack from "../UI/GoBack";
 import HeartShapeButton from "../UI/HeartShapeButton";
+import CreateReport from "./CreateReport";
 
 type Props = {
   business: BusinessInterface;
@@ -79,9 +80,12 @@ const BusinessDetail = ({ business, id }: Props) => {
                     {business.categories.join(", ")}
                   </p>
                 </div>
-                <div className="space-y-4 text-end">
-                  <HeartShapeButton id={id} />
+                <div className="space-y-2 text-end">
+                  <div className="flex items-center gap-4 ">
+                    <HeartShapeButton id={id} />
 
+                    <CreateReport id={id} />
+                  </div>
                   <span className="text-sm flex items-center max-md:text-xl font-bold">
                     {business.average_rating?.toFixed(1)}
 

@@ -98,6 +98,7 @@
   "register_business": "Register Your Business",
   "create_account": "Create Account",
   "send": "Send",
+  "sending": "Sending...",
   "back": "Go back",
   "forgot_password_title": "Forgot Password?",
   "forgot_password_subtitle": "Enter your email address and we'll send you a link to reset your password",
@@ -152,5 +153,8 @@
   "instruction_sent": "Instructions to reset your password have been sent to your email.",
   "confirm_title": "Confirm your email",
   "confirm_subtitle": "Please confirm your email to complete your registration.",
-  "confirm_email": "Confirm Email"
+  "confirm_email": "Confirm Email",
+  "title": "Title",
+  "report_send_success": "Report send successfully!",
+  "send_report": "Send a Report"
 }

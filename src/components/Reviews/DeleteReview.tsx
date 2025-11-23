@@ -15,7 +15,7 @@ type Props = {
 };
 
 function DeleteReview({ placeId, reviewId, onDeleted }: Props) {
-  const { handleToggleModal } = useUIContext();
+  const { handleCloseModal } = useUIContext();
 
   const [pending, setPending] = useState(false);
 
@@ -31,7 +31,7 @@ function DeleteReview({ placeId, reviewId, onDeleted }: Props) {
     setPending(true);
     try {
       await destroyReview(placeId, reviewId);
-      handleToggleModal();
+      handleCloseModal();
       onDeleted?.();
     } catch (err) {
       console.error(err);
@@ -42,18 +42,14 @@ function DeleteReview({ placeId, reviewId, onDeleted }: Props) {
   };
 
   return (
-    <Modal>
+    <Modal modalId={"delete-review"}>
       <form onSubmit={handleDelete}>
         <h2 className="text-xl text-center font-bold">
           {message.delete_caution}
         </h2>
 
         <div className="flex mt-6 justify-center items-center gap-4">
-          <Button
-            onClick={handleToggleModal}
-            type="button"
-            buttonType="outline"
-          >
+          <Button onClick={handleCloseModal} type="button" buttonType="outline">
             {message.cancel}
           </Button>
           <Button

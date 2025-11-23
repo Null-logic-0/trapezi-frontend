@@ -29,7 +29,7 @@ export default function MyBusinesses() {
     setPage,
     setSearchTerm,
   } = useFetchMyPlaces();
-  const { handleToggleModal } = useUIContext();
+  const { handleOpenModal } = useUIContext();
   const [placeId, setPlaceId] = useState<number | undefined>();
   const messages = useMessages();
   const router = useRouter();
@@ -114,7 +114,7 @@ export default function MyBusinesses() {
                         </p>
                       ),
                       onClick: () => {
-                        handleToggleModal();
+                        handleOpenModal("delete-my-business");
                         setPlaceId(business.id);
                       },
                     },

@@ -49,7 +49,7 @@ function UpdateProfile({
   });
 
   return (
-    <Modal>
+    <Modal modalId={"update-profile"}>
       <form action={formAction} className="flex flex-col gap-4">
         <ImagePicker
           firstName={name}

@@ -5,6 +5,7 @@ export interface UserInterface {
   avatar_url: string;
   email: string;
   business_owner: boolean;
+  is_blocked?: boolean;
 }
 
 export interface UpdateProfileInterface {

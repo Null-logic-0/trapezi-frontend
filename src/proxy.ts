@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { cookies } from "next/headers";
+import { fetchCurrentUser } from "./lib/api/fetchCurrentUser";
 
 const protectedBaseRoutes = [
   "/profile",
@@ -11,12 +12,19 @@ const protectedBaseRoutes = [
 const authPages = ["/login", "/signup"];
 
 export async function proxy(req: NextRequest) {
+  const currentUser = await fetchCurrentUser();
   const cookieStore = await cookies();
   const token = cookieStore.get("token")?.value;
   const { pathname } = req.nextUrl;
 
   const isProtectedPlace = /^\/places\/[^/]+$/.test(pathname);
   const isProtectedBase = protectedBaseRoutes.some((r) => pathname === r);
+
+  if (currentUser?.is_blocked) {
+    const res = NextResponse.redirect(new URL("/login", req.nextUrl.origin));
+    res.cookies.delete("token");
+    return res;
+  }
 
   if (!token && (isProtectedBase || isProtectedPlace)) {
     return NextResponse.redirect(new URL("/login", req.nextUrl.origin));

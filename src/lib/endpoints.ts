@@ -40,4 +40,9 @@ export const ENDPOINTS = {
     all: `${BASE_URL}/blogs`,
     one: `${BASE_URL}/blogs`,
   },
+
+  settings: {
+    registration: `${BASE_URL}/admin/registration`,
+    maintenance_mode: `${BASE_URL}/admin/maintenance`,
+  },
 };

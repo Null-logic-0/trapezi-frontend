@@ -3,6 +3,11 @@ import FeaturedSection from "@/components/BusinessListings/FeaturedSection";
 import CategoryFilter from "@/components/CategoryFilter";
 import CTASection from "@/components/CTASection";
 import Hero from "@/components/Hero/Hero";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Trapezi | Home",
+};
 
 type HomePageProps = {
   searchParams?: Promise<{ categories?: string }>;

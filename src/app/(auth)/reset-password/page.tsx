@@ -1,4 +1,9 @@
 import ResetPassword from "@/components/Auth/ResetPassword";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Trapezi | Reset Password",
+};
 
 type ResetPasswordProps = {
   searchParams: Promise<{ token: string }>;

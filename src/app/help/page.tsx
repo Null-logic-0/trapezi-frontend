@@ -6,7 +6,12 @@ import SendMessageSection from "@/components/HelpCenter/SendMessageSection";
 import VideoTutorial from "@/components/HelpCenter/VideoTutorial";
 import Spinner from "@/components/UI/Spinner/Spinner";
 import { fetchBlogs } from "@/lib/api/fetchBlogs";
+import { Metadata } from "next";
 import { Suspense } from "react";
+
+export const metadata: Metadata = {
+  title: "Trapezi | Help",
+};
 
 async function HelpPage() {
   const { blogs } = await fetchBlogs();

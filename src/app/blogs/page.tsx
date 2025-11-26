@@ -2,7 +2,12 @@ import BlogHeader from "@/components/Blogs/BlogHeader";
 import Blogs from "@/components/Blogs/Blogs";
 import Spinner from "@/components/UI/Spinner/Spinner";
 import { fetchBlogs } from "@/lib/api/fetchBlogs";
+import { Metadata } from "next";
 import { Suspense } from "react";
+
+export const metadata: Metadata = {
+  title: "Trapezi | Blog",
+};
 
 type Props = {
   searchParams?: { page?: string } | Promise<{ page?: string }>;

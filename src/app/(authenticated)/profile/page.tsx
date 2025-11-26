@@ -3,7 +3,16 @@ import ProfileOverview from "@/components/Profile/ProfileOverview";
 import Subscription from "@/components/Profile/Subscription";
 import Spinner from "@/components/UI/Spinner/Spinner";
 import { fetchCurrentUser } from "@/lib/api/fetchCurrentUser";
+import { Metadata } from "next";
 import { Suspense } from "react";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const user = await fetchCurrentUser();
+
+  return {
+    title: `${user?.name} ${user?.last_name}`,
+  };
+}
 
 async function Profile() {
   const user = await fetchCurrentUser();

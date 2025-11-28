@@ -81,8 +81,22 @@ export const TERMS = [
   },
   {
     title: {
-      en: "9. Contact Us",
-      ka: "9. დაგვიკავშირდით",
+      en: "9. Refund Policy",
+      ka: "9. თანხის დაბრუნების პოლიტიკა",
+    },
+    text: {
+      en: `The platform offers users a free basic service, which includes full-fledged placement of one business and access to basic functions. Paid services (placement of additional branches and VIP status) are a voluntary choice.
+Accordingly, the amount paid is not subject to refund.
+Subscription cancellation: The user can stop paying at any time. In this case, after the expiration of the paid period, the business account will become inactive (or VIP status will be canceled), however, the subscription fee already paid is not subject to refund.`,
+      ka: `პლატფორმა მომხმარებელს სთავაზობს უფასო საბაზისო მომსახურებას, რაც მოიცავს ერთი ბიზნესის სრულფასოვან განთავსებას და ძირითად ფუნქციებზე წვდომას. ფასიანი მომსახურება (დამატებითი ფილიალების განთავსება და VIP სტატუსი) წარმოადგენს ნებაყოფლობით არჩევანს.
+შესაბამისად, გადახდილი თანხა დაბრუნებას არ ექვემდებარება.
+გამოწერის გაუქმება: მომხმარებელს ნებისმიერ დროს შეუძლია შეწყვიტოს გადახდა. ამ შემთხვევაში, გადახდილი პერიოდის ამოწურვის შემდეგ, ბიზნესის ანგარიში გახდება არააქტიური (ან გაუუქმდება VIP სტატუსი), თუმცა უკვე გადახდილი სააბონენტო ღირებულება ანაზღაურებას არ ექვემდებარება.`,
+    },
+  },
+  {
+    title: {
+      en: "10. Contact Us",
+      ka: "10. დაგვიკავშირდით",
     },
     text: {
       en: "If you have any questions about these Terms, please contact us through our Help Center.",

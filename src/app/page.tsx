@@ -1,9 +1,7 @@
+import ChefLoader from "./components/ChefLoader";
+
 function Page() {
-  return (
-    <>
-      <p>hey</p>
-    </>
-  );
+  return <ChefLoader />;
 }
 
 export default Page;

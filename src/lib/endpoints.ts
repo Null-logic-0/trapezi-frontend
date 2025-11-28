@@ -45,4 +45,6 @@ export const ENDPOINTS = {
     registration: `${BASE_URL}/admin/registration`,
     maintenance_mode: `${BASE_URL}/admin/maintenance`,
   },
+
+  tutorials: `${BASE_URL}/video_tutorials`,
 };

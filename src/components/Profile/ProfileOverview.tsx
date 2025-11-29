@@ -10,6 +10,7 @@ import Button from "../UI/Button";
 import UpdateProfile from "./UpdateProfile";
 import { useUIContext } from "@/store/ui-context";
 import { useMessages } from "@/hooks/useMessages";
+import { Card } from "../UI/Card";
 
 type ProfileProps = {
   name: string;
@@ -33,7 +34,7 @@ function ProfileOverview({
 
   return (
     <>
-      <div className="profile-card-container ">
+      <Card className="p-6">
         <div className="flex justify-between max-md:flex-col gap-2  mb-6 mt-2  items-center">
           <ProfileHeading title={messages.profile_overview} />
 
@@ -74,7 +75,7 @@ function ProfileOverview({
             />
           </div>
         </div>
-      </div>
+      </Card>
       <UpdateProfile
         isBusiness={isBusiness}
         name={name || ""}

@@ -4,11 +4,12 @@ import { useMessages } from "@/hooks/useMessages";
 import Button from "../UI/Button";
 import ProfileHeading from "./ProfileHeading";
 import { FaCreditCard } from "react-icons/fa";
+import { Card } from "../UI/Card";
 
 function Subscription() {
   const messages = useMessages();
   return (
-    <div className="profile-card-container ">
+    <Card className="p-6">
       <div className="mb-6 mt-2 max-md:text-center">
         <ProfileHeading title={messages.subscriptions} />
       </div>
@@ -35,7 +36,7 @@ function Subscription() {
           {messages.subscribe}
         </Button>
       </div>
-    </div>
+    </Card>
   );
 }
 

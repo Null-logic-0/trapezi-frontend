@@ -4,12 +4,13 @@ import Button from "../UI/Button";
 import ProfileHeading from "./ProfileHeading";
 import { useRouter } from "next/navigation";
 import MyBusinessesList from "./MyBusinessesList";
+import { Card } from "../UI/Card";
 
 function MyBusiness() {
   const messages = useMessages();
   const router = useRouter();
   return (
-    <div className="profile-card-container">
+    <Card className="p-6">
       <div className="flex justify-between max-md:flex-col mb-6 mt-2 gap-2 items-center">
         <ProfileHeading title={messages.my_business} />
 
@@ -23,7 +24,7 @@ function MyBusiness() {
       </div>
 
       <MyBusinessesList />
-    </div>
+    </Card>
   );
 }
 

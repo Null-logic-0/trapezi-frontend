@@ -10,10 +10,3 @@ body {
   color: var(--foreground);
   font-family: var(--font-open_sans), sans-serif !important;
 }
-
-.profile-card-container {
-  background: #ffffff;
-  border-radius: 16px;
-  border: 2px solid #e3e3e3;
-  padding: 24px;
-}

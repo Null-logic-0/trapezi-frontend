@@ -15,8 +15,8 @@ export const FAQs = [
       ka: "რომელი გადახდის მეთოდები მიიღება?",
     },
     answer: {
-      en: "We accept all major credit cards (Visa, Mastercard, American Express). All payments are processed securely through our payment partners.",
-      ka: "ვიღებთ ყველა ძირითად ბარათს (Visa, Mastercard, American Express). ყველა გადახდა უსაფრთხოდ მუშავდება ჩვენი პარტნიორების მეშვეობით.",
+      en: "We accept all major credit cards (Visa, Mastercard). All payments are processed securely through our payment partners.",
+      ka: "ვიღებთ ყველა ძირითად ბარათს (Visa, Mastercard). ყველა გადახდა უსაფრთხოდ მუშავდება ჩვენი პარტნიორების მეშვეობით.",
     },
   },
   {

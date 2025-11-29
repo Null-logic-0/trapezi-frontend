@@ -47,4 +47,6 @@ export const ENDPOINTS = {
   },
 
   tutorials: `${BASE_URL}/video_tutorials`,
+
+  email: "https://formsubmit.co/ajax/support@trapezi.ge",
 };

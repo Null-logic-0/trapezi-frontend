@@ -158,5 +158,6 @@
   "report_send_success": "Report send successfully!",
   "send_report": "Send a Report",
   "maintenance_mod": "We’re performing some updates. Thanks for your patience — we’ll be back online soon!",
-  "register_restriction": "Registration is currently disabled"
+  "register_restriction": "Registration is currently disabled",
+  "message_sent": "Message sent successfully!"
 }

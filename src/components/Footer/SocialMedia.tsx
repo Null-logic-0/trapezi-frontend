@@ -21,7 +21,7 @@ function SocialMedia() {
 
         <a
           target="_blank"
-          href="#"
+          href="https://www.linkedin.com/company/trapezi-ge"
           className="text-[#fafafa]/80 hover:text-[#ff6b35] transition-colors"
         >
           <SlSocialLinkedin className="text-xl" />

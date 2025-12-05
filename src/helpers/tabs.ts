@@ -5,11 +5,12 @@ export interface Tab {
 export interface Messages {
   login: string;
   signup: string;
-  story_paragraphs?: string[];
-  [key: string]: string | string[] | undefined;
 }
 
+const getString = (value: string | string[] | undefined, fallback: string) =>
+  (value as string) || fallback;
+
 export const getTabs = (messages: Messages): Tab[] => [
-  { label: messages.login, href: "/login" },
-  { label: messages.signup, href: "/signup" },
+  { label: getString(messages.login, "Login"), href: "/login" },
+  { label: getString(messages.signup, "Signup"), href: "/signup" },
 ];

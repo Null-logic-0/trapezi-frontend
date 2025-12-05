@@ -5,9 +5,13 @@ import Button from "../UI/Button";
 import ProfileHeading from "./ProfileHeading";
 import { FaCreditCard } from "react-icons/fa";
 import { Card } from "../UI/Card";
+import { useRouter } from "next/navigation";
 
 function Subscription() {
   const messages = useMessages();
+  const router = useRouter();
+
+  const handleNavigate = () => router.push("/plan");
   return (
     <Card className="p-6">
       <div className="mb-6 mt-2 max-md:text-center">
@@ -30,6 +34,7 @@ function Subscription() {
           </div>
         </div>
         <Button
+          onClick={handleNavigate}
           buttonType="outline"
           className="w-[120px] max-md:w-full text-sm p-2"
         >

@@ -22,7 +22,6 @@
   "profile_overview": "Profile Overview",
   "edit_profile": "Edit Profile",
   "profile_success": "Profile updated successfully!",
-  "plan": "Plan",
   "my_business": "My Places",
   "business_deletion": "Place deleted successfully!",
   "add_business": "Add New Place",
@@ -159,5 +158,31 @@
   "send_report": "Send a Report",
   "maintenance_mod": "We’re performing some updates. Thanks for your patience — we’ll be back online soon!",
   "register_restriction": "Registration is currently disabled",
-  "message_sent": "Message sent successfully!"
+  "message_sent": "Message sent successfully!",
+
+  "plan": "Plan",
+  "plan_object": {
+    "title": "Choose Your Plan",
+    "subtitle": "Unlock premium features with Pro",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "save": "Save 20%",
+    "pro": "Pro",
+    "popular": "Most Popular",
+    "monthlyPrice": "$9.99",
+    "yearlyPrice": "$95.99",
+    "perMonth": "/month",
+    "perYear": "/year",
+    "billedYearly": "Billed annually",
+    "billedMonthly": "Billed monthly",
+    "getStarted": "Get Started",
+    "features": [
+      "Unlimited addition of new places",
+      "Priority customer support",
+      "Early access to new features",
+      "20% discount for VIP"
+    ]
+  },
+  "copy_schedule": "Copy Mon to Mon-Fri",
+  "closed": "Closed"
 }

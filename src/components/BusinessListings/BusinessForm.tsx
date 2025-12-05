@@ -20,6 +20,14 @@ type Props = {
   onSuccessRedirect?: string;
 };
 
+type CategoryMessages = {
+  restaurant?: string;
+  cafe?: string;
+  bar?: string;
+  bakery?: string;
+  pastry?: string;
+};
+
 function BusinessForm({
   initialValues,
   onSuccessRedirect = "/my-places",
@@ -27,7 +35,7 @@ function BusinessForm({
   const { locale } = useLanguage();
   const router = useRouter();
   const messages = useMessages();
-  const categories = SELECT_CATEGORIES(messages);
+  const categories = SELECT_CATEGORIES(messages as CategoryMessages);
 
   const { state, isPending, setImages, setMenuPdf, handleSubmit } =
     useBusinessForm({ locale, initialValues, onSuccessRedirect });
@@ -46,7 +54,7 @@ function BusinessForm({
         encType="multipart/form-data"
       >
         <h1 className="text-3xl font-bold pb-2">
-          {initialValues?.id ? messages.add_business : messages.update_business}
+          {initialValues?.id ? messages.update_business : messages.add_business}
         </h1>
 
         <Input

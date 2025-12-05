@@ -31,7 +31,7 @@ const FeaturedSpots = ({ places }: BusinessProps) => {
       ) : (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {places.slice(0, 4).map((business, index) => (
+            {places.slice(0, 8).map((business, index) => (
               <Link key={business.id} href={`places/${business.id}`}>
                 <div
                   className="animate-scale-in"

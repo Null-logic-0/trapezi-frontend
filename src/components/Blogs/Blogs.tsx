@@ -12,7 +12,7 @@ function Blogs({ blogs, pagination }: BlogsProps) {
       page < 1 ||
       page > Math.ceil(pagination.total_count / pagination.per_page)
     )
-      return; // prevent invalid pages
+      return;
 
     router.push(`/blogs?page=${page}`);
   };

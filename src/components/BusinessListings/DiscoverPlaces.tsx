@@ -30,7 +30,7 @@ function DiscoverPlaces({ places }: DiscoverPlacesProps) {
       ) : (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {places.slice(0, 3).map((business, index) => (
+            {places.slice(0, 6).map((business, index) => (
               <Link key={business.id} href={`places/${business.id}`}>
                 <div
                   className="animate-fade-in"

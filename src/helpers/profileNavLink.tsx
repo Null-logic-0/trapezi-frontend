@@ -2,10 +2,18 @@ import { LuUser, LuBriefcaseBusiness } from "react-icons/lu";
 import { MdFavoriteBorder } from "react-icons/md";
 import { IoCardOutline, IoSettingsOutline } from "react-icons/io5";
 import { AiOutlineHome } from "react-icons/ai";
-import { Messages } from "@/interfaces/messages.interface";
+
+type MenuMessages = {
+  home?: string;
+  profile?: string;
+  favorites?: string;
+  my_business?: string;
+  subscriptions?: string;
+  settings?: string;
+};
 
 export const PROFILE_NAV_LINKS = (
-  messages: Messages,
+  messages: MenuMessages,
   isBusinessAccount = false
 ) => {
   const links = [

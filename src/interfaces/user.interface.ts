@@ -6,6 +6,7 @@ export interface UserInterface {
   email: string;
   business_owner: boolean;
   is_blocked?: boolean;
+  plan?: string;
 }
 
 export interface UpdateProfileInterface {

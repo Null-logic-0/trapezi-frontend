@@ -16,6 +16,7 @@ type ProfileProps = {
   name: string;
   last_name: string;
   email: string;
+  plan: string;
   avatar_url: string;
   isBusiness?: boolean;
 };
@@ -23,6 +24,7 @@ type ProfileProps = {
 function ProfileOverview({
   name,
   last_name,
+  plan,
   email,
   avatar_url,
   isBusiness,
@@ -65,7 +67,7 @@ function ProfileOverview({
           <div className="flex flex-col gap-4 items-start">
             <UserMiniCard
               label={messages.plan}
-              text="PRO"
+              text={plan}
               icon={<FaCreditCard />}
             />
             <UserMiniCard

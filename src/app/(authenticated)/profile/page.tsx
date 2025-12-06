@@ -29,6 +29,7 @@ async function Profile() {
           isBusiness={user?.business_owner}
           avatar_url={user?.avatar_url || ""}
           name={user?.name || ""}
+          plan={user?.plan || ""}
           last_name={user?.last_name || ""}
           email={user?.email || ""}
         />

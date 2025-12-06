@@ -68,7 +68,7 @@ function FavoritePlaces() {
                     address={business.address}
                     image={business.images_url?.[0] || ""}
                     rating={business.average_rating}
-                    isOpen={true}
+                    isOpen={business.currently_open}
                   />
                 </Link>
               </div>

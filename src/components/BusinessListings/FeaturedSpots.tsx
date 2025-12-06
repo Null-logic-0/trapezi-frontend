@@ -44,7 +44,7 @@ const FeaturedSpots = ({ places }: BusinessProps) => {
                     image={business.images_url?.[0] || ""}
                     rating={business.average_rating}
                     isVIP={business.is_vip}
-                    isOpen={true}
+                    isOpen={business.currently_open}
                   />
                 </div>
               </Link>

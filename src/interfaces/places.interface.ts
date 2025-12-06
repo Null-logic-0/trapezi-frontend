@@ -19,6 +19,7 @@ export interface BusinessInterface {
   latitude?: number;
   longitude?: number;
   average_rating?: number;
+  currently_open?: boolean;
 }
 
 export interface BusinessFormState {

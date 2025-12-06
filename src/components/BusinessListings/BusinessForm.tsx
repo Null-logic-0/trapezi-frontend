@@ -14,6 +14,7 @@ import { useLanguage } from "@/store/language-context";
 import { useBusinessForm } from "@/hooks/useBusinessForm";
 import { BusinessInterface } from "@/interfaces/places.interface";
 import WorkingScheduleInput from "../UI/WorkingScheduleInput";
+import toast from "react-hot-toast";
 
 type Props = {
   initialValues?: BusinessInterface;
@@ -43,13 +44,16 @@ function BusinessForm({
   return (
     <div className="max-w-3xl mx-auto flex flex-col justify-center py-24">
       <form
-        onSubmit={(e) =>
+        onSubmit={(e) => {
+          if (state.fieldErrors?.plan) {
+            toast.error(state.fieldErrors?.plan);
+          }
           handleSubmit(
             e,
             initialValues?.id ? "PATCH" : "POST",
             initialValues?.id
-          )
-        }
+          );
+        }}
         className="bg-[#ffffff] flex flex-col gap-6 w-full border-[#e3e3e3] border px-8 py-6 rounded-xl"
         encType="multipart/form-data"
       >

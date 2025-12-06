@@ -8,6 +8,7 @@ import {
   Circle,
 } from "@react-google-maps/api";
 import Spinner from "./UI/Spinner/Spinner";
+import { GOOGLE_API_KEY } from "@/constants/google-api-key";
 
 type Location = {
   lat: number;
@@ -28,9 +29,10 @@ type UserLocation = {
 export default function PlacesMap({ locations = [], className }: Props) {
   const [userLocation, setUserLocation] = useState<UserLocation>(null);
 
-  const { isLoaded } = useJsApiLoader({
+  const { isLoaded, loadError } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!,
+    googleMapsApiKey: GOOGLE_API_KEY!,
+    libraries: ["places", "maps"],
   });
 
   useEffect(() => {
@@ -65,6 +67,13 @@ export default function PlacesMap({ locations = [], className }: Props) {
       <div className="text-center py-10">
         <Spinner />
       </div>
+    );
+
+  if (loadError)
+    return (
+      <p className="text-center text-red-500 font-medium text-sm">
+        Map failed to load
+      </p>
     );
 
   return (

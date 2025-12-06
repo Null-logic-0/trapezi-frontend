@@ -12,7 +12,7 @@ type BusinessCardProps = {
 
   image: string;
   address: string;
-  isOpen: boolean;
+  isOpen?: boolean;
   isVIP?: boolean;
 };
 

@@ -69,7 +69,7 @@ function DiscoverAllPlaces() {
                       image={business.images_url?.[0] || ""}
                       rating={business.average_rating}
                       isVIP={business.is_vip}
-                      isOpen={true}
+                      isOpen={business.currently_open}
                     />
                   </Link>
                 </div>

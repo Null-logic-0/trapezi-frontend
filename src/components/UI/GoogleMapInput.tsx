@@ -31,8 +31,9 @@ export default function GoogleMapInputWithUserLocation({
   mapHeight = "200px",
 }: Props) {
   const { isLoaded, loadError } = useJsApiLoader({
+    id: "google-map-script",
     googleMapsApiKey: apiKey,
-    libraries: ["places"],
+    libraries: ["places", "maps"],
   });
 
   const [address, setAddress] = useState(defaultValue || "");

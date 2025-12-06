@@ -42,7 +42,7 @@ function DiscoverPlaces({ places }: DiscoverPlacesProps) {
                     address={business.address}
                     image={business.images_url?.[0] || ""}
                     rating={business.average_rating}
-                    isOpen={true}
+                    isOpen={business.currently_open}
                   />
                 </div>
               </Link>

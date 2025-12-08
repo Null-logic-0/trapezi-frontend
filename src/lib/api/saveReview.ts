@@ -9,12 +9,14 @@ interface SaveReviewOptions {
   reviewId?: number;
   method?: Method;
   data: CreateReview;
+  locale: "en" | "ka";
 }
 
 export async function saveReview({
   placeId,
   reviewId,
   method = "POST",
+  locale = "ka",
   data,
 }: SaveReviewOptions) {
   try {
@@ -31,12 +33,18 @@ export async function saveReview({
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
+        "Accept-Language": locale,
       },
       body: JSON.stringify(data),
     });
+
+    const body = await res.json().catch(() => ({}));
+
     if (!res.ok) {
-      const errBody = await res.json().catch(() => ({}));
-      throw new Error(errBody?.message || "Action failed");
+      const message = body.error || body.message || "Action failed";
+      const userBlocked = body.user_blocked === true;
+
+      return { error: message, userBlocked };
     }
 
     return await res.json();

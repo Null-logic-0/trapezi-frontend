@@ -45,9 +45,18 @@ function BusinessForm({
     <div className="max-w-3xl mx-auto flex flex-col justify-center py-24">
       <form
         onSubmit={(e) => {
-          if (state.fieldErrors?.plan) {
-            toast.error(state.fieldErrors?.plan);
-          }
+          const errorFields = ["plan", "nsfw"];
+
+          let hasErrors = false;
+
+          errorFields.forEach((field) => {
+            if (state.fieldErrors?.[field]) {
+              toast.error(state.fieldErrors[field]);
+              hasErrors = true;
+            }
+          });
+
+          if (hasErrors) return;
           handleSubmit(
             e,
             initialValues?.id ? "PATCH" : "POST",

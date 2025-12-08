@@ -21,7 +21,9 @@ type Props = {
   defaultValue?: string;
 };
 
-export default function GoogleMapInputWithUserLocation({
+const LIBRARIES: ("places" | "maps")[] = ["places", "maps"];
+
+function GoogleMapInputWithUserLocation({
   apiKey,
   error,
   defaultValue,
@@ -33,7 +35,7 @@ export default function GoogleMapInputWithUserLocation({
   const { isLoaded, loadError } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: apiKey,
-    libraries: ["places", "maps"],
+    libraries: LIBRARIES,
   });
 
   const [address, setAddress] = useState(defaultValue || "");
@@ -72,7 +74,6 @@ export default function GoogleMapInputWithUserLocation({
     }
   };
 
-  // Handle clicking on the map to set marker & address
   const handleMapClick = useCallback((e: google.maps.MapMouseEvent) => {
     if (!e.latLng) return;
     const lat = e.latLng.lat();
@@ -140,3 +141,5 @@ export default function GoogleMapInputWithUserLocation({
     </div>
   );
 }
+
+export default GoogleMapInputWithUserLocation;

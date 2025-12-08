@@ -184,5 +184,6 @@
     ]
   },
   "copy_schedule": "Copy Mon to Mon-Fri",
-  "closed": "Closed"
+  "closed": "Closed",
+  "user_blocked": "Your profile has been blocked!"
 }

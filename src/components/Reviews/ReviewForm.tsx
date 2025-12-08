@@ -10,6 +10,7 @@ import { CreateReview, Reviews } from "@/interfaces/reviews.interface";
 import { useUIContext } from "@/store/ui-context";
 import toast from "react-hot-toast";
 import { saveReview } from "@/lib/api/saveReview";
+import { useLanguage } from "@/store/language-context";
 
 type ReviewFormProps = {
   placeId: number;
@@ -22,6 +23,7 @@ function ReviewForm({ placeId, review, onSuccess }: ReviewFormProps) {
   const [hover, setHover] = useState(0);
   const [isPending, setIsPending] = useState(false);
 
+  const { locale } = useLanguage();
   const messages = useMessages();
 
   const { handleToggleReviewForm } = useUIContext();
@@ -50,9 +52,16 @@ function ReviewForm({ placeId, review, onSuccess }: ReviewFormProps) {
         placeId,
         reviewId,
         method: reviewId ? "PATCH" : "POST",
+        locale,
         data,
       });
-
+      if ("error" in savedReview) {
+        toast.error(savedReview.error);
+        if (savedReview.userBlocked) {
+          toast.error(messages.user_blocked);
+        }
+        return;
+      }
       handleToggleReviewForm();
       if (onSuccess && savedReview) onSuccess(savedReview);
     } catch (err) {

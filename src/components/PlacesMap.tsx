@@ -26,13 +26,15 @@ type UserLocation = {
   lng: number;
 } | null;
 
-export default function PlacesMap({ locations = [], className }: Props) {
+const LIBRARIES: ("places" | "maps")[] = ["places", "maps"];
+
+function PlacesMap({ locations = [], className }: Props) {
   const [userLocation, setUserLocation] = useState<UserLocation>(null);
 
   const { isLoaded, loadError } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: GOOGLE_API_KEY!,
-    libraries: ["places", "maps"],
+    libraries: LIBRARIES,
   });
 
   useEffect(() => {
@@ -122,3 +124,5 @@ export default function PlacesMap({ locations = [], className }: Props) {
     </div>
   );
 }
+
+export default PlacesMap;

@@ -38,8 +38,14 @@ function BusinessForm({
   const messages = useMessages();
   const categories = SELECT_CATEGORIES(messages as CategoryMessages);
 
-  const { state, isPending, setImages, setMenuPdf, handleSubmit } =
-    useBusinessForm({ locale, initialValues, onSuccessRedirect });
+  const {
+    state,
+    isPending,
+    setImages,
+    setMenuPdf,
+    setDocumentPdf,
+    handleSubmit,
+  } = useBusinessForm({ locale, initialValues, onSuccessRedirect });
 
   return (
     <div className="max-w-3xl mx-auto flex flex-col justify-center py-24">
@@ -70,13 +76,33 @@ function BusinessForm({
           {initialValues?.id ? messages.update_business : messages.add_business}
         </h1>
 
-        <Input
-          type="text"
-          name="business_name"
-          error={state.fieldErrors?.business_name}
-          placeholder={messages.enter_business_name}
-          label={messages.business_name}
-          defaultValue={initialValues?.business_name || ""}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+          <Input
+            type="text"
+            className=""
+            name="business_name"
+            error={state.fieldErrors?.business_name}
+            placeholder={messages.enter_business_name}
+            label={messages.business_name}
+            defaultValue={initialValues?.business_name || ""}
+          />
+
+          <Input
+            type="text"
+            name="identification_code"
+            error={state.fieldErrors?.identification_code}
+            placeholder={messages.enter_identification_code}
+            label={messages.identification_code}
+            defaultValue={initialValues?.identification_code || ""}
+          />
+        </div>
+
+        <SinglePdfUploader
+          name="document_pdf"
+          onChange={setDocumentPdf}
+          label={messages.upload_document}
+          defaultFileUrl={initialValues?.document_url}
+          error={state.fieldErrors?.document_pdf}
         />
 
         <Input
@@ -133,7 +159,6 @@ function BusinessForm({
           error={state.fieldErrors?.images}
         />
 
-        {/* Single PDF Uploader */}
         <SinglePdfUploader
           name="menu_pdf"
           onChange={setMenuPdf}

@@ -6,7 +6,9 @@ export interface BusinessInterface {
   images: File[];
   images_url?: string[];
   menu_pdf?: File | null;
+  document_pdf?: File | null;
   menu_url?: string;
+  document_url?: string;
   phone?: string;
   description: string;
   working_schedule?: string;
@@ -20,6 +22,7 @@ export interface BusinessInterface {
   longitude?: number;
   average_rating?: number;
   currently_open?: boolean;
+  identification_code?: string;
 }
 
 export interface BusinessFormState {

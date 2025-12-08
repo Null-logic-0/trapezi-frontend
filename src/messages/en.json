@@ -38,7 +38,7 @@
   "upload_images": "Upload Images",
   "images_caution": "Up to 5 images (images only)",
   "drag&drop_or_click": "Drag & drop or click to choose",
-  "click_to_upload_menu": "Click to upload Menu",
+  "click_to_upload_menu": "Click to upload PDF",
   "upload_menu": "Upload Menu",
   "add_links": "Add Links",
   "clear": "Clear",
@@ -185,5 +185,8 @@
   },
   "copy_schedule": "Copy Mon to Mon-Fri",
   "closed": "Closed",
-  "user_blocked": "Your profile has been blocked!"
+  "user_blocked": "Your profile has been blocked!",
+  "identification_code": "Identification Code",
+  "enter_identification_code": "Enter ID number",
+  "upload_document": "Upload a business-critical document"
 }

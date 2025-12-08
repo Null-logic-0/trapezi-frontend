@@ -33,6 +33,9 @@ export function useBusinessForm({
   const [menuPdf, setMenuPdf] = useState<File | null>(
     initialValues.menu_pdf || null
   );
+  const [documentPdf, setDocumentPdf] = useState<File | null>(
+    initialValues.document_pdf || null
+  );
 
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>,
@@ -56,11 +59,14 @@ export function useBusinessForm({
         tiktok: (formData.get("tiktok") as string) || "",
         categories: formData.getAll("categories[]") as string[],
         phone: (formData.get("phone") as string) || "",
+        identification_code:
+          (formData.get("identification_code") as string) || "",
         working_schedule:
           (formData.get("working_schedule") as string) || JSON.stringify({}),
 
         images,
         menu_pdf: menuPdf,
+        document_pdf: documentPdf,
       };
 
       const res = await saveBusinessListing({ id, locale, method, data });
@@ -113,6 +119,7 @@ export function useBusinessForm({
     images,
     setImages,
     menuPdf,
+    setDocumentPdf,
     setMenuPdf,
     handleSubmit,
   };

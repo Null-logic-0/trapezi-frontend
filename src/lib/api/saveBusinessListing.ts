@@ -26,6 +26,8 @@ export async function saveBusinessListing({
       business_name,
       description,
       working_schedule,
+      identification_code,
+      document_pdf,
       address,
       phone,
       categories,
@@ -50,6 +52,7 @@ export async function saveBusinessListing({
     );
     formData.append("address", address);
     formData.append("phone", phone || "");
+    formData.append("identification_code", identification_code || "");
     formData.append("website", website);
     formData.append("facebook", facebook);
     formData.append("instagram", instagram);
@@ -63,9 +66,13 @@ export async function saveBusinessListing({
       }
     });
 
-    if (menu_pdf && menu_pdf instanceof File && menu_pdf.size > 0) {
-      formData.append("menu_pdf", menu_pdf);
-    }
+    const files = { menu_pdf, document_pdf };
+
+    Object.entries(files).forEach(([key, file]) => {
+      if (file && file instanceof File && file.size > 0) {
+        formData.append(key, file);
+      }
+    });
 
     const endpoint =
       method === "PATCH"

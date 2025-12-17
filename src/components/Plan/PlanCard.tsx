@@ -11,8 +11,8 @@ import {
 } from "../UI/Card";
 import { FiZap } from "react-icons/fi";
 import { BiCheck } from "react-icons/bi";
-import Button from "../UI/Button";
 import { useMessages } from "@/hooks/useMessages";
+import PlanForm from "./PlanForm";
 
 type Props = {
   isPopular?: boolean;
@@ -21,6 +21,7 @@ type Props = {
 
 function PlanCard({ isPopular, billingPeriod = "monthly" }: Props) {
   const messages = useMessages();
+
   const price =
     billingPeriod === "monthly"
       ? messages.plan_object.monthlyPrice
@@ -73,8 +74,8 @@ function PlanCard({ isPopular, billingPeriod = "monthly" }: Props) {
         </ul>
       </CardContent>
 
-      <CardFooter className="pb-8">
-        <Button>{messages.plan_object.getStarted}</Button>
+      <CardFooter className="pb-8 flex-col">
+        <PlanForm billingPeriod={billingPeriod} />
       </CardFooter>
     </Card>
   );

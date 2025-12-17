@@ -23,6 +23,7 @@ export interface BusinessInterface {
   average_rating?: number;
   currently_open?: boolean;
   identification_code?: string;
+  vip_plan: "vip_2_days" | "vip_2_weeks" | "vip_1_month" | string;
 }
 
 export interface BusinessFormState {

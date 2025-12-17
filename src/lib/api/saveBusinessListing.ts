@@ -37,11 +37,12 @@ export async function saveBusinessListing({
       website,
       tiktok,
       facebook,
+      is_vip,
+      vip_plan,
     } = data;
 
     const formData = new FormData();
 
-    // Text fields
     formData.append("business_name", business_name);
     formData.append("description", description);
     formData.append(
@@ -51,6 +52,8 @@ export async function saveBusinessListing({
         : JSON.stringify(working_schedule || {})
     );
     formData.append("address", address);
+    formData.append("is_vip", is_vip ? "true" : "false");
+    formData.append("vip_plan", vip_plan);
     formData.append("phone", phone || "");
     formData.append("identification_code", identification_code || "");
     formData.append("website", website);
@@ -92,6 +95,7 @@ export async function saveBusinessListing({
 
     return {
       success: body.success ?? res.ok,
+      checkout_url: body.checkout_url,
       message:
         body.message ??
         (method === "PATCH"

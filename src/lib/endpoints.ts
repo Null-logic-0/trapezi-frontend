@@ -49,4 +49,10 @@ export const ENDPOINTS = {
   tutorials: `${BASE_URL}/video_tutorials`,
 
   email: "https://formsubmit.co/ajax/support@trapezi.ge",
+
+  payments: {
+    checkout: `${BASE_URL}/payments/create`,
+    callback: `${BASE_URL}/payments/callback`,
+    vip_callback: `${BASE_URL}/payments/vip/food_place_callback`,
+  },
 };

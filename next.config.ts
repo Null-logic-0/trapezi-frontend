@@ -18,6 +18,11 @@ const nextConfig: NextConfig = {
   experimental: {
     serverActions: {
       bodySizeLimit: "10mb",
+      allowedOrigins: [
+        "secure-redirect.cloudipsp.com",
+        "localhost:3001",
+        "https://www.trapezi.ge",
+      ],
     },
   },
 };

@@ -188,5 +188,9 @@
   "user_blocked": "Your profile has been blocked!",
   "identification_code": "Identification Code",
   "enter_identification_code": "Enter ID number",
-  "upload_document": "Upload a business-critical document"
+  "upload_document": "Upload a business-critical document",
+
+  "payments": {
+    "success": "Payment was successful"
+  }
 }

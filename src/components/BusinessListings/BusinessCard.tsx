@@ -14,13 +14,14 @@ type BusinessCardProps = {
   address: string;
   isOpen?: boolean;
   isVIP?: boolean;
+  vip_badge_align?: "left" | "right";
 };
 
 const BusinessCard = ({
   business_name,
   categories,
   rating,
-
+  vip_badge_align = "right",
   image,
   address,
   isOpen,
@@ -38,7 +39,11 @@ const BusinessCard = ({
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
         {isVIP && (
-          <Badge className="absolute top-3 right-3 bg-[#ffd466] text-[#1a1a1a] border-0 shadow-lg">
+          <Badge
+            className={`absolute top-3 ${
+              vip_badge_align === "right" ? "right-3" : "left-3"
+            }  bg-[#ffd466] text-[#1a1a1a] border-0 shadow-lg`}
+          >
             ⭐ VIP
           </Badge>
         )}

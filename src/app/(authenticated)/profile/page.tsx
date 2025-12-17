@@ -36,7 +36,7 @@ async function Profile() {
         {user?.business_owner && (
           <>
             <MyBusiness />
-            <Subscription />
+            {user?.plan === "free" && <Subscription />}
           </>
         )}
       </div>

@@ -1,6 +1,6 @@
 import { LuUser, LuBriefcaseBusiness } from "react-icons/lu";
 import { MdFavoriteBorder } from "react-icons/md";
-import { IoCardOutline, IoSettingsOutline } from "react-icons/io5";
+import { IoSettingsOutline } from "react-icons/io5";
 import { AiOutlineHome } from "react-icons/ai";
 
 type MenuMessages = {
@@ -43,13 +43,7 @@ export const PROFILE_NAV_LINKS = (
       icon: <LuBriefcaseBusiness />,
       requiresBusiness: true,
     },
-    {
-      key: "subscription",
-      href: "/subscription",
-      text: messages.subscriptions,
-      icon: <IoCardOutline />,
-      requiresBusiness: true,
-    },
+
     {
       key: "settings",
       href: "/profile/settings",

@@ -67,9 +67,17 @@ export function useBusinessForm({
         images,
         menu_pdf: menuPdf,
         document_pdf: documentPdf,
+        vip_plan: formData.get("vip_plan") as string | "",
+        is_vip: formData.get("is_vip") === "true" ? true : false,
       };
 
       const res = await saveBusinessListing({ id, locale, method, data });
+
+      console.log(res);
+
+      if (res?.checkout_url) {
+        window.location.href = res.checkout_url;
+      }
 
       if (!res) {
         setState({

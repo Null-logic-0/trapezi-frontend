@@ -89,13 +89,13 @@ export default function MyBusinesses() {
             {places.map((business, index) => (
               <div
                 key={business.id}
-                className="animate-fade-in relative"
+                className="animate-fade-in relative "
                 style={{ animationDelay: `${index * 0.05}s` }}
               >
                 <DropdownMenu
                   align="right"
                   className="z-20"
-                  buttonStyles="rounded-md mb-2 shadow-sm bg-[#2A2D34] text-white text-lg p-2 hover:bg-[#FF6B35] transition-colors"
+                  buttonStyles="text-gray-800 text-2xl p-1"
                   items={[
                     {
                       label: (
@@ -129,6 +129,8 @@ export default function MyBusinesses() {
                     image={business.images_url?.[0] || ""}
                     rating={business.average_rating}
                     isOpen={business.currently_open}
+                    isVIP={business.is_vip}
+                    vip_badge_align="left"
                   />
                 </Link>
               </div>

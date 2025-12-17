@@ -15,6 +15,8 @@ import { useBusinessForm } from "@/hooks/useBusinessForm";
 import { BusinessInterface } from "@/interfaces/places.interface";
 import WorkingScheduleInput from "../UI/WorkingScheduleInput";
 import toast from "react-hot-toast";
+import { useState } from "react";
+import VipPlanSection, { VipPlanId } from "./VipPlanSection";
 
 type Props = {
   initialValues?: BusinessInterface;
@@ -37,6 +39,17 @@ function BusinessForm({
   const router = useRouter();
   const messages = useMessages();
   const categories = SELECT_CATEGORIES(messages as CategoryMessages);
+  const [selectedPlan, setSelectedPlan] = useState<VipPlanId | string>(() => {
+    if (!initialValues?.vip_plan) return "";
+
+    const planMap: Record<string, VipPlanId> = {
+      "2_days": "vip_2_days",
+      "2_weeks": "vip_2_weeks",
+      "1_month": "vip_1_month",
+    };
+
+    return planMap[initialValues.vip_plan] || null;
+  });
 
   const {
     state,
@@ -150,7 +163,6 @@ function BusinessForm({
           error={state.fieldErrors?.working_schedule}
         />
 
-        {/* Multi Image Picker */}
         <MultiImagePicker
           name="images[]"
           maxImages={5}
@@ -168,6 +180,12 @@ function BusinessForm({
         />
 
         <AddLinks defaultValues={initialValues} />
+
+        <VipPlanSection
+          onSelect={setSelectedPlan}
+          error={state.fieldErrors?.plan}
+          selectedPlan={selectedPlan}
+        />
 
         <div className="flex justify-center items-center gap-4">
           <Button

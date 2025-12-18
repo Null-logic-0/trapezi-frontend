@@ -5,22 +5,23 @@ import { FiMapPin } from "react-icons/fi";
 import { FaRegClock } from "react-icons/fa";
 import { Badge } from "../UI/Badge";
 
-interface BusinessCardProps {
+type BusinessCardProps = {
   business_name: string;
   categories: string[];
-  rating: number;
-  reviews: number;
+  rating?: number;
+
   image: string;
   address: string;
-  isOpen: boolean;
+  isOpen?: boolean;
   isVIP?: boolean;
-}
+  vip_badge_align?: "left" | "right";
+};
 
 const BusinessCard = ({
   business_name,
   categories,
   rating,
-  reviews,
+  vip_badge_align = "right",
   image,
   address,
   isOpen,
@@ -38,7 +39,11 @@ const BusinessCard = ({
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
         {isVIP && (
-          <Badge className="absolute top-3 right-3 bg-[#ffd466] text-[#1a1a1a] border-0 shadow-lg">
+          <Badge
+            className={`absolute top-3 ${
+              vip_badge_align === "right" ? "right-3" : "left-3"
+            }  bg-[#ffd466] text-[#1a1a1a] border-0 shadow-lg`}
+          >
             ⭐ VIP
           </Badge>
         )}
@@ -58,8 +63,9 @@ const BusinessCard = ({
 
         <div className="flex items-center gap-1 mb-3">
           <IoMdStar className="text-[#ff6933]" />
-          <span className="text-sm font-medium text-[#1a1a1a]">{rating}</span>
-          <span className="text-sm text-[#737373]">({reviews})</span>
+          <span className="text-sm font-medium text-[#1a1a1a]">
+            {rating?.toFixed(1)}
+          </span>
         </div>
 
         <div className="flex items-center justify-between gap-4 text-sm text-[#737373]">

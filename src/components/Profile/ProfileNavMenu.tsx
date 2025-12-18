@@ -12,7 +12,9 @@ function ProfileNavMenu({
 }) {
   const pathname = usePathname();
   const messages = useMessages();
+
   const NAV_LINKS = PROFILE_NAV_LINKS(messages, isBusinessAccount);
+
   return (
     <nav>
       <ul className="flex flex-col gap-2">

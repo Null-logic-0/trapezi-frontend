@@ -24,12 +24,18 @@ const modalVariants: Variants = {
   },
 };
 
-function Modal({ children }: { children: React.ReactNode }) {
-  const { openModal, handleToggleModal } = useUIContext();
+function Modal({
+  children,
+  modalId,
+}: {
+  children: React.ReactNode;
+  modalId: string | number | null;
+}) {
+  const { openModalId, handleCloseModal } = useUIContext();
 
   return (
     <AnimatePresence>
-      {openModal && (
+      {openModalId === modalId && (
         <>
           <motion.div
             className="fixed inset-0 bg-black z-50"
@@ -37,7 +43,7 @@ function Modal({ children }: { children: React.ReactNode }) {
             initial="hidden"
             animate="visible"
             exit="hidden"
-            onClick={handleToggleModal}
+            onClick={handleCloseModal}
           />
 
           <motion.dialog

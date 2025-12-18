@@ -26,6 +26,8 @@ export async function saveBusinessListing({
       business_name,
       description,
       working_schedule,
+      identification_code,
+      document_pdf,
       address,
       phone,
       categories,
@@ -35,11 +37,12 @@ export async function saveBusinessListing({
       website,
       tiktok,
       facebook,
+      is_vip,
+      vip_plan,
     } = data;
 
     const formData = new FormData();
 
-    // Text fields
     formData.append("business_name", business_name);
     formData.append("description", description);
     formData.append(
@@ -49,7 +52,10 @@ export async function saveBusinessListing({
         : JSON.stringify(working_schedule || {})
     );
     formData.append("address", address);
+    formData.append("is_vip", is_vip ? "true" : "false");
+    formData.append("vip_plan", vip_plan);
     formData.append("phone", phone || "");
+    formData.append("identification_code", identification_code || "");
     formData.append("website", website);
     formData.append("facebook", facebook);
     formData.append("instagram", instagram);
@@ -63,9 +69,13 @@ export async function saveBusinessListing({
       }
     });
 
-    if (menu_pdf && menu_pdf instanceof File && menu_pdf.size > 0) {
-      formData.append("menu_pdf", menu_pdf);
-    }
+    const files = { menu_pdf, document_pdf };
+
+    Object.entries(files).forEach(([key, file]) => {
+      if (file && file instanceof File && file.size > 0) {
+        formData.append(key, file);
+      }
+    });
 
     const endpoint =
       method === "PATCH"
@@ -85,6 +95,7 @@ export async function saveBusinessListing({
 
     return {
       success: body.success ?? res.ok,
+      checkout_url: body.checkout_url,
       message:
         body.message ??
         (method === "PATCH"

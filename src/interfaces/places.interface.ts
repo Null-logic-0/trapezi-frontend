@@ -1,11 +1,3 @@
-export interface MyFoodPlaceInterface {
-  id: number;
-  business_name: string;
-  categories: string[];
-  address: string;
-  images_url: string[];
-}
-
 export interface BusinessInterface {
   id?: number;
   business_name: string;
@@ -14,7 +6,9 @@ export interface BusinessInterface {
   images: File[];
   images_url?: string[];
   menu_pdf?: File | null;
+  document_pdf?: File | null;
   menu_url?: string;
+  document_url?: string;
   phone?: string;
   description: string;
   working_schedule?: string;
@@ -24,6 +18,12 @@ export interface BusinessInterface {
   tiktok: string;
   instagram: string;
   is_vip?: boolean;
+  latitude?: number;
+  longitude?: number;
+  average_rating?: number;
+  currently_open?: boolean;
+  identification_code?: string;
+  vip_plan: "vip_2_days" | "vip_2_weeks" | "vip_1_month" | string;
 }
 
 export interface BusinessFormState {

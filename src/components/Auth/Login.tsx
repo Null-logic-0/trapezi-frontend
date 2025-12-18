@@ -7,16 +7,29 @@ import Button from "@/components/UI/Button";
 import { MdEmail } from "react-icons/md";
 import { login } from "@/lib/actions/login";
 import { TbLockFilled } from "react-icons/tb";
-import { useActionToast } from "@/hooks/useActionToast";
 import { useMessages } from "@/hooks/useMessages";
 import { useLanguage } from "@/store/language-context";
 import { AuthFormState } from "@/interfaces/authResponse.interface";
 import Navigation from "../UI/navigation";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 function Login() {
   const { locale } = useLanguage();
+  const messages = useMessages();
+  const router = useRouter();
+
   const handleAction = async (prevState: AuthFormState, formData: FormData) => {
-    return login(prevState, formData, locale);
+    const result = await login(prevState, formData, locale);
+
+    if (result.success) {
+      toast.success(messages.login_success);
+      router.push("/profile");
+    } else {
+      toast.error(messages.login_error);
+    }
+
+    return result;
   };
   const [state, formAction, isPending] = useActionState(handleAction, {
     message: "",
@@ -25,10 +38,6 @@ function Login() {
       email: "",
     },
   });
-
-  useActionToast(state, "/profile");
-
-  const messages = useMessages();
 
   return (
     <form action={formAction} className="flex flex-col gap-4 w-full">

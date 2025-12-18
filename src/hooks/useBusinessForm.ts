@@ -6,6 +6,7 @@ import {
   BusinessInterface,
 } from "@/interfaces/places.interface";
 import { saveBusinessListing } from "@/lib/api/saveBusinessListing";
+import { useMessages } from "./useMessages";
 
 type UseBusinessFormOptions = {
   locale: "en" | "ka";
@@ -26,11 +27,14 @@ export function useBusinessForm({
     fieldErrors: {},
     values: initialValues,
   });
-
+  const messages = useMessages();
   const [isPending, setIsPending] = useState(false);
   const [images, setImages] = useState<File[]>(initialValues.images || []);
   const [menuPdf, setMenuPdf] = useState<File | null>(
     initialValues.menu_pdf || null
+  );
+  const [documentPdf, setDocumentPdf] = useState<File | null>(
+    initialValues.document_pdf || null
   );
 
   const handleSubmit = async (
@@ -55,19 +59,30 @@ export function useBusinessForm({
         tiktok: (formData.get("tiktok") as string) || "",
         categories: formData.getAll("categories[]") as string[],
         phone: (formData.get("phone") as string) || "",
+        identification_code:
+          (formData.get("identification_code") as string) || "",
         working_schedule:
           (formData.get("working_schedule") as string) || JSON.stringify({}),
 
         images,
         menu_pdf: menuPdf,
+        document_pdf: documentPdf,
+        vip_plan: formData.get("vip_plan") as string | "",
+        is_vip: formData.get("is_vip") === "true" ? true : false,
       };
 
       const res = await saveBusinessListing({ id, locale, method, data });
 
+      console.log(res);
+
+      if (res?.checkout_url) {
+        window.location.href = res.checkout_url;
+      }
+
       if (!res) {
         setState({
           success: false,
-          message: "No response from server",
+          message: messages.error_message,
           fieldErrors: {},
           values: Object.fromEntries(formData.entries()),
         });
@@ -78,7 +93,7 @@ export function useBusinessForm({
       if (!res.success) {
         setState({
           success: false,
-          message: res.message || "Request failed",
+          message: res.message || messages.error_message,
           fieldErrors: res.errors || {},
           values: Object.fromEntries(formData.entries()),
         });
@@ -112,6 +127,7 @@ export function useBusinessForm({
     images,
     setImages,
     menuPdf,
+    setDocumentPdf,
     setMenuPdf,
     handleSubmit,
   };

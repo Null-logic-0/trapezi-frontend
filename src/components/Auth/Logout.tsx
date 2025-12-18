@@ -20,11 +20,11 @@ export default function Logout() {
       const result = await logout();
       if (result.success) {
         router.push("/login");
-        toast.success("Logged out successfully");
+        toast.success(messages.logout_message);
       }
     } catch (err) {
       console.error(err);
-      toast.error("Logout failed");
+      toast.error(messages.error_message);
     } finally {
       setPending(false);
     }

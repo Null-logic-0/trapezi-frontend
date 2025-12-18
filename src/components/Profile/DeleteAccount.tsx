@@ -11,11 +11,13 @@ import { useMessages } from "@/hooks/useMessages";
 
 function DeleteAccount() {
   const router = useRouter();
-  const { handleToggleModal } = useUIContext();
+  const { handleCloseModal, handleOpenModal } = useUIContext();
 
   const [pending, setPending] = useState(false);
 
   const message = useMessages();
+
+  const modalId = "delete-modal-id";
 
   const handleDelete = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,13 +26,13 @@ function DeleteAccount() {
     try {
       const result = await deleteAccount();
       if (result.success) {
-        toast.success("Account deleted successfully");
-        handleToggleModal();
+        toast.success(message.account_deletion_success);
+        handleCloseModal();
         router.push("/login");
       }
     } catch (err) {
       console.error(err);
-      toast.error("Account destruction failed");
+      toast.error(message.error_message);
     } finally {
       setPending(false);
     }
@@ -38,14 +40,14 @@ function DeleteAccount() {
   return (
     <>
       <Button
-        onClick={handleToggleModal}
+        onClick={() => handleOpenModal(modalId)}
         buttonType="outline"
-        className="text-red-500 max-w-[150px]"
+        className="text-red-500 max-w-40 text-sm"
       >
-        Delete Account
+        {message.delete_account}
       </Button>
 
-      <Modal>
+      <Modal modalId={modalId}>
         <form onSubmit={handleDelete}>
           <h1 className="text-2xl text-center font-bold">
             {message.delete_account}
@@ -56,7 +58,7 @@ function DeleteAccount() {
 
           <div className="flex mt-6 justify-center items-center gap-4">
             <Button
-              onClick={handleToggleModal}
+              onClick={handleCloseModal}
               type="button"
               buttonType="outline"
             >

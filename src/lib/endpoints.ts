@@ -5,7 +5,10 @@ export const ENDPOINTS = {
     login: `${BASE_URL}/login`,
     google: `${BASE_URL}/google_oauth`,
     signup: `${BASE_URL}/signup`,
+    confirm: `${BASE_URL}/confirm`,
     logout: `${BASE_URL}/logout`,
+    reset_password_request: `${BASE_URL}/password_reset_request`,
+    reset_password: `${BASE_URL}/password_reset`,
   },
 
   user: {
@@ -22,5 +25,34 @@ export const ENDPOINTS = {
   places: {
     all: `${BASE_URL}/food_places`,
     one: `${BASE_URL}/food_places`,
+    vip: `${BASE_URL}/vip_places`,
+    favorite_places: `${BASE_URL}/favorites`,
+    toggle_favorite: `${BASE_URL}/favorite`,
+    reviews: `${BASE_URL}/reviews`,
+    create_review: `${BASE_URL}/reviews`,
+    update_review: `${BASE_URL}/reviews`,
+    delete_review: `${BASE_URL}/reviews`,
+    search_places: `${BASE_URL}/search_places`,
+    create_report: `${BASE_URL}/create_report`,
+  },
+
+  blogs: {
+    all: `${BASE_URL}/blogs`,
+    one: `${BASE_URL}/blogs`,
+  },
+
+  settings: {
+    registration: `${BASE_URL}/admin/registration`,
+    maintenance_mode: `${BASE_URL}/admin/maintenance`,
+  },
+
+  tutorials: `${BASE_URL}/video_tutorials`,
+
+  email: "https://formsubmit.co/ajax/support@trapezi.ge",
+
+  payments: {
+    checkout: `${BASE_URL}/payments/create`,
+    callback: `${BASE_URL}/payments/callback`,
+    vip_callback: `${BASE_URL}/payments/vip/food_place_callback`,
   },
 };

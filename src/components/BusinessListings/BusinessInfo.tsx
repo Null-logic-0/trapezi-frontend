@@ -8,6 +8,7 @@ import { GrInstagram } from "react-icons/gr";
 import { PiTiktokLogoBold } from "react-icons/pi";
 import { useFetchSinglePlace } from "@/hooks/useFetchSinglePlace";
 import { useMessages } from "@/hooks/useMessages";
+import { BiFoodMenu } from "react-icons/bi";
 
 function BusinessInfo({ id }: { id: number }) {
   const { business } = useFetchSinglePlace(id);
@@ -66,6 +67,22 @@ function BusinessInfo({ id }: { id: number }) {
                 className="text-sm font-semibold text-[#868686] hover:underline"
               >
                 {business?.phone}
+              </a>
+            </div>
+          </div>
+        )}
+
+        {business?.menu_url && (
+          <div className="flex items-baseline space-x-3">
+            <BiFoodMenu className="text-[#ff6633]" />
+            <div>
+              <p className="font-medium">{messages.menu}</p>
+              <a
+                href={business.menu_url}
+                target="_blank"
+                className="text-sm font-semibold text-[#868686] hover:underline"
+              >
+                {business?.menu_url.split("/").pop()}
               </a>
             </div>
           </div>

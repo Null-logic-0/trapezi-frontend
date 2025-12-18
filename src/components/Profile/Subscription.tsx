@@ -4,11 +4,16 @@ import { useMessages } from "@/hooks/useMessages";
 import Button from "../UI/Button";
 import ProfileHeading from "./ProfileHeading";
 import { FaCreditCard } from "react-icons/fa";
+import { Card } from "../UI/Card";
+import { useRouter } from "next/navigation";
 
 function Subscription() {
   const messages = useMessages();
+  const router = useRouter();
+
+  const handleNavigate = () => router.push("/plan");
   return (
-    <div className="profile-card-container ">
+    <Card className="p-6">
       <div className="mb-6 mt-2 max-md:text-center">
         <ProfileHeading title={messages.subscriptions} />
       </div>
@@ -29,13 +34,14 @@ function Subscription() {
           </div>
         </div>
         <Button
+          onClick={handleNavigate}
           buttonType="outline"
           className="w-[120px] max-md:w-full text-sm p-2"
         >
           {messages.subscribe}
         </Button>
       </div>
-    </div>
+    </Card>
   );
 }
 

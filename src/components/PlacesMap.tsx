@@ -1,0 +1,128 @@
+"use client";
+
+import { useEffect, useState, useMemo } from "react";
+import {
+  GoogleMap as Map,
+  Marker,
+  useJsApiLoader,
+  Circle,
+} from "@react-google-maps/api";
+import Spinner from "./UI/Spinner/Spinner";
+import { GOOGLE_API_KEY } from "@/constants/google-api-key";
+
+type Location = {
+  lat: number;
+  lng: number;
+  name?: string;
+};
+
+type Props = {
+  locations: Location[];
+  className?: string;
+};
+
+type UserLocation = {
+  lat: number;
+  lng: number;
+} | null;
+
+const LIBRARIES: ("places" | "maps")[] = ["places", "maps"];
+
+function PlacesMap({ locations = [], className }: Props) {
+  const [userLocation, setUserLocation] = useState<UserLocation>(null);
+
+  const { isLoaded, loadError } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: GOOGLE_API_KEY!,
+    libraries: LIBRARIES,
+  });
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          setUserLocation({
+            lat: pos.coords.latitude,
+            lng: pos.coords.longitude,
+          });
+        },
+        (err) => {
+          console.warn("User location access denied:", err);
+        },
+        { enableHighAccuracy: true }
+      );
+    }
+  }, []);
+
+  const center = useMemo(() => {
+    if (userLocation) return userLocation;
+    if (locations.length > 0) {
+      return {
+        lat: locations[0].lat,
+        lng: locations[0].lng,
+      };
+    }
+  }, [userLocation, locations]);
+
+  if (!isLoaded)
+    return (
+      <div className="text-center py-10">
+        <Spinner />
+      </div>
+    );
+
+  if (loadError)
+    return (
+      <p className="text-center text-red-500 font-medium text-sm">
+        Map failed to load
+      </p>
+    );
+
+  return (
+    <div className={className}>
+      <Map
+        center={center}
+        zoom={12}
+        mapContainerClassName="w-full h-full rounded-2xl"
+        options={{
+          streetViewControl: false,
+          mapTypeControl: false,
+          fullscreenControl: false,
+        }}
+      >
+        {/*  User marker */}
+        {userLocation && (
+          <>
+            <Marker
+              position={userLocation}
+              title="You are here"
+              icon={{
+                url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+              }}
+            />
+            <Circle
+              center={userLocation}
+              radius={1000}
+              options={{
+                fillColor: "#007bff33",
+                strokeColor: "#007bff",
+                strokeOpacity: 0.5,
+              }}
+            />
+          </>
+        )}
+
+        {/*  Business markers */}
+        {locations.map((loc, idx) => (
+          <Marker
+            key={idx}
+            position={{ lat: loc.lat, lng: loc.lng }}
+            title={loc.name || "Business"}
+          />
+        ))}
+      </Map>
+    </div>
+  );
+}
+
+export default PlacesMap;

@@ -8,12 +8,27 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Inter, sans-serif;
+  font-family: var(--font-open_sans), sans-serif !important;
 }
 
-.profile-card-container {
-  background: #ffffff;
-  border-radius: 16px;
-  border: 2px solid #e3e3e3;
-  padding: 24px;
+.custom-time-picker-wrapper .react-time-picker__wrapper {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  padding: 0 8px;
+  background: white;
+  transition: all 0.2s;
+  height: 36px;
+  min-width: 90px;
+}
+.custom-time-picker-wrapper .react-time-picker__wrapper:focus-within {
+  border-color: #ff6b35;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+.react-time-picker__inputGroup__input {
+  font-weight: 500 !important;
+  color: #374151 !important;
+  outline: none !important;
+}
+.react-time-picker__inputGroup__divider {
+  color: #9ca3af;
 }

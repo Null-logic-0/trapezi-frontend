@@ -14,10 +14,13 @@ export const CATEGORIES = (messages: Messages) => [
   { key: "pastry", name: messages.pastry, icon: <LuCakeSlice /> },
 ];
 
+const getString = (value: string | string[] | undefined, fallback: string) =>
+  (value as string) || fallback;
+
 export const SELECT_CATEGORIES = (messages: Messages) => [
-  { id: "restaurant", label: messages.restaurant || "Restaurant" },
-  { id: "cafe", label: messages.cafe || "Cafe" },
-  { id: "bar", label: messages.bar || "Bar" },
-  { id: "bakery", label: messages.bakery || "Bakery" },
-  { id: "pastry", label: messages.pastry || "Pastry" },
+  { id: "restaurant", label: getString(messages.restaurant, "Restaurant") },
+  { id: "cafe", label: getString(messages.cafe, "Cafe") },
+  { id: "bar", label: getString(messages.bar, "Bar") },
+  { id: "bakery", label: getString(messages.bakery, "Bakery") },
+  { id: "pastry", label: getString(messages.pastry, "Pastry") },
 ];

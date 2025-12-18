@@ -22,9 +22,9 @@ const CategoryFilter = ({ className }: { className?: string }) => {
 
     const params = new URLSearchParams(searchParams);
     if (key === "all") {
-      params.delete("category");
+      params.delete("categories");
     } else {
-      params.set("category", key);
+      params.set("categories", key);
     }
 
     router.push(`${pathname}?${params.toString()}`, { scroll: false });

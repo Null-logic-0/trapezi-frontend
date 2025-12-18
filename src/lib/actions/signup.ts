@@ -4,8 +4,10 @@ import { revalidatePath } from "next/cache";
 import { SignupInterface } from "@/interfaces/signup.interface";
 import {
   AuthFormState,
-  CreateUserResponse,
+  ConfirmFormState,
 } from "@/interfaces/authResponse.interface";
+import { cookies } from "next/headers";
+import { ENDPOINTS } from "../endpoints";
 
 export async function signup(
   _prevState: AuthFormState,
@@ -25,21 +27,19 @@ export async function signup(
       false,
   };
 
-  const res: CreateUserResponse = await createUser(body, locale);
+  const res = await createUser(body, locale);
 
   if (!res.success) {
     const fieldErrors: Record<string, string> = {};
-    if (res.errors) {
-      for (const key in res.errors) {
-        fieldErrors[key] = Array.isArray(res.errors[key])
-          ? res.errors[key][0]
-          : res.errors[key];
-      }
+    for (const key in res.fieldErrors) {
+      fieldErrors[key] = Array.isArray(res.fieldErrors[key])
+        ? res.fieldErrors[key][0]
+        : res.fieldErrors[key];
     }
 
     return {
       success: false,
-      message: res.message || "Signup failed",
+      message: res.message,
       fieldErrors,
       values: body,
     };
@@ -49,7 +49,55 @@ export async function signup(
 
   return {
     success: true,
-    message: "Signup successful!",
+    message: res.message,
+    fieldErrors: {},
     values: body,
   };
+}
+
+export async function confirm(
+  _prevState: ConfirmFormState,
+  locale: "ka" | "en" = "ka",
+  token: string,
+  setCookie = true
+) {
+  try {
+    const res = await fetch(ENDPOINTS.auth.confirm, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept-Language": locale,
+      },
+      body: JSON.stringify({ token }),
+    });
+
+    const body = await res.json();
+
+    if (!res.ok) {
+      return {
+        success: false,
+        message: body.error || body.message || "Request failed",
+        errors: body.errors || {},
+      };
+    }
+
+    if (setCookie && body.token) {
+      const cookieStore = await cookies();
+      cookieStore.set("token", body.token, {
+        secure: process.env.NODE_ENV === "production",
+        httpOnly: true,
+        sameSite: "strict",
+      });
+    }
+
+    return {
+      success: true,
+      message: body.message,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: error instanceof Error ? error.message : String(error),
+    };
+  }
 }

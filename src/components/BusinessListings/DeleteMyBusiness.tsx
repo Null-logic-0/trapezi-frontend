@@ -15,7 +15,7 @@ function DeleteMyBusiness({
   id?: number;
   onDeleted?: () => void;
 }) {
-  const { handleToggleModal } = useUIContext();
+  const { handleCloseModal } = useUIContext();
 
   const [pending, setPending] = useState(false);
 
@@ -28,8 +28,8 @@ function DeleteMyBusiness({
     try {
       const result = await deleteBusiness(id);
       if (result.success) {
-        toast.success(message.success_message);
-        handleToggleModal();
+        toast.success(message.business_deletion);
+        handleCloseModal();
         if (onDeleted) onDeleted();
       }
     } catch (err) {
@@ -40,18 +40,14 @@ function DeleteMyBusiness({
     }
   };
   return (
-    <Modal>
+    <Modal modalId={"delete-my-business"}>
       <form onSubmit={handleDelete}>
         <h2 className="text-xl text-center font-bold">
           {message.delete_caution}
         </h2>
 
         <div className="flex mt-6 justify-center items-center gap-4">
-          <Button
-            onClick={handleToggleModal}
-            type="button"
-            buttonType="outline"
-          >
+          <Button onClick={handleCloseModal} type="button" buttonType="outline">
             {message.cancel}
           </Button>
           <Button

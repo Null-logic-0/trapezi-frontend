@@ -1,12 +1,19 @@
 import { LuUser, LuBriefcaseBusiness } from "react-icons/lu";
-import { IoIosStarOutline } from "react-icons/io";
 import { MdFavoriteBorder } from "react-icons/md";
-import { IoCardOutline, IoSettingsOutline } from "react-icons/io5";
+import { IoSettingsOutline } from "react-icons/io5";
 import { AiOutlineHome } from "react-icons/ai";
-import { Messages } from "@/interfaces/messages.interface";
+
+type MenuMessages = {
+  home?: string;
+  profile?: string;
+  favorites?: string;
+  my_business?: string;
+  subscriptions?: string;
+  settings?: string;
+};
 
 export const PROFILE_NAV_LINKS = (
-  messages: Messages,
+  messages: MenuMessages,
   isBusinessAccount = false
 ) => {
   const links = [
@@ -22,12 +29,7 @@ export const PROFILE_NAV_LINKS = (
       text: messages.profile,
       icon: <LuUser />,
     },
-    {
-      key: "reviews",
-      href: "/my-reviews",
-      text: messages.reviews,
-      icon: <IoIosStarOutline />,
-    },
+
     {
       key: "favorites",
       href: "/favorites",
@@ -41,13 +43,7 @@ export const PROFILE_NAV_LINKS = (
       icon: <LuBriefcaseBusiness />,
       requiresBusiness: true,
     },
-    {
-      key: "subscription",
-      href: "/subscription",
-      text: messages.subscriptions,
-      icon: <IoCardOutline />,
-      requiresBusiness: true,
-    },
+
     {
       key: "settings",
       href: "/profile/settings",

@@ -20,6 +20,8 @@ import FullScreenImageDialog from "./FullScreenImageDialog";
 import { BusinessInterface } from "@/interfaces/places.interface";
 import { useMessages } from "@/hooks/useMessages";
 import GoBack from "../UI/GoBack";
+import HeartShapeButton from "../UI/HeartShapeButton";
+import CreateReport from "./CreateReport";
 
 type Props = {
   business: BusinessInterface;
@@ -43,7 +45,7 @@ const BusinessDetail = ({ business, id }: Props) => {
             {business.images_url?.map((image, index) => (
               <CarouselItem key={index}>
                 <div
-                  className="relative rounded-lg overflow-hidden h-[782px] max-md:h-[375px] cursor-pointer"
+                  className="relative rounded-lg overflow-hidden h-[820px] max-md:h-[375px] cursor-pointer"
                   onClick={() => setSelectedImageIndex(index)}
                 >
                   <Image
@@ -78,16 +80,16 @@ const BusinessDetail = ({ business, id }: Props) => {
                     {business.categories.join(", ")}
                   </p>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <IoMdStar className="text-4xl text-[#ff6633]" />
+                <div className="space-y-2 text-end">
+                  <div className="flex items-center gap-4 ">
+                    <HeartShapeButton id={id} />
 
-                  <span className="text-2xl max-md:text-xl font-bold">
-                    {/* {business.rating} */}
-                    4.4
-                  </span>
-                  <span className="text-[#7c7c7c] text-sm">
-                    {/* ({business.reviews} reviews) */}
-                    (200)
+                    <CreateReport id={id} />
+                  </div>
+                  <span className="text-sm flex items-center max-md:text-xl font-bold">
+                    {business.average_rating?.toFixed(1)}
+
+                    <IoMdStar className="text-[16px] text-[#ff6633]" />
                   </span>
                 </div>
               </div>
@@ -110,7 +112,7 @@ const BusinessDetail = ({ business, id }: Props) => {
 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
         {/* Reviews Section */}
-        <ReviewsSection />
+        <ReviewsSection id={id} />
         <Card className="bg-[#ffffff] border-[#e6e6e6]">
           <CardContent className="p-6">
             <h3 className="text-xl font-bold mb-4">{messages.location}</h3>

@@ -30,13 +30,13 @@ function GoogleAuth() {
 
       if (result.success) {
         router.push("/profile");
-        toast.success(result.message || "Welcome back!");
+        toast.success(messages.login_success);
       } else {
-        toast.error(result.message || "Login failed.");
+        toast.error(result.message || messages.login_error);
       }
     } catch (err) {
       console.error(err);
-      toast.error("Something went wrong. Try again.");
+      toast.error(messages.error_message);
     } finally {
       setIsPending(false);
     }
@@ -57,7 +57,7 @@ function GoogleAuth() {
             size="large"
             shape="square"
             onSuccess={handleGoogleResponse}
-            onError={() => toast.error("Google login failed.")}
+            onError={() => toast.error(messages.login_error)}
           />
         </GoogleOAuthProvider>
       </div>

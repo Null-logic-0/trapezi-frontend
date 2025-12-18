@@ -10,11 +10,13 @@ import Button from "../UI/Button";
 import UpdateProfile from "./UpdateProfile";
 import { useUIContext } from "@/store/ui-context";
 import { useMessages } from "@/hooks/useMessages";
+import { Card } from "../UI/Card";
 
 type ProfileProps = {
   name: string;
   last_name: string;
   email: string;
+  plan: string;
   avatar_url: string;
   isBusiness?: boolean;
 };
@@ -22,23 +24,24 @@ type ProfileProps = {
 function ProfileOverview({
   name,
   last_name,
+  plan,
   email,
   avatar_url,
   isBusiness,
 }: ProfileProps) {
-  const { handleToggleModal } = useUIContext();
+  const { handleOpenModal } = useUIContext();
   const messages = useMessages();
 
   const fullName = `${name} ${last_name}`;
 
   return (
     <>
-      <div className="profile-card-container ">
+      <Card className="p-6">
         <div className="flex justify-between max-md:flex-col gap-2  mb-6 mt-2  items-center">
           <ProfileHeading title={messages.profile_overview} />
 
           <Button
-            onClick={handleToggleModal}
+            onClick={() => handleOpenModal("update-profile")}
             buttonType="outline"
             className="max-w-[184px] text-sm p-2"
           >
@@ -64,7 +67,7 @@ function ProfileOverview({
           <div className="flex flex-col gap-4 items-start">
             <UserMiniCard
               label={messages.plan}
-              text="PRO"
+              text={plan}
               icon={<FaCreditCard />}
             />
             <UserMiniCard
@@ -74,7 +77,7 @@ function ProfileOverview({
             />
           </div>
         </div>
-      </div>
+      </Card>
       <UpdateProfile
         isBusiness={isBusiness}
         name={name || ""}

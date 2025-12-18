@@ -14,10 +14,21 @@ import { useLanguage } from "@/store/language-context";
 import { useBusinessForm } from "@/hooks/useBusinessForm";
 import { BusinessInterface } from "@/interfaces/places.interface";
 import WorkingScheduleInput from "../UI/WorkingScheduleInput";
+import toast from "react-hot-toast";
+import { useState } from "react";
+import VipPlanSection, { VipPlanId } from "./VipPlanSection";
 
 type Props = {
   initialValues?: BusinessInterface;
   onSuccessRedirect?: string;
+};
+
+type CategoryMessages = {
+  restaurant?: string;
+  cafe?: string;
+  bar?: string;
+  bakery?: string;
+  pastry?: string;
 };
 
 function BusinessForm({
@@ -27,35 +38,84 @@ function BusinessForm({
   const { locale } = useLanguage();
   const router = useRouter();
   const messages = useMessages();
-  const categories = SELECT_CATEGORIES(messages);
+  const categories = SELECT_CATEGORIES(messages as CategoryMessages);
+  const [selectedPlan, setSelectedPlan] = useState<VipPlanId | string>(() => {
+    if (!initialValues?.vip_plan) return "";
 
-  const { state, isPending, setImages, setMenuPdf, handleSubmit } =
-    useBusinessForm({ locale, initialValues, onSuccessRedirect });
+    const planMap: Record<string, VipPlanId> = {
+      "2_days": "vip_2_days",
+      "2_weeks": "vip_2_weeks",
+      "1_month": "vip_1_month",
+    };
+
+    return planMap[initialValues.vip_plan] || null;
+  });
+
+  const {
+    state,
+    isPending,
+    setImages,
+    setMenuPdf,
+    setDocumentPdf,
+    handleSubmit,
+  } = useBusinessForm({ locale, initialValues, onSuccessRedirect });
 
   return (
     <div className="max-w-3xl mx-auto flex flex-col justify-center py-24">
       <form
-        onSubmit={(e) =>
+        onSubmit={(e) => {
+          const errorFields = ["plan", "nsfw"];
+
+          let hasErrors = false;
+
+          errorFields.forEach((field) => {
+            if (state.fieldErrors?.[field]) {
+              toast.error(state.fieldErrors[field]);
+              hasErrors = true;
+            }
+          });
+
+          if (hasErrors) return;
           handleSubmit(
             e,
             initialValues?.id ? "PATCH" : "POST",
             initialValues?.id
-          )
-        }
+          );
+        }}
         className="bg-[#ffffff] flex flex-col gap-6 w-full border-[#e3e3e3] border px-8 py-6 rounded-xl"
         encType="multipart/form-data"
       >
         <h1 className="text-3xl font-bold pb-2">
-          {initialValues?.id ? messages.add_business : messages.update_business}
+          {initialValues?.id ? messages.update_business : messages.add_business}
         </h1>
 
-        <Input
-          type="text"
-          name="business_name"
-          error={state.fieldErrors?.business_name}
-          placeholder={messages.enter_business_name}
-          label={messages.business_name}
-          defaultValue={initialValues?.business_name || ""}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+          <Input
+            type="text"
+            className=""
+            name="business_name"
+            error={state.fieldErrors?.business_name}
+            placeholder={messages.enter_business_name}
+            label={messages.business_name}
+            defaultValue={initialValues?.business_name || ""}
+          />
+
+          <Input
+            type="text"
+            name="identification_code"
+            error={state.fieldErrors?.identification_code}
+            placeholder={messages.enter_identification_code}
+            label={messages.identification_code}
+            defaultValue={initialValues?.identification_code || ""}
+          />
+        </div>
+
+        <SinglePdfUploader
+          name="document_pdf"
+          onChange={setDocumentPdf}
+          label={messages.upload_document}
+          defaultFileUrl={initialValues?.document_url}
+          error={state.fieldErrors?.document_pdf}
         />
 
         <Input
@@ -103,7 +163,6 @@ function BusinessForm({
           error={state.fieldErrors?.working_schedule}
         />
 
-        {/* Multi Image Picker */}
         <MultiImagePicker
           name="images[]"
           maxImages={5}
@@ -112,7 +171,6 @@ function BusinessForm({
           error={state.fieldErrors?.images}
         />
 
-        {/* Single PDF Uploader */}
         <SinglePdfUploader
           name="menu_pdf"
           onChange={setMenuPdf}
@@ -122,6 +180,12 @@ function BusinessForm({
         />
 
         <AddLinks defaultValues={initialValues} />
+
+        <VipPlanSection
+          onSelect={setSelectedPlan}
+          error={state.fieldErrors?.plan}
+          selectedPlan={selectedPlan}
+        />
 
         <div className="flex justify-center items-center gap-4">
           <Button

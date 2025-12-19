@@ -1,51 +1,15 @@
 "use client";
+import { VIP_PLANS } from "@/helpers/vipPlans";
+import { useFetchCurrentUser } from "@/hooks/useFetchCurrentUser";
+import { useMessages } from "@/hooks/useMessages";
+import { VipPlanId } from "@/interfaces/vipPlan.interface";
 import { BiStar, BiCheckCircle } from "react-icons/bi";
 
-export type VipPlanId = "vip_2_days" | "vip_2_weeks" | "vip_1_month";
-
-interface PlanDefinition {
-  id: VipPlanId;
-  price: number;
-  duration: string;
-  label: string;
-  description: string;
-  isPopular?: boolean;
-  backendValue: string;
-}
-
-const VIP_PLANS: PlanDefinition[] = [
-  {
-    id: "vip_2_days",
-    price: 5,
-    duration: "2 Days",
-    label: "Starter",
-    description: "Quick boost visibility",
-    backendValue: "2_days",
-  },
-  {
-    id: "vip_2_weeks",
-    price: 10,
-    duration: "2 Weeks",
-    label: "Standard",
-    description: "Best for short term events",
-    isPopular: true,
-    backendValue: "2_weeks",
-  },
-  {
-    id: "vip_1_month",
-    price: 15,
-    duration: "1 Month",
-    label: "Premium",
-    description: "Maximum long-term exposure",
-    backendValue: "1_month",
-  },
-];
-
-interface VipPlanSectionProps {
+type VipPlanSectionProps = {
   selectedPlan: VipPlanId | string;
   onSelect: (planId: VipPlanId | string) => void;
   error?: string;
-}
+};
 
 function VipPlanSection({
   selectedPlan,
@@ -53,13 +17,17 @@ function VipPlanSection({
   error,
 }: VipPlanSectionProps) {
   const isVip = !!selectedPlan;
+  const messages = useMessages();
+  const { user } = useFetchCurrentUser();
+  const isPro = user?.plan === "pro";
+  const plans = VIP_PLANS(messages, isPro);
 
   return (
     <div className="space-y-4 pt-4 border-t border-gray-100">
       <div className="flex items-center justify-between">
-        <label className="text-sm font-semibold flex items-center gap-2 text-gray-800">
-          <BiStar className="w-5 h-5 text-yellow-500" />
-          Promote your Business (VIP)
+        <label className="text-lg font-bold flex items-center gap-1 text-gray-800">
+          <BiStar className="text-yellow-500" />
+          VIP
         </label>
 
         {selectedPlan && (
@@ -68,13 +36,13 @@ function VipPlanSection({
             onClick={() => onSelect("")}
             className="text-xs text-gray-400 cursor-pointer hover:text-red-500 underline transition-colors"
           >
-            Clear selection
+            {messages.cancel}
           </button>
         )}
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {VIP_PLANS.map((plan) => {
+        {plans.map((plan) => {
           const isSelected = selectedPlan === plan.id;
           return (
             <div
@@ -108,8 +76,17 @@ function VipPlanSection({
               </div>
 
               <div className="pt-2">
-                <div className="flex items-baseline gap-1">
-                  <span className="text-2xl font-bold text-gray-900">
+                <div className="flex items-baseline gap-2">
+                  {isPro && (
+                    <span className="text-xl line-through font-bold text-gray-500">
+                      {plan.originalPrice} ₾
+                    </span>
+                  )}
+                  <span
+                    className={`text-2xl font-bold ${
+                      isPro ? "text-[#ff6b36]" : "text-gray-900"
+                    }`}
+                  >
                     {plan.price} ₾
                   </span>
                   <span className="text-xs text-gray-500 font-medium">

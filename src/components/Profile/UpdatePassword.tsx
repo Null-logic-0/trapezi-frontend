@@ -12,6 +12,7 @@ import { useLanguage } from "@/store/language-context";
 import { ProfileFormState } from "@/interfaces/user.interface";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { Card, CardContent, CardHeader } from "../UI/Card";
 
 function UpdatePassword() {
   const { locale } = useLanguage();
@@ -42,33 +43,37 @@ function UpdatePassword() {
   });
 
   return (
-    <div className="profile-card-container">
-      <ProfileHeading title="Update Password" />
-      <form action={formAction} className="flex mt-4 flex-col gap-4">
-        <Input
-          isPassword
-          label={messages.password_confirmation}
-          name="current_password"
-          error={state.fieldErrors?.current_password}
-        />
-        <Input
-          isPassword
-          label={messages.password}
-          name="password"
-          error={state.fieldErrors?.password}
-        />
-        <Input
-          isPassword
-          label={messages.password_confirmation}
-          name="password_confirmation"
-          error={state.fieldErrors?.password_confirmation}
-        />
+    <Card>
+      <CardHeader>
+        <ProfileHeading title="Update Password" />
+      </CardHeader>
+      <CardContent>
+        <form action={formAction} className="flex mt-4 flex-col gap-4">
+          <Input
+            isPassword
+            label={messages.password_confirmation}
+            name="current_password"
+            error={state.fieldErrors?.current_password}
+          />
+          <Input
+            isPassword
+            label={messages.password}
+            name="password"
+            error={state.fieldErrors?.password}
+          />
+          <Input
+            isPassword
+            label={messages.password_confirmation}
+            name="password_confirmation"
+            error={state.fieldErrors?.password_confirmation}
+          />
 
-        <Button isPending={isPending} isDisabled={isPending} type="submit">
-          {isPending ? messages.updating : messages.update_password}
-        </Button>
-      </form>
-    </div>
+          <Button isPending={isPending} isDisabled={isPending} type="submit">
+            {isPending ? messages.updating : messages.update_password}
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
   );
 }
 

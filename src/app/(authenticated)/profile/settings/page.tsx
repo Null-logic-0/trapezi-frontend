@@ -8,13 +8,12 @@ export const metadata: Metadata = {
 
 function SettingsPage() {
   return (
-    <>
+    <div className="flex-col flex gap-6  w-full">
       <UpdatePassword />
-
-      <div className="flex mt-6  justify-end w-full">
+      <div className="w-full flex justify-end">
         <DeleteAccount />
       </div>
-    </>
+    </div>
   );
 }
 

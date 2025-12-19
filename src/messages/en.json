@@ -181,7 +181,15 @@
       "Priority customer support",
       "Early access to new features",
       "20% discount for VIP"
-    ]
+    ],
+    "vip": {
+      "quick_boost": "Quick boost visibility",
+      "short_term_boost": "Best for short term events",
+      "long_term_boost": "Maximum long-term exposure",
+      "two_days": "2 Days",
+      "two_weeks": "2 Weeks",
+      "month": "1 Month"
+    }
   },
   "copy_schedule": "Copy Mon to Mon-Fri",
   "closed": "Closed",

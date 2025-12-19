@@ -16,7 +16,8 @@ import { BusinessInterface } from "@/interfaces/places.interface";
 import WorkingScheduleInput from "../UI/WorkingScheduleInput";
 import toast from "react-hot-toast";
 import { useState } from "react";
-import VipPlanSection, { VipPlanId } from "./VipPlanSection";
+import VipPlanSection from "./VipPlanSection";
+import { VipPlanId } from "@/interfaces/vipPlan.interface";
 
 type Props = {
   initialValues?: BusinessInterface;

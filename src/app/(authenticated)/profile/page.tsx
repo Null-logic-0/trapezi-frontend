@@ -24,7 +24,7 @@ async function Profile() {
         </div>
       }
     >
-      <div className="flex flex-col gap-6">
+      <div className="flex max-md:mt-16 flex-col gap-6">
         <ProfileOverview
           isBusiness={user?.business_owner}
           avatar_url={user?.avatar_url || ""}

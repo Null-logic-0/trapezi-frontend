@@ -13,7 +13,7 @@ function NavList() {
   const { handleToggleMenu } = useUIContext();
 
   return (
-    <ul className="flex justify-center gap-4 items-center max-lg:flex-col">
+    <ul className="flex max-lg:items-start justify-center gap-4 items-center max-lg:flex-col">
       {LINKS.map((link) => {
         const isActive = pathname === link.href;
         return (

@@ -8,7 +8,7 @@ async function ProfileAsideMenu() {
   const user = await fetchCurrentUser();
 
   return (
-    <Card className="p-4 flex justify-evenly flex-col  gap-6 w-full h-full">
+    <Card className="p-4 max-md:mt-16 flex justify-evenly flex-col  gap-6 w-full h-full">
       <UserCard
         business_owner={user?.business_owner || false}
         name={user?.name || ""}

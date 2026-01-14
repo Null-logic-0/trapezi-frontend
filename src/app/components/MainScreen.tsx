@@ -19,10 +19,9 @@ export default function MainScreen() {
       <Card className="fixed mx-auto w-full max-w-xl">
         <CardContent>
           <p className="text-lg font-medium p-6 text-gray-600  mx-auto text-center">
-            We’re performing some updates. Thanks for your patience — we’ll be
-            back online soon!
+            We’re performing some updates.
+            <br /> Thanks for your patience — we’ll be back online soon!
           </p>
-          <hr className="border-gray-400" />
         </CardContent>
       </Card>
     </main>

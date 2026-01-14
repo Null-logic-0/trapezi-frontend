@@ -1,7 +1,8 @@
 import ChefLoader from "./components/ChefLoader";
+import MainScreen from "./components/MainScreen";
 
 function Page() {
-  return <ChefLoader />;
+  return <MainScreen />;
 }
 
 export default Page;

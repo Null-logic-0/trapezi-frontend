@@ -4,7 +4,7 @@ import Image from "next/image";
 import heroImage from "../../../public/hero-food.png";
 import { Card, CardContent } from "./Card";
 
-function FullScreenHero() {
+export default function MainScreen() {
   return (
     <main className="h-screen flex justify-center items-center">
       <div className="absolute inset-0">
@@ -28,5 +28,3 @@ function FullScreenHero() {
     </main>
   );
 }
-
-export default FullScreenHero;
